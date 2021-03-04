@@ -1,0 +1,9 @@
+<ng-container *ngIf="certificate">
+  <div class="container">
+    <app-certificate-info title="Сведения о сертификате"
+                          [certificate]="certificate">
+
+    </app-certificate-info>
+    <app-attachments [certificate]="certificate"></app-attachments>
+  </div>
+</ng-container>

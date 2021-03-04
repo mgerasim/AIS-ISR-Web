@@ -1,0 +1,6 @@
+<ng-container *ngFor="let attachment of attachments">
+  <a [routerLink]="" (click)="select(attachment);">{{attachment.title}} ({{attachment.size | fileSize}})</a>
+  <dx-button icon="trash"
+             class="otstup"
+             type="danger"  (click)="delete(attachment)"></dx-button>
+</ng-container>

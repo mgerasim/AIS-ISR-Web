@@ -1,0 +1,26 @@
+<ng-container *ngIf="dataSource">
+  <dx-tree-list
+    id="treeContainer"
+    [dataSource]="dataSource"
+    keyExpr="division.id"
+    parentIdExpr="division.parentId"
+    [rowAlternationEnabled]="true"
+    (onSelectionChanged)="onSelectionChanged($event)"
+    (onToolbarPreparing)="onToolbarPreparing($event)"
+    [columnAutoWidth]="true"
+    [showBorders]="true">
+
+    <dxo-search-panel [visible]="true" width="250"></dxo-search-panel>
+    <dxo-header-filter [visible]="true"></dxo-header-filter>
+    <dxo-selection mode="multiple"></dxo-selection>
+    <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
+
+    <dxi-column dataField="division.title" caption="Наименование"></dxi-column>
+    <dxi-column dataField="equipmentCount" caption="Количество оборудования" [width]="150"></dxi-column>
+
+    <div *dxTemplate="let data of 'titleTemplate'">
+      <h3>Подразделения</h3>
+    </div>
+
+  </dx-tree-list>
+</ng-container>

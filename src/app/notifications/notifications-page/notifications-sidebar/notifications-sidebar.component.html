@@ -1,0 +1,18 @@
+
+<kendo-listview
+  [data]="menu"
+  [containerClass]="'k-d-flex k-flex-col k-flex-nowrap'">
+  <ng-template
+    kendoListViewItemTemplate
+    let-dataItem="dataItem"
+    let-isFirst="isFirst"
+  >
+
+    <button look="flat" kendoButton (click)="dataItem.click()">
+      <span class="title">{{ dataItem.title}}</span>
+    </button>
+
+
+  </ng-template>
+
+</kendo-listview>

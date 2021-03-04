@@ -1,0 +1,25 @@
+:host {
+  height: 100%;
+  display: block;
+  padding-bottom: 57px;
+  padding-left: 1rem;
+}
+
+
+dl {
+  display: grid;
+  grid-template: auto / auto 1fr;
+
+  dt {
+    font-weight: normal;
+
+    &::after {
+      content: ":";
+    }
+  }
+
+  dd {
+    margin: 0 0 0 1rem;
+
+  }
+}

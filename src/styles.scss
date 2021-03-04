@@ -1,0 +1,55 @@
+@import "styles/datagrid";
+@import "styles/prop.scss";
+
+html,
+body
+{
+  height:100%;
+  margin:0;
+  padding:0;
+  overflow:hidden;
+}
+
+/* Notification groups  */
+.equipment-groups {
+  background-image: url("./assets/equipment-groups.sprite.png");
+  background-repeat: no-repeat;
+  display: inline-block;
+}
+
+.equipment-groups.equipment-groups-error {
+  width: 32px;
+  height: 32px;
+  background-position: -10px -136px;
+}
+.equipment-groups.equipment-groups-warning {
+  width: 32px;
+  height: 32px;
+  background-position: -10px -178px;
+}
+.equipment-groups.equipment-groups-job {
+  width: 32px;
+  height: 32px;
+  background-position: -10px -220px;
+}
+
+/* Notification read/unread  */
+.notification-read {
+  background-image: url("./assets/img/notification-read/read.png");
+  background-repeat: no-repeat;
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+}
+
+.notification-unread {
+  background-image: url("./assets/img/notification-read/unread.png");
+  background-repeat: no-repeat;
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+}
+
+.otstup {
+  margin-right: 10px;
+}

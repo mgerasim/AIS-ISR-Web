@@ -1,0 +1,14 @@
+@use "~bootstrap/scss/bootstrap";
+
+.prop-table {
+  @extend .table;
+  @extend .table-bordered;
+  @extend .table-hover;
+}
+
+.prop-title {
+  font-size: medium;
+  font: bold;
+  width: 300px;
+  background-color: #feebcd;
+}

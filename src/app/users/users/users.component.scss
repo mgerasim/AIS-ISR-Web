@@ -1,0 +1,25 @@
+:host {
+  height: 100%;
+  display: block;
+  padding-bottom: 57px;
+}
+
+dx-data-grid {
+  ::ng-deep {
+    .clicked-column {
+      cursor: pointer;
+    }
+  }
+}
+
+#gridContainer {
+  height: 100%;
+}
+
+::ng-deep {
+  .dx-datagrid-header-panel {
+    padding-top: 9px;
+    padding-left: 9px;
+    padding-right: 9px;
+  }
+}

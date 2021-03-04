@@ -1,0 +1,10 @@
+<dl>
+  <dt>Имя файла</dt>
+  <dd>{{importResponse.fileName}}</dd>
+  <dt>Состояние импорта</dt>
+  <dd>{{importResponse.importProcessorState | importState}}</dd>
+  <dt>Импортировано</dt>
+  <dd>{{importResponse.lineCurrentPosition}} / {{importResponse.lineCount}}</dd>
+  <dt>Количество ошибок</dt>
+  <dd>{{importResponse.importProcessorErrors.length}}</dd>
+</dl>

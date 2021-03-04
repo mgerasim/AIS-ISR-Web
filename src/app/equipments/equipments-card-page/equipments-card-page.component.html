@@ -1,0 +1,16 @@
+<kendo-splitter *ngIf="equipment" orientation="horizontal">
+
+
+  <kendo-splitter-pane size="250px">
+    <app-equipments-card-sidebar [equipment]="equipment">
+
+    </app-equipments-card-sidebar>
+  </kendo-splitter-pane>
+
+  <kendo-splitter-pane>
+    <app-equipments-card [equipment]="equipment">
+
+    </app-equipments-card>
+  </kendo-splitter-pane>
+
+</kendo-splitter>

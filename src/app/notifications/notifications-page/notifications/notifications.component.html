@@ -1,0 +1,68 @@
+<dx-data-grid id="gridContainer"
+              [dataSource]="dataSource"
+              [remoteOperations]="true"
+              [wordWrapEnabled]="true"
+              [columnAutoWidth]="true"
+              [allowColumnReordering]="true"
+              [allowColumnResizing]="true"
+              [rowAlternationEnabled]="true"
+              (onCellDblClick)="onCellDblClick($event)"
+              (onSelectionChanged)="onSelectionChanged($event)"
+              columnResizingMode="widget"
+              (onToolbarPreparing)="onToolbarPreparing($event)"
+              [(selectedRowKeys)]="selectedRowKeys"
+              [hoverStateEnabled]="true"
+              [showBorders]="true">
+  <dxo-column-chooser
+    [enabled]="true"
+    mode="select">
+  </dxo-column-chooser>
+
+  <dxo-filter-panel [visible]="true"></dxo-filter-panel>
+  <dxo-filter-row [visible]="true"></dxo-filter-row>
+  <dxo-header-filter [visible]="true"></dxo-header-filter>
+  <dxo-search-panel
+    [visible]="true"
+    title="Выбрать колонки"
+    [width]="240"
+    placeholder="Поиск..."></dxo-search-panel>
+
+  <dxo-selection mode="single"></dxo-selection>
+
+  <dxo-scrolling mode="virtual" rowRenderingMode="virtual" ></dxo-scrolling>
+  <dxo-paging [pageSize]="100"></dxo-paging>
+
+  <dxi-column dataField="notification.id" [fixed]="false" caption="№"></dxi-column>
+
+  <dxi-column dataField="isRead"
+              minWidth="60px"
+              width="60px"
+              caption="Уведомление прочитано"
+              [visible]="true"
+              alignment="center"
+              cellTemplate="isReadCellTemplate"
+              [allowHeaderFiltering]="true">
+  </dxi-column>
+
+  <dxi-column dataField="notification.createdAt" caption="Дата" cellTemplate="dateTemplate"></dxi-column>
+
+  <dxi-column dataField="notification.title" caption="Сообщение"></dxi-column>
+
+  <div *dxTemplate="let data of 'dateTemplate'">
+    {{toDate(data.data.notification.createdAt) | date: 'dd.MM.yyyy hh:mm:ss'}}
+  </div>
+
+  <div *dxTemplate="let data of 'titleTemplate'">
+    <h3>Уведомления</h3>
+  </div>
+
+  <div *dxTemplate="let item of 'isReadCellTemplate'">
+    <img *ngIf="item.data.userNotification.isRead" src="../../../../assets/img/notification-read/read.png"
+         alt="Сообщение прочитано"
+         style="width: 32px; display: block">
+    <img *ngIf="!item.data.userNotification.isRead" src="../../../../assets/img/notification-read/unread.png"
+         alt="Сообщение не прочитано"
+         style="width: 32px; display: block">
+  </div>
+
+</dx-data-grid>

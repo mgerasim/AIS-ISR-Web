@@ -1,0 +1,64 @@
+
+<kendo-listview
+  [data]="menu"
+  [containerClass]="'k-d-flex k-flex-col k-flex-nowrap'">
+
+
+  <ng-template
+    kendoListViewItemTemplate
+    let-dataItem="dataItem"
+    let-isFirst="isFirst"
+  >
+
+    <button look="flat" [imageUrl]="dataItem.icon" kendoButton (click)="dataItem.click()">
+      <span class="title">{{ dataItem.title}}</span>
+    </button>
+
+
+  </ng-template>
+
+</kendo-listview>
+
+<dx-popup
+  [showTitle]="true"
+  title="Выберите в какое подразделение переместить оборудование"
+  [dragEnabled]="false"
+  [height]="400"
+  [closeOnOutsideClick]="true"
+  [(visible)]="popupEquipmentMove">
+  <div *dxTemplate="let data of 'content'">
+    <dx-scroll-view>
+      <dx-tree-view
+        [items]="divisions"
+        [height]="350"
+        dataStructure="plain"
+        keyExpr="id"
+        parentIdExpr="parentId"
+        displayExpr="title"
+        [searchEnabled]="true"
+        searchMode="contains"
+        (onItemClick)="selectItem($event)"
+      ></dx-tree-view>
+    </dx-scroll-view>
+    <dx-button text="Выбрать" (onClick)="equipmentsMoveClick()"></dx-button>
+  </div>
+</dx-popup>
+
+<dx-popup
+  [showTitle]="true"
+  title="Форма подраздление"
+  [dragEnabled]="false"
+  [height]="400"
+  [closeOnOutsideClick]="true"
+  [(visible)]="popupDivisionForm">
+  <div *dxTemplate="let data of 'content'">
+    <dx-form id="form" [formData]="selectedDivision">
+
+      <dxi-item dataField="title">
+        <dxo-label text="Наименование"></dxo-label>
+      </dxi-item>
+
+    </dx-form>
+    <dx-button text="Сохранить" (onClick)="saveDivisionClick()"></dx-button>
+  </div>
+</dx-popup>

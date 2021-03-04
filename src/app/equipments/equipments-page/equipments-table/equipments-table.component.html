@@ -1,0 +1,159 @@
+<dx-data-grid id="gridContainer"
+              [dataSource]="dataSource"
+              [remoteOperations]="true"
+              [wordWrapEnabled]="true"
+              [columnAutoWidth]="true"
+              [allowColumnReordering]="true"
+              [allowColumnResizing]="true"
+              [rowAlternationEnabled]="true"
+              [masterDetail]="{ enabled: true, template: 'detail' }"
+              (onCellDblClick)="onCellDblClick($event)"
+              (onSelectionChanged)="onSelectionChanged($event)"
+              columnResizingMode="widget"
+              (onToolbarPreparing)="onToolbarPreparing($event)"
+              (onRowPrepared)="onRowPrepared($event)"
+              [hoverStateEnabled]="true"
+              [showBorders]="true">
+  <dxo-column-chooser
+    [enabled]="true"
+    mode="select">
+  </dxo-column-chooser>
+
+  <dxo-filter-panel [visible]="true"></dxo-filter-panel>
+  <dxo-filter-row [visible]="true"></dxo-filter-row>
+  <dxo-header-filter [visible]="true"></dxo-header-filter>
+  <dxo-search-panel
+    [visible]="true"
+    title="Выбрать колонки"
+    [width]="240"
+    placeholder="Поиск..."></dxo-search-panel>
+
+  <dxo-selection mode="single"></dxo-selection>
+
+  <dxo-column-fixing [enabled]="true"></dxo-column-fixing>
+
+  <dxo-state-storing [enabled]="true"
+                     type="localStorage"
+                     storageKey="equipmentsDataGrid">
+  </dxo-state-storing>
+
+  <dxo-scrolling mode="virtual" rowRenderingMode="virtual" ></dxo-scrolling>
+  <dxo-paging [pageSize]="100"></dxo-paging>
+
+  <dxi-column dataField="equipment.code" [fixed]="false" caption="№ п/п"></dxi-column>
+
+  <dxi-column dataField="wearStatus"
+              minWidth="60px"
+              width="60px"
+              caption="Статус износа оборудования"
+              [visible]="true"
+              alignment="center"
+              cellTemplate="equipmentWearStatusTypeCellTemplate"
+              [allowHeaderFiltering]="true">
+  </dxi-column>
+
+  <dxi-column dataField="hasCorrectionActions"
+              minWidth="60px"
+              width="60px"
+              caption="Наличие корректирующих мероприятий"
+              [visible]="true"
+              alignment="center"
+              cellTemplate="hasCorrectionActionsTypeCellTemplate"
+              [allowHeaderFiltering]="true">
+  </dxi-column>
+
+  <dxi-column dataField="equipment.registerNumber" [fixed]="false" caption="Регистрационный № ОПО"></dxi-column>
+  <dxi-column dataField="division.title" [fixed]="false" caption="Подразделение"></dxi-column>
+  <dxi-column dataField="equipment.location" [fixed]="false" caption="Расположение"></dxi-column>
+  <dxi-column dataField="equipment.title" [fixed]="false" caption="Наименование оборудования" cellTemplate="equipmentTitleTemplate"></dxi-column>
+  <dxi-column dataField="equipment.shortCharacteristics" [fixed]="false" caption="Краткие характеристики"></dxi-column>
+  <dxi-column dataField="equipment.techNumber" [fixed]="false" caption="Техн. №"></dxi-column>
+  <dxi-column dataField="equipment.serialNumber" [fixed]="false" caption="Зав. №"></dxi-column>
+  <dxi-column dataField="equipment.releaseYear" [fixed]="false" caption="Год выпуска"></dxi-column>
+  <dxi-column dataField="equipment.commissioningYear" [fixed]="false" caption="Год ввода в эксплуатацию"></dxi-column>
+  <dxi-column dataField="equipment.repairDate" [fixed]="false" caption="Дата проведения СР" cellTemplate="tryDateTemplate"></dxi-column>
+  <dxi-column dataField="equipment.overhaulDate" [fixed]="false" caption="Дата проведения КР" cellTemplate="tryDateTemplate"></dxi-column>
+  <dxi-column dataField="equipment.exploitationPeriod" [fixed]="false" caption="Срок эксплуатации"></dxi-column>
+  <dxi-column dataField="equipment.exploitationPeriodUnit" [fixed]="false" caption="Ед.изм." cellTemplate="exploitationPeriodUnitTemplate"></dxi-column>
+  <dxi-column dataField="equipment.wearPercentage" [fixed]="false" caption="Процент износа оборудования"></dxi-column>
+  <dxi-column dataField="examination.createdAt" [fixed]="false" caption="Дата ЭПБ" cellTemplate="examinationCreatedAtTemplate"></dxi-column>
+  <dxi-column dataField="examination.examinationNumber" [fixed]="false" caption="№ закл. ЭПБ"></dxi-column>
+  <dxi-column dataField="examination.registerNumber" [fixed]="false" caption="Регистрационный номер ЭПБ"></dxi-column>
+  <dxi-column dataField="examination.status" [fixed]="false" caption="Статус ЭПБ" cellTemplate="examinationStatusTemplate"></dxi-column>
+  <dxi-column dataField="examination.comment" [fixed]="false" caption="Выводы из заключения ЭПБ"></dxi-column>
+  <dxi-column dataField="equipment" [fixed]="false" caption="Корректирующие мероприятия" cellTemplate="correctiveActionsTemplate"></dxi-column>
+  <dxi-column dataField="examination.examinationNextYear" [fixed]="false" caption="Дата след. ЭПБ, продление срока эксплуатации"></dxi-column>
+  <dxi-column dataField="certificateType.title" caption="Тип сертификата"></dxi-column>
+  <dxi-column dataField="certificate.title" caption="Номер сертификата"></dxi-column>
+  <dxi-column dataField="certificate.date" caption="Дата сертификата" cellTemplate="dateCertificateTemplate"></dxi-column>
+  <dxi-column dataField="certificateAgent.title" caption="Кем выдан сертификат"></dxi-column>
+  <dxi-column dataField="responsibilityCenter.title" caption="Центр ответственности"></dxi-column>
+
+  <div *dxTemplate="let equipment of 'correctiveActionsTemplate'">
+    <app-corrective-action-cell [equipment]="equipment.value">
+
+    </app-corrective-action-cell>
+  </div>
+
+  <div *dxTemplate="let equipment of 'equipmentTitleTemplate'">
+    <div [ngClass]="{'warning': equipment.data.isWarning, 'critical': equipment.data.isCritical}">{{equipment.value}}</div>
+  </div>
+
+  <div *dxTemplate="let data of 'tryDateTemplate'">
+    <ng-container *ngIf="data.value">{{data.value | date: 'dd.MM.yyyy'}}</ng-container>
+  </div>
+
+  <div *dxTemplate="let data of 'exploitationPeriodUnitTemplate'">
+    {{ data.data.equipment.exploitationPeriodUnit | exploitationPeriodUnit }}
+  </div>
+
+  <div *dxTemplate="let data of 'examinationStatusTemplate'">
+    {{data.data.examination?.status | examinationStatus}}
+  </div>
+
+  <div *dxTemplate="let data of 'examinationCreatedAtTemplate'">
+     <ng-container *ngIf="data.data.examination">{{data.data.examination?.createdAt | date:'dd.MM.yyyy'}}</ng-container>
+  </div>
+
+  <div *dxTemplate="let equipment of 'equipmentWearStatusTypeCellTemplate'">
+    <div *ngIf="equipment.data.isCritical" class="equipment-groups equipment-groups-error"
+         [title]="'Превышение износа оборудования отметки 80%'"></div>
+    <div *ngIf="equipment.data.isWarning" class="equipment-groups equipment-groups-warning"
+         [title]="'Превышение износа оборудования отметки 70%'"></div>
+  </div>
+
+  <div *dxTemplate="let equipment of 'hasCorrectionActionsTypeCellTemplate'">
+    <div *ngIf="equipment.data.examination && equipment.data.examination.correctiveActions && equipment.data.examination.correctiveActions.length > 0" class="equipment-groups equipment-groups-job"
+         [title]="'Имеется корректирующие мероприятия'"></div>
+  </div>
+
+  <div *dxTemplate="let data of 'dateCertificateTemplate'">
+    <ng-container *ngIf="data.data.certificate">
+      {{toDate(data.data.certificate.date) | date: 'dd.MM.yyyy'}}
+    </ng-container>
+  </div>
+
+  <div *dxTemplate="let data of 'titleTemplate'">
+    <h3>Оборудование</h3>
+  </div>
+
+  <div *dxTemplate="let data of 'detail'">
+    <app-equipments-card [equipment]="data.data.equipment">
+
+    </app-equipments-card>
+  </div>
+
+</dx-data-grid>
+
+<ng-template #empty>
+  <span>Не проводился</span>
+</ng-template>
+
+<dx-popup *ngIf="equipment" [(visible)]="popupVisible"
+          [title]="equipment.title">
+  <div *dxTemplate="let data of 'content'">
+    <app-equipments-card [equipment]="equipment">
+
+    </app-equipments-card>
+  </div>
+</dx-popup>

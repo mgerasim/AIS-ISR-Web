@@ -1,0 +1,80 @@
+<ng-container *ngIf="equipment">
+  <dx-scroll-view>
+    <div class="container edit">
+
+      <h3>{{equipment.title}}</h3>
+
+      <dx-form id="form" [formData]="equipment">
+        <dxi-item dataField="code" [editorOptions]="{disabled: true }">
+          <dxo-label text="№ п/п"></dxo-label>
+        </dxi-item>
+
+        <dxi-item dataField="registerNumber">
+          <dxo-label text="Регистрационный № ОПО"></dxo-label>
+        </dxi-item>
+
+        <dxi-item dataField="divisionId" editorType="dxSelectBox" [editorOptions]="{items: divisions, searchEnabled: true, valueExpr: 'id', displayExpr: 'title', value: equipment.divisionId}">
+          <dxo-label text="Структурное подразделение"></dxo-label>
+        </dxi-item>
+
+        <dxi-item dataField="location">
+          <dxo-label text="Расположение"></dxo-label>
+        </dxi-item>
+
+        <dxi-item dataField="title">
+          <dxo-label text="Наименование оборудования"></dxo-label>
+        </dxi-item>
+
+        <dxi-item dataField="shortCharacteristics" editorType="dxTextArea" [editorOptions]="{disabled: false, height: '100' }">
+          <dxo-label text="Краткие характеристики"></dxo-label>
+        </dxi-item>
+
+        <dxi-item dataField="techNumber">
+          <dxo-label text="Техн. №"></dxo-label>
+        </dxi-item>
+
+        <dxi-item dataField="serialNumber">
+          <dxo-label text="Зав. №"></dxo-label>
+        </dxi-item>
+
+        <dxi-item dataField="releaseYear" editorType="dxNumberBox">
+          <dxo-label text="Год выпуска"></dxo-label>
+        </dxi-item>
+
+        <dxi-item dataField="commissioningYear" editorType="dxNumberBox">
+          <dxo-label text="Год ввода в эксплуатацию"></dxo-label>
+        </dxi-item>
+
+        <dxi-item dataField="exploitationPeriod" editorType="dxNumberBox">
+          <dxo-label text="Срок эксплуатации"></dxo-label>
+        </dxi-item>
+
+        <dxi-item dataField="repairDate" editorType="dxDateBox">
+          <dxo-label text="Дата проведения СР"></dxo-label>
+        </dxi-item>
+
+        <dxi-item dataField="overhaulDate" editorType="dxDateBox">
+          <dxo-label text="Дата проведения КР"></dxo-label>
+        </dxi-item>
+
+        <dxi-item dataField="certificateId" editorType="dxSelectBox" [editorOptions]="{items: exploitationPeriodUnits, searchEnabled: true, valueExpr: 'id', displayExpr: 'title', value: equipment.exploitationPeriodUnit}">
+          <dxo-label text="Единица измерения периода эксплуатации"></dxo-label>
+        </dxi-item>
+
+        <dxi-item dataField="certificateId" editorType="dxSelectBox" [editorOptions]="{items: certificates, searchEnabled: true, valueExpr: 'id', displayExpr: 'title', value: equipment.certificateId}">
+          <dxo-label text="Сертификат"></dxo-label>
+        </dxi-item>
+
+        <dxi-item dataField="responsibilityCenterId" editorType="dxSelectBox" [editorOptions]="{items: responsibilityCenters, searchEnabled: true, valueExpr: 'id', displayExpr: 'title', value: equipment.responsibilityCenterId}">
+          <dxo-label text="Центр ответственности"></dxo-label>
+        </dxi-item>
+
+      </dx-form>
+
+      <div class="k-form-buttons">
+        <button class="k-button k-primary" (click)="save()">Сохранить</button>
+      </div>
+
+    </div>
+  </dx-scroll-view>
+</ng-container>

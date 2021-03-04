@@ -1,0 +1,8 @@
+<div class="container">
+  <ng-container *ngIf="equipment">
+    <h2>{{equipment.title}}</h2>
+    <app-examination-form [examination]="examination">
+
+    </app-examination-form>
+  </ng-container>
+</div>

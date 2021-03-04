@@ -1,0 +1,21 @@
+<div class="container">
+<p>Импорт реестр ЭПБ</p>
+<p>
+  <kendo-upload
+    [title]="'Выберите файл'"
+    [restrictions]="myRestrictions"
+    [saveUrl]="uploadSaveUrl">
+    <kendo-upload-messages
+      select="Выбрать файл..."
+      uploadSelectedFiles="Файл загружен"
+      dropFilesHere="Переместите файл сюда"
+    ></kendo-upload-messages>
+  </kendo-upload>
+</p>
+  <div *ngIf="importResponse && importResponse.hasStart">
+    <h3>Состояние импорта</h3>
+    <app-import-response [importResponse]="importResponse">
+
+    </app-import-response>
+  </div>
+</div>

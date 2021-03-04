@@ -1,0 +1,27 @@
+
+<kendo-listview
+  [data]="menu"
+  [containerClass]="'k-d-flex k-flex-col k-flex-nowrap'">
+
+
+  <ng-template
+    kendoListViewItemTemplate
+    let-dataItem="dataItem"
+    let-isFirst="isFirst"
+  >
+      <button look="flat" [imageUrl]="dataItem.icon" kendoButton (click)="dataItem.click()" [title]="dataItem.title">
+        <span class="title">{{ dataItem.title}}</span>
+      </button>
+
+
+  </ng-template>
+
+</kendo-listview>
+
+<dx-popup *ngIf="correctiveAction" [(visible)]="popupVisible"
+          title="Добавить корректирующее мероприятие">
+  <div *dxTemplate="let data of 'content'">
+    <app-corrective-action-form [correctiveAction]="correctiveAction" (save)="saveCorrectiveAction()"></app-corrective-action-form>
+  </div>
+</dx-popup>
+

@@ -1,0 +1,32 @@
+<ng-container *ngIf="certificate">
+  <dx-scroll-view>
+    <div class="container edit">
+
+      <dx-form id="form" [formData]="certificate">
+
+        <dxi-item dataField="certificateTypeId" editorType="dxSelectBox" [editorOptions]="{items: certificateTypes, searchEnabled: true, valueExpr: 'id', displayExpr: 'title', value: certificate.certificateTypeId}">
+          <dxo-label text="Тип сертификата"></dxo-label>
+        </dxi-item>
+
+        <dxi-item dataField="title">
+          <dxo-label text="Номер сертификата"></dxo-label>
+        </dxi-item>
+
+        <dxi-item dataField="date" editorType="dxDateBox">
+          <dxo-label text="Дата сертификата"></dxo-label>
+        </dxi-item>
+
+        <dxi-item dataField="certificateAgentId" editorType="dxSelectBox" [editorOptions]="{items: certificateAgents, searchEnabled: true, valueExpr: 'id', displayExpr: 'title', value: certificate.certificateAgentId}">
+          <dxo-label text="Кем выдан"></dxo-label>
+        </dxi-item>
+
+      </dx-form>
+
+      <div class="k-form-buttons">
+        <button class="k-button k-primary" (click)="save()">Сохранить</button>
+      </div>
+
+    </div>
+  </dx-scroll-view>
+</ng-container>
+

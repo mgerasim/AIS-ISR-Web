@@ -1,0 +1,3 @@
+<ng-container *ngIf="correctiveActions">
+  <span *ngFor="let correctiveAction of correctiveActions">{{correctiveAction.title}} ({{correctiveAction.scheduledComplationDate | date: 'dd.MM.yyyy'}}); </span>
+</ng-container>

@@ -1,0 +1,26 @@
+dl {
+  display: grid;
+  grid-template: auto / auto 1fr;
+
+  dt {
+    font-weight: normal;
+
+    &::after {
+      content: ":";
+    }
+  }
+
+  dd {
+    margin: 0 0 0 1rem;
+
+    .green {
+      font-weight: 600;
+      color: green;
+    }
+
+    .red {
+      font-weight: 600;
+      color: red;
+    }
+  }
+}

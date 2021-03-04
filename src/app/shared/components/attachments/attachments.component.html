@@ -1,0 +1,20 @@
+<h2 class="text-sm-center">{{title}}</h2>
+
+<app-attachments-list *ngIf="attachments" [attachments]="attachments">
+
+</app-attachments-list>
+
+<p>
+  <kendo-upload
+    [(ngModel)]="files"
+    title="Добавить файл"
+    (success)="success($event)"
+    [saveUrl]="uploadSaveUrl">
+    <kendo-upload-messages
+      select="Выбрать файл..."
+      uploadSelectedFiles="Файл загружен"
+      dropFilesHere="Переместите файл сюда"
+    ></kendo-upload-messages>
+  </kendo-upload>
+</p>
+

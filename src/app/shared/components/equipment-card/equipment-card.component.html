@@ -1,0 +1,123 @@
+<dx-scroll-view>
+  <div class="container fix-footer" *ngIf="equipment">
+    <h1 class="text-sm-center">{{equipment.title}}</h1>
+    <h2 class="text-sm-center">Сведения об оборудовании</h2>
+    <table class="prop-table">
+      <tbody>
+      <tr>
+        <td class="prop-title">№ п/п</td>
+        <td>{{equipment.code}}</td>
+      </tr>
+      <tr>
+        <td class="prop-title">Регистрационный № ОПО</td>
+        <td>{{equipment.registerNumber}}</td>
+      </tr>
+      <tr *ngIf="equipment.division">
+        <td class="prop-title">Подразделение</td>
+        <td>{{equipment.division.title}}</td>
+      </tr>
+      <tr>
+        <td class="prop-title">Расположение</td>
+        <td>{{equipment.location}}</td>
+      </tr>
+      <tr>
+        <td class="prop-title">Наименование оборудования</td>
+        <td>{{equipment.title}}</td>
+      </tr>
+      <tr>
+        <td class="prop-title">Краткие характеристики</td>
+        <td>{{equipment.shortCharacteristics}}</td>
+      </tr>
+      <tr>
+        <td class="prop-title">Техн. №</td>
+        <td>{{equipment.techNumber}}</td>
+      </tr>
+      <tr>
+        <td class="prop-title">Зав. №</td>
+        <td>{{equipment.serialNumber}}</td>
+      </tr>
+      <tr>
+        <td class="prop-title">Год выпуска</td>
+        <td>{{equipment.releaseYear}}</td>
+      </tr>
+      <tr>
+        <td class="prop-title">Год ввода в эксплуатацию</td>
+        <td>{{equipment.commissioningYear}}</td>
+      </tr>
+      <tr>
+        <td class="prop-title">Срок эксплуатации</td>
+        <td>{{equipment.exploitationPeriod}}</td>
+      </tr>
+      <tr>
+        <td class="prop-title">Дата проведения СР</td>
+        <td>{{equipment.repairDate | date: 'dd.MM.yyyy'}}</td>
+      </tr>
+      <tr>
+        <td class="prop-title">Дата проведения КР</td>
+        <td>{{equipment.overhaulDate | date: 'dd.MM.yyyy'}}</td>
+      </tr>
+      <tr>
+        <td class="prop-title">Процент износа</td>
+        <td>{{equipment.wearPercentage}}</td>
+      </tr>
+      <tr>
+        <td class="prop-title">Корректирующие мероприятия</td>
+        <td>
+          <app-corrective-action-cell [equipment]="equipment" ></app-corrective-action-cell>
+        </td>
+      </tr>
+      <tr *ngIf="responsibilityCenter">
+        <td class="prop-title">Центр ответственности</td>
+        <td>{{responsibilityCenter.title}}</td>
+      </tr>
+      </tbody>
+    </table>
+
+    <ng-container *ngIf="examination">
+      <h2 class="text-sm-center">Сведения ЭПБ</h2>
+
+      <table class="prop-table">
+        <tbody>
+        <tr>
+          <td class="prop-title">Дата ЭПБ</td>
+          <td>{{examination.createdAt}}</td>
+        </tr>
+        <tr>
+          <td class="prop-title">№ закл. ЭПБ</td>
+          <td>{{examination.examinationNumber}}</td>
+        </tr>
+        <tr>
+          <td class="prop-title">Регистрационный номер ЭПБ</td>
+          <td>{{examination.registerNumber}}</td>
+        </tr>
+
+        <tr>
+          <td class="prop-title">Статус ЭПБ</td>
+          <td>{{examination.status | examinationStatus}}</td>
+        </tr>
+
+        <tr>
+          <td class="prop-title">Выводы из заключения ЭПБ</td>
+          <td>{{examination.comment}}</td>
+        </tr>
+        <tr>
+          <td class="prop-title">Дата след. ЭПБ, продление срока эксплуатации</td>
+          <td>{{examination.examinationNextYear}}</td>
+        </tr>
+        </tbody>
+      </table>
+
+
+    </ng-container>
+
+    <ng-container *ngIf="certificate">
+      <app-certificate-info title="Сведения о сертификации"
+                            [certificate]="certificate">
+
+      </app-certificate-info>
+    </ng-container>
+    <app-attachments [equipment]="equipment" title="Паспорт завода изготовителя" [category]="attachmentCategoryPassport"></app-attachments>
+    <app-attachments [equipment]="equipment" title="Экспертиза" [category]="attachmentCategoryExamination"></app-attachments>
+    <app-attachments [equipment]="equipment" title="Прочее" [category]="attachmentCategoryOther"></app-attachments>
+  </div>
+</dx-scroll-view>

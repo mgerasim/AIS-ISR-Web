@@ -1,0 +1,77 @@
+<dx-data-grid id="gridContainer"
+              [dataSource]="dataSource"
+              [remoteOperations]="true"
+              [wordWrapEnabled]="true"
+              [columnAutoWidth]="true"
+              [allowColumnReordering]="true"
+              [allowColumnResizing]="true"
+              [rowAlternationEnabled]="true"
+              (onCellDblClick)="onCellDblClick($event)"
+              (onSelectionChanged)="onSelectionChanged($event)"
+              columnResizingMode="widget"
+              (onToolbarPreparing)="onToolbarPreparing($event)"
+              [(selectedRowKeys)]="selectedRowKeys"
+              [hoverStateEnabled]="true"
+              [showBorders]="true">
+  <dxo-column-chooser
+    [enabled]="true"
+    mode="select">
+  </dxo-column-chooser>
+
+  <dxo-filter-panel [visible]="true"></dxo-filter-panel>
+  <dxo-filter-row [visible]="true"></dxo-filter-row>
+  <dxo-header-filter [visible]="true"></dxo-header-filter>
+  <dxo-search-panel
+    [visible]="true"
+    title="Выбрать колонки"
+    [width]="240"
+    placeholder="Поиск..."></dxo-search-panel>
+
+  <dxo-selection mode="single"></dxo-selection>
+
+  <dxo-column-fixing [enabled]="true"></dxo-column-fixing>
+
+  <dxo-state-storing [enabled]="true"
+                     type="localStorage"
+                     storageKey="certificatesDataGrid">
+  </dxo-state-storing>
+
+  <dxo-scrolling mode="virtual" rowRenderingMode="virtual" ></dxo-scrolling>
+  <dxo-paging [pageSize]="100"></dxo-paging>
+
+  <dxi-column dataField="incident.id" [fixed]="false" caption="№"></dxi-column>
+  <dxi-column dataField="incident.title" caption="Сообщение"></dxi-column>
+  <dxi-column dataField="division.title" [fixed]="false" caption="Подразделение"></dxi-column>
+  <dxi-column dataField="responsibilityCenter.title" [fixed]="false" caption="Центр ответственности"></dxi-column>
+  <dxi-column dataField="equipment.title" [fixed]="false" caption="Наименование оборудования"></dxi-column>
+  <dxi-column dataField="equipment.techNumber" [fixed]="false" caption="Техн. №"></dxi-column>
+  <dxi-column dataField="equipment.serialNumber" [fixed]="false" caption="Зав. №"></dxi-column>
+  <dxi-column dataField="equipment.releaseYear" [fixed]="false" caption="Год выпуска"></dxi-column>
+  <dxi-column dataField="equipment.commissioningYear" [fixed]="false" caption="Год ввода в эксплуатацию"></dxi-column>
+  <dxi-column dataField="equipment.exploitationPeriod" [fixed]="false" caption="Срок эксплуатации"></dxi-column>
+  <dxi-column dataField="equipment.exploitationPeriodUnit" [fixed]="false" caption="Ед.изм." cellTemplate="exploitationPeriodUnitTemplate"></dxi-column>
+  <dxi-column dataField="equipment.wearPercentage" [fixed]="false" caption="Процент износа оборудования"></dxi-column>
+
+  <div *dxTemplate="let data of 'exploitationPeriodUnitTemplate'">
+    {{ data.data.equipment.exploitationPeriodUnit | exploitationPeriodUnit }}
+  </div>
+
+  <div *dxTemplate="let data of 'dateTemplate'">
+    {{toDate(data.data.date) | date:'dd.MM.yyyy'}}
+  </div>
+
+  <div *dxTemplate="let data of 'titleTemplate'">
+    <h3>Инциденты</h3>
+  </div>
+
+</dx-data-grid>
+
+<dx-popup *ngIf="equipment" [(visible)]="popupVisible"
+          [title]="equipment.title">
+  <div *dxTemplate="let data of 'content'">
+    <app-equipments-card [equipment]="equipment">
+
+    </app-equipments-card>
+  </div>
+</dx-popup>
+

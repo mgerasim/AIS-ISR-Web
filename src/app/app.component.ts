@@ -1,10 +1,48 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+
+import 'devextreme/localization/globalize/number';
+import 'devextreme/localization/globalize/date';
+import 'devextreme/localization/globalize/currency';
+import 'devextreme/localization/globalize/message';
+import 'devextreme/localization/globalize/number';
+import 'devextreme/localization/globalize/date';
+import 'devextreme/localization/globalize/currency';
+import 'devextreme/localization/globalize/message';
+
+import ruMessages from "devextreme/localization/messages/ru.json";
+import supplemental from "devextreme-cldr-data/supplemental.json";
+import ruCldrData from "devextreme-cldr-data/ru.json";
+
+import Globalize from 'globalize';
+import {TitleService} from './core/services/title.service';
+import {LoadingService} from './core/services/loading.service';
+import {load} from '@progress/kendo-angular-intl';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  title = 'AIS-ISR-Web';
+export class AppComponent implements OnInit {
+
+  isLoading = false;
+
+  constructor(
+    private loadingService: LoadingService
+  ) {
+    Globalize.load(
+      supplemental, ruCldrData
+    );
+
+    Globalize.loadMessages(ruMessages);
+    Globalize.locale(navigator.language);
+  }
+
+  ngOnInit(): void {
+    this.loadingService.loadingVisible$.subscribe(loading => {
+      this.isLoading = loading;
+    }, error => {
+      console.error(error);
+    });
+  }
 }

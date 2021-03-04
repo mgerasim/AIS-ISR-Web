@@ -1,0 +1,24 @@
+<h2 class="text-sm-center">
+  {{ title }}
+</h2>
+
+<table class="prop-table">
+  <tbody>
+  <tr *ngIf="certificateType">
+    <td class="prop-title">Тип сертификата</td>
+    <td>{{certificateType.title}}</td>
+  </tr>
+  <tr>
+    <td class="prop-title">Номер сертификата</td>
+    <td>{{certificate.title}}</td>
+  </tr>
+  <tr>
+    <td class="prop-title">Дата сертификата</td>
+    <td>{{certificate.date | date: 'dd.MM.yyyy'}}</td>
+  </tr>
+  <tr *ngIf="certificateAgent">
+    <td class="prop-title">Кем выдан сертификат</td>
+    <td>{{certificateAgent.title}}</td>
+  </tr>
+  </tbody>
+</table>

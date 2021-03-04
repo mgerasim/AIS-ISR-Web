@@ -1,0 +1,87 @@
+<dx-data-grid id="gridContainer"
+              [dataSource]="dataSource"
+              [remoteOperations]="true"
+              [wordWrapEnabled]="true"
+              [columnAutoWidth]="true"
+              [rowAlternationEnabled]="true"
+              [allowColumnReordering]="true"
+              [allowColumnResizing]="true"
+              (onCellDblClick)="onCellDblClick($event)"
+              (onSelectionChanged)="onSelectionChanged($event)"
+              columnResizingMode="widget"
+              (onToolbarPreparing)="onToolbarPreparing($event)"
+              [(selectedRowKeys)]="selectedRowKeys"
+              [hoverStateEnabled]="true"
+              [showBorders]="true">
+  <dxo-column-chooser
+    [enabled]="true"
+    mode="select">
+  </dxo-column-chooser>
+
+  <dxo-filter-panel [visible]="true"></dxo-filter-panel>
+  <dxo-filter-row [visible]="true"></dxo-filter-row>
+  <dxo-header-filter [visible]="true"></dxo-header-filter>
+  <dxo-search-panel
+    [visible]="true"
+    title="Выбрать колонки"
+    [width]="240"
+    placeholder="Поиск..."></dxo-search-panel>
+
+  <dxo-selection mode="single"></dxo-selection>
+
+  <dxo-column-fixing [enabled]="true"></dxo-column-fixing>
+
+  <dxo-state-storing [enabled]="true"
+                     type="localStorage"
+                     storageKey="usersDataGrid">
+  </dxo-state-storing>
+
+  <dxo-scrolling mode="virtual" rowRenderingMode="virtual" ></dxo-scrolling>
+  <dxo-paging [pageSize]="100"></dxo-paging>
+
+  <dxi-column dataField="user.id" [fixed]="false" caption="№"></dxi-column>
+  <dxi-column dataField="user.createdAt" caption="Дата создания" cellTemplate="createAtTemplate"></dxi-column>
+  <dxi-column width="50" cellTemplate="avatarTemplate"></dxi-column>
+  <dxi-column dataField="user.displayName" caption="ФИО"></dxi-column>
+  <dxi-column dataField="user.voiceTelephoneNumber" caption="Телефон"></dxi-column>
+  <dxi-column dataField="user.emailAddress" caption="Электронный адрес"></dxi-column>
+  <dxi-column dataField="division.title" caption="Подразделение" cellTemplate="divisionTemplate"></dxi-column>
+  <dxi-column dataField="user.role" caption="Роль" cellTemplate="roleTemplate"></dxi-column>
+  <dxi-column dataField="user.centerResponsibilities" caption="Центр ответственности" cellTemplate="responsibilityCenterTemplate"></dxi-column>
+
+  <div *dxTemplate="let data of 'avatarTemplate'">
+    <kendo-avatar *ngIf="data.data.user.thumbnailPhoto" class="otstup" [shape]="'circle'" size="medium" [imageSrc]="'data:image/png;base64,' + data.data.user.thumbnailPhoto"></kendo-avatar>
+  </div>
+
+  <div *dxTemplate="let data of 'createAtTemplate'">
+    {{data.data.user.createdAt | date: 'dd.MM.yyyy hh:mm:ss'}}
+  </div>
+
+  <div *dxTemplate="let data of 'roleTemplate'">
+    <dx-select-box [items]="roles"
+                   [(value)]="data.data.account.role" displayExpr="title"
+                   valueExpr="id"
+                   (onValueChanged)="onRoleChanged(data.data.account)" ></dx-select-box>
+  </div>
+
+  <div *dxTemplate="let data of 'responsibilityCenterTemplate'">
+    <kendo-multiselect [data]="responsibilityCenters"
+                       textField="title"
+                       valueField="id"
+                       (valueChange)="responsibilityCentersChanged(data.data.user)" [(ngModel)]="userResponsibilityCenters"></kendo-multiselect>
+  </div>
+
+  <div *dxTemplate="let data of 'divisionTemplate'">
+    <dx-select-box [items]="divisions"
+                   [(value)]="data.data.user.divisionId"
+                   displayExpr="title"
+                   [searchEnabled]="true"
+                   valueExpr="id"
+                   (onValueChanged)="onDivisionChanged(data.data.user)"></dx-select-box>
+  </div>
+
+  <div *dxTemplate="let data of 'titleTemplate'">
+    <h3>Пользователи</h3>
+  </div>
+
+</dx-data-grid>

@@ -1,0 +1,93 @@
+<dx-data-grid id="gridContainer"
+              [dataSource]="certificates"
+              [remoteOperations]="true"
+              [wordWrapEnabled]="true"
+              [columnAutoWidth]="true"
+              [allowColumnReordering]="true"
+              [allowColumnResizing]="true"
+              [rowAlternationEnabled]="true"
+              (onCellDblClick)="onCellDblClick($event)"
+              [masterDetail]="{ enabled: true, template: 'detail' }"
+              (onSelectionChanged)="onSelectionChanged($event)"
+              columnResizingMode="widget"
+              (onToolbarPreparing)="onToolbarPreparing($event)"
+              [(selectedRowKeys)]="selectedRowKeys"
+              [hoverStateEnabled]="true"
+              [showBorders]="true">
+  <dxo-column-chooser
+    [enabled]="true"
+    mode="select">
+  </dxo-column-chooser>
+
+  <dxo-filter-panel [visible]="true"></dxo-filter-panel>
+  <dxo-filter-row [visible]="true"></dxo-filter-row>
+  <dxo-header-filter [visible]="true"></dxo-header-filter>
+  <dxo-search-panel
+    [visible]="true"
+    title="Выбрать колонки"
+    [width]="240"
+    placeholder="Поиск..."></dxo-search-panel>
+
+  <dxo-selection mode="single"></dxo-selection>
+
+  <dxo-column-fixing [enabled]="true"></dxo-column-fixing>
+
+  <dxo-state-storing [enabled]="true"
+                     type="localStorage"
+                     storageKey="certificatesDataGrid">
+  </dxo-state-storing>
+
+  <dxo-scrolling mode="virtual" rowRenderingMode="virtual" ></dxo-scrolling>
+  <dxo-paging [pageSize]="100"></dxo-paging>
+
+  <dxi-column dataField="id" [fixed]="false" caption="№ п/п"></dxi-column>
+
+  <dxi-column dataField="certificateType.title" caption="Тип сертификата"></dxi-column>
+  <dxi-column dataField="title" caption="Номер сертификата"></dxi-column>
+  <dxi-column dataField="date" caption="Дата сертификата" cellTemplate="dateTemplate"></dxi-column>
+
+  <dxi-column dataField="certificateAgent.title" caption="Кем выдан сертификат"></dxi-column>
+
+  <div *dxTemplate="let data of 'dateTemplate'">
+    {{toDate(data.data.date) | date:'dd.MM.yyyy'}}
+  </div>
+
+  <div *dxTemplate="let data of 'titleTemplate'">
+    <h3>Сертификаты</h3>
+  </div>
+
+  <div *dxTemplate="let data of 'actionAddTemplate'">
+    <dx-button text="Добавить"
+               (onClick)="add()"
+               icon="add"></dx-button>
+  </div>
+
+  <div *dxTemplate="let data of 'actionEditTemplate'">
+    <dx-button text="Редактировать"
+               [disabled]="!selectedRowKeys"
+               (onClick)="edit()"
+               icon="edit"></dx-button>
+  </div>
+
+  <div *dxTemplate="let data of 'actionShowTemplate'">
+    <dx-button text="Просмотр"
+               [disabled]="!selectedRowKeys"
+               (onClick)="show()"
+               icon="file"></dx-button>
+  </div>
+
+
+  <div *dxTemplate="let data of 'detail'">
+    <app-attachments [certificate]="data.data">
+
+    </app-attachments>
+  </div>
+
+</dx-data-grid>
+
+<ng-template #empty>
+  <span>Не проводился</span>
+</ng-template>
+
+<router-outlet class="router-card"
+></router-outlet>
