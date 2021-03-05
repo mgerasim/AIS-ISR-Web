@@ -65,10 +65,9 @@
   </div>
 
   <div *dxTemplate="let data of 'responsibilityCenterTemplate'">
-    <kendo-multiselect [data]="responsibilityCenters"
-                       textField="title"
-                       valueField="id"
-                       (valueChange)="responsibilityCentersChanged(data.data.user)" [(ngModel)]="userResponsibilityCenters"></kendo-multiselect>
+    <app-responsibility-centers [user]="data.data.user" [responsibilityCenters]="responsibilityCenters">
+
+    </app-responsibility-centers>
   </div>
 
   <div *dxTemplate="let data of 'divisionTemplate'">

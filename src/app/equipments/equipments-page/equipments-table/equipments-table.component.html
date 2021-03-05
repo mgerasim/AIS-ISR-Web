@@ -75,7 +75,7 @@
   <dxi-column dataField="equipment.overhaulDate" [fixed]="false" caption="Дата проведения КР" cellTemplate="tryDateTemplate"></dxi-column>
   <dxi-column dataField="equipment.exploitationPeriod" [fixed]="false" caption="Срок эксплуатации"></dxi-column>
   <dxi-column dataField="equipment.exploitationPeriodUnit" [fixed]="false" caption="Ед.изм." cellTemplate="exploitationPeriodUnitTemplate"></dxi-column>
-  <dxi-column dataField="equipment.wearPercentage" [fixed]="false" caption="Процент износа оборудования"></dxi-column>
+  <dxi-column dataField="equipment.wearPercentage" [fixed]="false" caption="Процент износа оборудования" cellTemplate="wearPercentageTemplate"></dxi-column>
   <dxi-column dataField="examination.createdAt" [fixed]="false" caption="Дата ЭПБ" cellTemplate="examinationCreatedAtTemplate"></dxi-column>
   <dxi-column dataField="examination.examinationNumber" [fixed]="false" caption="№ закл. ЭПБ"></dxi-column>
   <dxi-column dataField="examination.registerNumber" [fixed]="false" caption="Регистрационный номер ЭПБ"></dxi-column>
@@ -93,6 +93,10 @@
     <app-corrective-action-cell [equipment]="equipment.value">
 
     </app-corrective-action-cell>
+  </div>
+
+  <div *dxTemplate="let equipment of 'wearPercentageTemplate'">
+    <div [ngClass]="{'warning': equipment.data.isWarning, 'critical': equipment.data.isCritical}">{{equipment.value}}%</div>
   </div>
 
   <div *dxTemplate="let equipment of 'equipmentTitleTemplate'">
@@ -123,8 +127,9 @@
   </div>
 
   <div *dxTemplate="let equipment of 'hasCorrectionActionsTypeCellTemplate'">
-    <div *ngIf="equipment.data.examination && equipment.data.examination.correctiveActions && equipment.data.examination.correctiveActions.length > 0" class="equipment-groups equipment-groups-job"
-         [title]="'Имеется корректирующие мероприятия'"></div>
+    <app-corrective-action-indicator [equipment]="equipment.data.equipment">
+
+    </app-corrective-action-indicator>
   </div>
 
   <div *dxTemplate="let data of 'dateCertificateTemplate'">

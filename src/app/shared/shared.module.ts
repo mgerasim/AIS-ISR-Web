@@ -28,9 +28,10 @@ import {CoreModule} from '../core/core.module';
 import { AttachmentsListComponent } from './components/attachments/attachments-list/attachments-list.component';
 import {EquipmentCardComponent} from './components/equipment-card/equipment-card.component';
 import {CorrectiveActionCellComponent} from './components/corrective-action-cell/corrective-action-cell.component';
+import { CorrectiveActionIndicatorComponent } from './components/corrective-action-indicator/corrective-action-indicator.component';
 
 @NgModule({
-  declarations: [HeaderComponent, CertificateInfoComponent, AttachmentsComponent, AttachmentsTableComponent, AttachmentsListComponent, EquipmentCardComponent, CorrectiveActionCellComponent],
+  declarations: [HeaderComponent, CertificateInfoComponent, AttachmentsComponent, AttachmentsTableComponent, AttachmentsListComponent, EquipmentCardComponent, CorrectiveActionCellComponent, CorrectiveActionIndicatorComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -84,7 +85,8 @@ import {CorrectiveActionCellComponent} from './components/corrective-action-cell
         AttachmentsComponent,
         HeaderComponent,
         EquipmentCardComponent,
-        CorrectiveActionCellComponent
+        CorrectiveActionCellComponent,
+        CorrectiveActionIndicatorComponent
     ]
 })
 export class SharedModule { }

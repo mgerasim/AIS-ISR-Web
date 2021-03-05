@@ -6,10 +6,11 @@ import { UsersComponent } from './users/users.component';
 import {SharedModule} from '../shared/shared.module';
 import {CoreModule} from '../core/core.module';
 import {FormsModule} from '@angular/forms';
+import { ResponsibilityCentersComponent } from './users/responsibility-centers/responsibility-centers.component';
 
 
 @NgModule({
-  declarations: [UsersComponent],
+  declarations: [UsersComponent, ResponsibilityCentersComponent],
     imports: [
         CommonModule,
         UsersRoutingModule,

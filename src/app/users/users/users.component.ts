@@ -11,13 +11,12 @@ import {showSuccess} from '../../shared/utils/message-utils';
 import {TitleService} from '../../core/services/title.service';
 import {AuthService} from '../../auth/auth.service';
 import {AccountsService} from '../../api/services/accounts.service';
-import {ResponsibilityCentersService} from '../../api/services/responsibility-centers.service';
 
 type DataSourceItem = {
   user: User,
   division?: Division,
   account: Account
-}
+};
 
 @UntilDestroy()
 @Component({
@@ -47,7 +46,6 @@ export class UsersComponent implements OnInit, OnDestroy {
     }
   ];
   divisions: Division[];
-  userResponsibilityCenters = new Array<ResponsibilityCenter>();
   responsibilityCenters: ResponsibilityCenter[];
 
   constructor(
@@ -66,14 +64,11 @@ export class UsersComponent implements OnInit, OnDestroy {
       this.entityDataContext.divisions.getListLazy(),
       this.entityDataContext.accounts.getListLazy(),
       this.entityDataContext.responsibilityCenters.getListLazy(),
-      this.entityDataContext.userResponsibilityCenters.getListLazy(),
     ]).pipe(
       untilDestroyed(this)
-    ).subscribe(([users, divisions, accounts, responsibilityCenters, userResponsibilityCenters]) => {
+    ).subscribe(([users, divisions, accounts, responsibilityCenters]) => {
       this.divisions = divisions;
       this.responsibilityCenters = responsibilityCenters;
-      const userResponsibilityCenterIds = userResponsibilityCenters.filter(x => x.userId === this.authService.currentUser.id).map(x => x.responsibilityCenterId);
-      this.userResponsibilityCenters = this.responsibilityCenters.filter(x => userResponsibilityCenterIds.includes(x.id));
       this.dataSource = users.map(user => {
         const division = divisions.find(x => x.id === user.divisionId);
         const account = accounts.find(x => x.id === user.accountId);
@@ -121,14 +116,6 @@ export class UsersComponent implements OnInit, OnDestroy {
   onDivisionChanged(user: User): void {
     this.usersService.apiUsersIdPut({id: user.id, body: user}).subscribe(() => {
       showSuccess(`Подразделение успешно установлено для пользоватлея ${user.displayName}`);
-    }, error => this.errorHandlerService.handle(error));
-  }
-
-  responsibilityCentersChanged(user: User): void {
-    console.log(user);
-    console.log(this.userResponsibilityCenters);
-    this.usersService.apiUsersResponsibilityCenterIdPut$Json({id: user.id, body: this.userResponsibilityCenters}).subscribe(() => {
-      showSuccess(`Принадлежность к центрам ответсвенности успешно обновлено для пользоватлея ${user.displayName}`);
     }, error => this.errorHandlerService.handle(error));
   }
 }
