@@ -1,4 +1,4 @@
-<ng-container *ngIf="correctiveAction">
+<ng-container *ngIf="correctiveAction && users">
   <dx-scroll-view>
     <div class="container edit">
 
@@ -12,12 +12,19 @@
           <dxo-label text="Срок исполнения"></dxo-label>
         </dxi-item>
 
+        <dxi-item dataField="performerId" editorType="dxSelectBox" [editorOptions]="{items: users, searchEnabled: true, valueExpr: 'id', displayExpr: 'title', value: correctiveAction.performerId}">
+          <dxo-label text="Исполнитель"></dxo-label>
+        </dxi-item>
+
+        <dxi-item dataField="status" editorType="dxSelectBox" [editorOptions]="{items: statuses, searchEnabled: true, valueExpr: 'id', displayExpr: 'title', value: correctiveAction.status}">
+          <dxo-label text="Статус"></dxo-label>
+        </dxi-item>
+
       </dx-form>
 
       <div class="k-form-buttons">
         <button class="k-button k-primary" (click)="saveCorrectiveAction()">Сохранить</button>
       </div>
-
     </div>
   </dx-scroll-view>
 </ng-container>

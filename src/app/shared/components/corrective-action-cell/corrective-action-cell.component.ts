@@ -3,7 +3,9 @@ import {Equipment} from '../../../api/models/equipment';
 import {EntityDataContext} from '../../../core/entity/entity-data-context.service';
 import {ErrorHandlerService} from '../../../core/errors/error-handler.service';
 import {CorrectiveAction} from '../../../api/models/corrective-action';
+import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Component({
   selector: 'app-corrective-action-cell',
   templateUrl: './corrective-action-cell.component.html',
@@ -20,8 +22,9 @@ export class CorrectiveActionCellComponent implements OnInit {
     private errorHandler: ErrorHandlerService
   ) { }
 
+
   ngOnInit(): void {
-    this.entityDataContext.correctiveActions.getListLazy().subscribe(correctiveActions => {
+    this.entityDataContext.correctiveActions.getListLazy().pipe(untilDestroyed(this)).subscribe(correctiveActions => {
       this.correctiveActions = correctiveActions.filter(x => x.equipmentId === this.equipment.id);
     }, error => {
       this.errorHandler.handle(error);

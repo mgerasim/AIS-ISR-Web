@@ -1,11 +1,11 @@
 import {Injectable, Type} from "@angular/core";
 import {Subscription} from "rxjs";
-import {EntityChangedHubService} from '../server-notifications/entity-changed-hub.service';
-import {EntityChangedNotificationsService} from '../server-notifications/entity-changed-notifications.service';
 import {ErrorHandlerService} from '../errors/error-handler.service';
 import {EntityDataContext} from './entity-data-context.service';
 import {EntityChangedNotifyParameters} from '../../api/models/entity-changed-notify-parameters';
-import {EntityOperationType} from '../../api/models';
+import {EntityOperationType, SubscribeOperation} from '../../api/models';
+import {ServerHubService} from '../server-notifications/server-hub';
+import {ServerNotificationsService} from '../server-notifications/server-notifications.service';
 
 @Injectable({
     providedIn: "root",
@@ -14,14 +14,16 @@ export class EntityChangedSubscriberService {
     subscriptions: Subscription[] = [];
 
     constructor(
-        private entityChangedHub: EntityChangedHubService,
-        private serverNotificationService: EntityChangedNotificationsService,
+        private serverHub: ServerHubService,
+        private serverNotificationService: ServerNotificationsService,
         private errorHandler: ErrorHandlerService,
         private entityDataContext: EntityDataContext
     ) {}
 
     async subscribeInitializeAndSetEmptySubs(): Promise<void> {
-        await this.entityChangedHub.initialize();
+        console.log('subscribeInitializeAndSetEmptySubs: Start');
+        await this.serverHub.initialize();
+        console.log('subscribeInitializeAndSetEmptySubs: End');
         this.subscriptions = [];
     }
 
@@ -35,12 +37,12 @@ export class EntityChangedSubscriberService {
         // Даем время 1 сек отписаться от серверных уведомлений.
         await new Promise(resolve => setTimeout(resolve, 1000));
 
-        return this.entityChangedHub.close();
+        return this.serverHub.close();
     }
 
     subscribeAndAddEntityChangedHandler(): Subscription {
         return this.serverNotificationService
-            .subscribeEntityChanged()
+            .subscribe(SubscribeOperation.EntityChanged)
             .subscribe((data: EntityChangedNotifyParameters) => {
                 const service = this.entityDataContext.getEntityCollectionService(data.entityType);
 

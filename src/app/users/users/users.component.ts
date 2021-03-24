@@ -118,4 +118,10 @@ export class UsersComponent implements OnInit, OnDestroy {
       showSuccess(`Подразделение успешно установлено для пользоватлея ${user.displayName}`);
     }, error => this.errorHandlerService.handle(error));
   }
+
+  onAllowEmailChanged(user: User): void {
+    this.usersService.apiUsersIdPut({id: user.id, body: user}).subscribe(() => {
+      showSuccess(`Разрешение на получение эдектронной почты успешно изменено для пользоватлея ${user.displayName}`);
+    }, error => this.errorHandlerService.handle(error));
+  }
 }

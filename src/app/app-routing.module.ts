@@ -43,6 +43,10 @@ const routes: Routes = [
     loadChildren: () => import('./divisions/divisions.module').then(m => m.DivisionsModule)
   },
   {
+    path: 'correctiveActions',
+    loadChildren: () => import('./corrective-actions/corrective-actions.module').then(m => m.CorrectiveActionsModule)
+  },
+  {
     path: 'users',
     canActivate: [AuthGuard],
     loadChildren: () => import('./users/users.module').then(m => m.UsersModule)

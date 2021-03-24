@@ -11,6 +11,7 @@ export interface Settings {
   equipmentWearThresholdExceededJobWarningPercent: number;
   id?: number;
   importStartLine?: number;
+  incidentAcceptedDuration: number;
   title: string;
   updatedAt?: string;
   updatedBy?: Account;

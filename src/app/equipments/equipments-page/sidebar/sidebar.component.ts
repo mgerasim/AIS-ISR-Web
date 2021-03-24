@@ -2,8 +2,10 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {NavigatorService} from '../../../core/routing/navigator.service';
 import {SidebarService} from '../../sidebar.service';
 import {UntilDestroy} from '@ngneat/until-destroy';
-import {showError, showWarning} from '../../../shared/utils/message-utils';
+import {showWarning} from '../../../shared/utils/message-utils';
 import {CorrectiveAction} from '../../../api/models/corrective-action';
+import {AuthService} from '../../../auth/auth.service';
+import {CorrectiveActionStatus} from '../../../api/models/corrective-action-status';
 
 @UntilDestroy()
 @Component({
@@ -55,7 +57,11 @@ export class SidebarComponent implements OnInit, OnDestroy {
           showWarning('Необходимо выделить оборудование в таблице');
           return;
         }
-        this.correctiveAction = { equipmentId: this.sidebarService.equipment$.value.id } as CorrectiveAction;
+        this.correctiveAction = {
+          equipmentId: this.sidebarService.equipment$.value.id,
+          performerId: this.authService.currentUser.id,
+          status: CorrectiveActionStatus.InWork
+        } as CorrectiveAction;
         this.popupVisible = true;
       }
     },
@@ -73,7 +79,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   constructor(
     private navigator: NavigatorService,
-    private sidebarService: SidebarService
+    private sidebarService: SidebarService,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {

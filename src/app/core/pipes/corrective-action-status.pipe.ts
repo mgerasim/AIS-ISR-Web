@@ -1,21 +1,25 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {ExaminationStatus} from '../../api/models/examination-status';
+import {CorrectiveActionStatus} from '../../api/models/corrective-action-status';
 
 @Pipe({
-  name: 'examinationStatus'
+  name: 'correctiveActionStatus'
 })
-export class ExaminationStatusPipe implements PipeTransform {
+export class CorrectiveActionStatusPipe implements PipeTransform {
 
-  transform(value: ExaminationStatus, ...args: unknown[]): unknown {
+  transform(value: CorrectiveActionStatus, ...args: unknown[]): unknown {
     if (value === null || value === undefined) {
       return '';
     }
 
     switch (value) {
-      case ExaminationStatus.Corresponds:
-        return 'Соответствует требованиям';
-      case ExaminationStatus.NonCorresponds:
-        return 'Не соответсвует требованиям';
+      case CorrectiveActionStatus.None:
+        return 'Создано';
+      case CorrectiveActionStatus.InWork:
+        return 'В работе';
+      case CorrectiveActionStatus.Completed:
+        return 'Выполнено';
+      case CorrectiveActionStatus.Confirmed:
+        return 'Подтверждено';
       default:
         throw new Error(`Не поддерживаемый статус экспертизы: ${value}`);
     }

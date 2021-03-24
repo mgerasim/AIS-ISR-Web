@@ -3,6 +3,8 @@ import {NavigatorService} from '../../../core/routing/navigator.service';
 import {Equipment} from '../../../api/models/equipment';
 import {showWarning} from '../../../shared/utils/message-utils';
 import {CorrectiveAction} from '../../../api/models/corrective-action';
+import {CorrectiveActionStatus} from '../../../api/models/corrective-action-status';
+import {AuthService} from '../../../auth/auth.service';
 
 @Component({
   selector: 'app-equipments-card-sidebar',
@@ -19,6 +21,7 @@ export class EquipmentsCardSidebarComponent implements OnInit {
 
   constructor(
     private navigator: NavigatorService,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -43,7 +46,11 @@ export class EquipmentsCardSidebarComponent implements OnInit {
         icon: '',
         title: 'Добавить корректирующее мероприятие',
         click: () => {
-          this.correctiveAction = { equipmentId: this.equipment.id } as CorrectiveAction;
+          this.correctiveAction = {
+            equipmentId: this.equipment.id,
+            performerId: this.authService.currentUser.id,
+            status: CorrectiveActionStatus.InWork
+          } as CorrectiveAction;
           this.popupVisible = true;
         }
       },

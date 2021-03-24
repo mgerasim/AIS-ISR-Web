@@ -1,18 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AuthService} from '../../../auth/auth.service';
 import {User} from '../../../api/models/user';
 import {UserNotificationsService} from '../../../api/services/user-notifications.service';
 import {ErrorHandlerService} from '../../../core/errors/error-handler.service';
-import {IncidentCountChangedNotificationsService} from '../../../core/server-notifications/incident-count-changed-notifications.service';
-import {IncidentCountChangedSubscriberService} from '../../../core/server-notifications/incident-count-changed-subscriber.service';
-import {NotificationCountChangedSubscriberService} from '../../../core/server-notifications/notification-count-changed-subscriber.service';
+import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
+import {ServerNotificationsService} from '../../../core/server-notifications/server-notifications.service';
+import {SubscribeOperation} from '../../../api/models/subscribe-operation';
 
+@UntilDestroy()
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
 
   notificationCount?: number = undefined;
 
@@ -25,33 +26,31 @@ export class HeaderComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private userNotificationsService: UserNotificationsService,
-    private notificationCountChangedSubscriberService: NotificationCountChangedSubscriberService,
-    private incidentCountChangedSubscriberService: IncidentCountChangedSubscriberService,
+    private serverNotificationsService: ServerNotificationsService,
     private errorHandler: ErrorHandlerService
   ) { }
 
   ngOnInit(): void {
-    this.incidentCountChangedSubscriberService.subscribeInitializeAndSetEmptySubs().then( () => {
-      this.incidentCountChangedSubscriberService.subscribeAndAddEntityChangedHandler().subscribe(count => {
+    console.log('subscribe Incident Count');
+    this.serverNotificationsService.subscribe<number>(SubscribeOperation.IncidentCount)
+      .pipe(untilDestroyed(this))
+      .subscribe(count => {
         console.log(count);
         this.incidentCount = count;
       }, error => {
         this.errorHandler.handle(error);
       });
-    }).catch(error => {
-      this.errorHandler.handle(error);
-    });
 
-    this.notificationCountChangedSubscriberService.subscribeInitializeAndSetEmptySubs().then( () => {
-      this.notificationCountChangedSubscriberService.subscribeAndAddEntityChangedHandler().subscribe( count => {
-        console.log(count);
+    this.serverNotificationsService.subscribe<number>(SubscribeOperation.NotificationCount)
+      .pipe(untilDestroyed(this))
+      .subscribe(count => {
         this.notificationCount = count;
       }, error => {
         this.errorHandler.handle(error);
       });
-    }).catch(error => {
-      this.errorHandler.handle(error);
-    });
+  }
+
+  ngOnDestroy(): void {
   }
 
 }

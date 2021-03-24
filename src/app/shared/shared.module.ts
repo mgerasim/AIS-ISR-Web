@@ -9,7 +9,7 @@ import {ButtonsModule} from '@progress/kendo-angular-buttons';
 import {UploadsModule} from '@progress/kendo-angular-upload';
 import {GridModule} from '@progress/kendo-angular-grid';
 import {
-  DxButtonModule,
+  DxButtonModule, DxCheckBoxModule,
   DxDataGridModule,
   DxDropDownBoxModule,
   DxFormModule, DxLoadPanelModule, DxPopupModule,
@@ -29,9 +29,10 @@ import { AttachmentsListComponent } from './components/attachments/attachments-l
 import {EquipmentCardComponent} from './components/equipment-card/equipment-card.component';
 import {CorrectiveActionCellComponent} from './components/corrective-action-cell/corrective-action-cell.component';
 import { CorrectiveActionIndicatorComponent } from './components/corrective-action-indicator/corrective-action-indicator.component';
+import { EquipmentWearStatusIndicatorComponent } from './components/equipment-wear-status-indicator/equipment-wear-status-indicator.component';
 
 @NgModule({
-  declarations: [HeaderComponent, CertificateInfoComponent, AttachmentsComponent, AttachmentsTableComponent, AttachmentsListComponent, EquipmentCardComponent, CorrectiveActionCellComponent, CorrectiveActionIndicatorComponent],
+  declarations: [HeaderComponent, CertificateInfoComponent, AttachmentsComponent, AttachmentsTableComponent, AttachmentsListComponent, EquipmentCardComponent, CorrectiveActionCellComponent, CorrectiveActionIndicatorComponent, EquipmentWearStatusIndicatorComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -58,35 +59,37 @@ import { CorrectiveActionIndicatorComponent } from './components/corrective-acti
     DxPopupModule,
     CoreModule
   ],
-    exports: [
-        LayoutModule,
-        IconModule,
-        IconsModule,
-        NumericTextBoxModule,
-        InputsModule,
-        LabelModule,
-        ListViewModule,
-        ButtonsModule,
-        UploadsModule,
-        GridModule,
-        BadgeModule,
-        DxDataGridModule,
-        DxDropDownBoxModule,
-        DxScrollViewModule,
-        DropDownsModule,
-        DxFormModule,
-        DxButtonModule,
-        DxTreeListModule,
-        DxTreeViewModule,
-        DxPopupModule,
-        DxSelectBoxModule,
-        DxLoadPanelModule,
-        CertificateInfoComponent,
-        AttachmentsComponent,
-        HeaderComponent,
-        EquipmentCardComponent,
-        CorrectiveActionCellComponent,
-        CorrectiveActionIndicatorComponent
-    ]
+  exports: [
+    LayoutModule,
+    IconModule,
+    IconsModule,
+    NumericTextBoxModule,
+    InputsModule,
+    LabelModule,
+    ListViewModule,
+    ButtonsModule,
+    UploadsModule,
+    GridModule,
+    BadgeModule,
+    DxDataGridModule,
+    DxDropDownBoxModule,
+    DxScrollViewModule,
+    DropDownsModule,
+    DxFormModule,
+    DxButtonModule,
+    DxTreeListModule,
+    DxTreeViewModule,
+    DxPopupModule,
+    DxSelectBoxModule,
+    DxLoadPanelModule,
+    DxCheckBoxModule,
+    CertificateInfoComponent,
+    AttachmentsComponent,
+    HeaderComponent,
+    EquipmentCardComponent,
+    CorrectiveActionCellComponent,
+    CorrectiveActionIndicatorComponent,
+    EquipmentWearStatusIndicatorComponent
+  ]
 })
 export class SharedModule { }

@@ -2,5 +2,6 @@
 /* eslint-disable */
 export enum IncidentType {
   None = 'None',
-  EquipmentWearThresholdExceeded = 'EquipmentWearThresholdExceeded'
+  EquipmentWearThresholdExceeded = 'EquipmentWearThresholdExceeded',
+  IncidentAcceptedDuretionExceeded = 'IncidentAcceptedDuretionExceeded'
 }

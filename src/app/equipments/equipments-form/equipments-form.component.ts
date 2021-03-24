@@ -67,13 +67,11 @@ export class EquipmentsFormComponent implements OnInit, OnDestroy {
         /// TODO: Переделать на Core сервис
         await this.equipmentsService.apiEquipmentsIdPut({id: this.equipment?.id, body: this.equipment}).toPromise();
         showSuccess(`Оборудование ${this.equipment.title} успешно обновлено`);
-        this.entityDataContext.equipments.updateOneInCache(this.equipment);
         this.navigator.toEquipment(this.equipment.id);
       } else {
         console.log(this.equipment);
         this.equipment = await this.equipmentsService.apiEquipmentsPost$Json({body: this.equipment}).toPromise();
         showSuccess(`Оборудование ${this.equipment.title} успешно создано`);
-        this.entityDataContext.equipments.addOneToCache(this.equipment);
         this.navigator.toEquipment(this.equipment.id);
       }
     }

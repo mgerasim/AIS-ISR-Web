@@ -1,4 +1,4 @@
-<dx-data-grid id="gridContainer"
+<dx-data-grid *ngIf="settings" id="gridContainer"
               [dataSource]="dataSource"
               [remoteOperations]="true"
               [wordWrapEnabled]="true"
@@ -120,10 +120,12 @@
   </div>
 
   <div *dxTemplate="let equipment of 'equipmentWearStatusTypeCellTemplate'">
-    <div *ngIf="equipment.data.isCritical" class="equipment-groups equipment-groups-error"
-         [title]="'Превышение износа оборудования отметки 80%'"></div>
-    <div *ngIf="equipment.data.isWarning" class="equipment-groups equipment-groups-warning"
-         [title]="'Превышение износа оборудования отметки 70%'"></div>
+    <app-equipment-wear-status-indicator [equipment]="equipment.data.equipment"
+                                         [settings]="settings"
+                                         [warningPercent]="settings.equipmentWearThresholdExceededJobWarningPercent"
+                                         [criticalPercent]="settings.equipmentWearThresholdExceededJobCriticalPercent">
+
+    </app-equipment-wear-status-indicator>
   </div>
 
   <div *dxTemplate="let equipment of 'hasCorrectionActionsTypeCellTemplate'">

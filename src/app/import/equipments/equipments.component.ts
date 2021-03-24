@@ -4,8 +4,9 @@ import {ImportResponse} from '../../api/models/import-response';
 import {ImportService} from '../../api/services/import.service';
 import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
 import {ErrorHandlerService} from '../../core/errors/error-handler.service';
-import {ImportResponseSubscriberService} from '../../core/server-notifications/import-response-subscriber.service';
 import {TitleService} from '../../core/services/title.service';
+import {ServerNotificationsService} from '../../core/server-notifications/server-notifications.service';
+import {SubscribeOperation} from '../../api/models/subscribe-operation';
 
 @UntilDestroy()
 @Component({
@@ -25,7 +26,7 @@ export class EquipmentsComponent implements OnInit, OnDestroy {
 
   constructor(
     private importService: ImportService,
-    private importResponseSubscriber: ImportResponseSubscriberService,
+    private serverNotificationsService: ServerNotificationsService,
     private errorHandler: ErrorHandlerService,
     private titleService: TitleService,
   ) { }
@@ -41,15 +42,11 @@ export class EquipmentsComponent implements OnInit, OnDestroy {
   }
 
   private subscribeOnImportResponseChanged(): void {
-
-    this.importResponseSubscriber.subscribeInitializeAndSetEmptySubs().then( () => {
-      this.importResponseSubscriber.subscribeAndAddEntityChangedHandler().subscribe(response => {
+    this.serverNotificationsService.subscribe(SubscribeOperation.Import)
+      .pipe(untilDestroyed(this))
+      .subscribe(response => {
         this.importResponse = response;
       }, error => this.errorHandler.handle(error));
-    })
-      .catch(err => {
-        this.errorHandler.handle(err);
-      });
   }
 
   ngOnDestroy(): void {

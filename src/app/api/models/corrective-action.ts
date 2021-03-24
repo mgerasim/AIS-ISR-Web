@@ -1,7 +1,9 @@
 /* tslint:disable */
 /* eslint-disable */
 import { Account } from './account';
+import { CorrectiveActionStatus } from './corrective-action-status';
 import { Equipment } from './equipment';
+import { User } from './user';
 export interface CorrectiveAction {
   createdAt?: string;
   createdBy?: Account;
@@ -11,7 +13,10 @@ export interface CorrectiveAction {
   equipment?: Equipment;
   equipmentId?: number;
   id?: number;
+  performer?: User;
+  performerId?: null | number;
   scheduledComplationDate?: string;
+  status?: CorrectiveActionStatus;
   title: string;
   updatedAt?: string;
   updatedBy?: Account;

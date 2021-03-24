@@ -46,7 +46,11 @@
 
   <dxi-column dataField="notification.createdAt" caption="Дата" cellTemplate="dateTemplate"></dxi-column>
 
-  <dxi-column dataField="notification.title" caption="Сообщение"></dxi-column>
+  <dxi-column dataField="notification.title" caption="Сообщение" cellTemplate="messageTemplate"></dxi-column>
+
+  <div *dxTemplate="let data of 'messageTemplate'">
+    <div [innerHTML]="data.value"></div>
+  </div>
 
   <div *dxTemplate="let data of 'dateTemplate'">
     {{toDate(data.data.notification.createdAt) | date: 'dd.MM.yyyy hh:mm:ss'}}

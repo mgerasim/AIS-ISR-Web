@@ -28,6 +28,7 @@ export class EquipmentsCardPageComponent implements OnInit, OnDestroy{
 
   ngOnInit(): void {
     this.titleService.setTitle('Карточка оборудования');
+
     this.entityId
       .pipe(
         untilDestroyed(this)

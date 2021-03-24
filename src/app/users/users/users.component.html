@@ -45,9 +45,18 @@
   <dxi-column dataField="user.displayName" caption="ФИО"></dxi-column>
   <dxi-column dataField="user.voiceTelephoneNumber" caption="Телефон"></dxi-column>
   <dxi-column dataField="user.emailAddress" caption="Электронный адрес"></dxi-column>
+  <dxi-column dataField="user.allowEmail" width="50" [allowFiltering]="false" [allowReordering]="false" headerCellTemplate="allowEmailHeaderTemplate" cellTemplate="allowEmailTemplate"></dxi-column>
   <dxi-column dataField="division.title" caption="Подразделение" cellTemplate="divisionTemplate"></dxi-column>
   <dxi-column dataField="user.role" caption="Роль" cellTemplate="roleTemplate"></dxi-column>
   <dxi-column dataField="user.centerResponsibilities" caption="Центр ответственности" cellTemplate="responsibilityCenterTemplate"></dxi-column>
+
+  <div *dxTemplate="let data of 'allowEmailTemplate'">
+    <dx-check-box [(value)]="data.data.user.allowEmail" (valueChange)="onAllowEmailChanged(data.data.user)"></dx-check-box>
+  </div>
+
+  <div *dxTemplate="let data of 'allowEmailHeaderTemplate'">
+    <img src="assets/allow_email.png" title="Разрешить электронную почту">
+  </div>
 
   <div *dxTemplate="let data of 'avatarTemplate'">
     <kendo-avatar *ngIf="data.data.user.thumbnailPhoto" class="otstup" [shape]="'circle'" size="medium" [imageSrc]="'data:image/png;base64,' + data.data.user.thumbnailPhoto"></kendo-avatar>

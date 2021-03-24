@@ -28,14 +28,6 @@ class DataSourceItem {
   certificateType?: CertificateType;
   certificateAgent?: CertificateAgent;
   settings: Settings;
-
-  get isCritical(): boolean {
-    return this.equipment.wearPercentage >= this.settings.equipmentWearThresholdExceededJobCriticalPercent;
-  }
-
-  get isWarning(): boolean {
-    return this.settings.equipmentWearThresholdExceededJobWarningPercent <= this.equipment.wearPercentage && this.equipment.wearPercentage < this.settings.equipmentWearThresholdExceededJobCriticalPercent
-  }
 }
 
 @UntilDestroy()
@@ -98,6 +90,7 @@ export class EquipmentsTableComponent implements OnInit, OnDestroy {
                                certificates,
                                settings
                            ]) => {
+      this.settings = settings;
       this.dataSource = equipments.map(equipment => {
         if (equipment.responsibilityCenterId === null && equipment.responsibilityCenterId === undefined) {
           throw new Error(`У оборудования ${equipment.code}: ${equipment.title} не задан центр ответственности`);
@@ -136,6 +129,7 @@ export class EquipmentsTableComponent implements OnInit, OnDestroy {
         item.settings = settings;
         return item;
       });
+      console.log(this.dataSource);
     });
     this.gridDataSource = this.makeAsyncDataSource();
   }

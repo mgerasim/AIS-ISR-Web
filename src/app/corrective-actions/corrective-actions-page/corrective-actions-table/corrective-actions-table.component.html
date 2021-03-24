@@ -1,0 +1,80 @@
+<dx-data-grid *ngIf="users" id="gridContainer"
+              [dataSource]="dataSource"
+              [remoteOperations]="true"
+              [wordWrapEnabled]="true"
+              [columnAutoWidth]="true"
+              [allowColumnReordering]="true"
+              [allowColumnResizing]="true"
+              [rowAlternationEnabled]="true"
+              [masterDetail]="{ enabled: false, template: 'detail' }"
+              (onCellDblClick)="onCellDblClick($event)"
+              (onSelectionChanged)="onSelectionChanged($event)"
+              columnResizingMode="widget"
+              (onToolbarPreparing)="onToolbarPreparing($event)"
+              (onRowPrepared)="onRowPrepared($event)"
+              [hoverStateEnabled]="true"
+              [showBorders]="true">
+  <dxo-column-chooser
+    [enabled]="true"
+    mode="select">
+  </dxo-column-chooser>
+
+  <dxo-filter-panel [visible]="true"></dxo-filter-panel>
+  <dxo-filter-row [visible]="true"></dxo-filter-row>
+  <dxo-header-filter [visible]="true"></dxo-header-filter>
+  <dxo-search-panel
+    [visible]="true"
+    title="Выбрать колонки"
+    [width]="240"
+    placeholder="Поиск..."></dxo-search-panel>
+
+  <dxo-selection mode="single"></dxo-selection>
+
+  <dxo-column-fixing [enabled]="true"></dxo-column-fixing>
+
+  <dxo-state-storing [enabled]="true"
+                     type="localStorage"
+                     storageKey="correctiveActionsDataGrid">
+  </dxo-state-storing>
+
+  <dxo-scrolling mode="virtual" rowRenderingMode="virtual" ></dxo-scrolling>
+  <dxo-paging [pageSize]="100"></dxo-paging>
+
+  <dxi-column dataField="correctiveAction.createdAt" [fixed]="false" caption="Дата создания" cellTemplate="dateTemplate"></dxi-column>
+  <dxi-column dataField="correctiveAction.title" [fixed]="false" caption="Наименование"></dxi-column>
+  <dxi-column dataField="correctiveAction.scheduledComplationDate" [fixed]="false" caption="Запланированная дата выполнения" cellTemplate="dateTemplate"></dxi-column>
+  <dxi-column dataField="correctiveAction" name="status" [fixed]="false" caption="Статус" cellTemplate="statusTemplate"></dxi-column>
+  <dxi-column dataField="creator.displayName" [fixed]="false" caption="Создатель"></dxi-column>
+  <dxi-column dataField="correctiveAction" name="performer" [fixed]="false" caption="Исполнитель" cellTemplate="performerTemplate"></dxi-column>
+  <dxi-column dataField="equipment.title" [fixed]="false" caption="Оборудование"></dxi-column>
+  <dxi-column dataField="division.title" [fixed]="false" caption="Подразделение"></dxi-column>
+
+  <div *dxTemplate="let data of 'dateTemplate'">
+    <ng-container *ngIf="data.value">{{data.value | date:'dd.MM.yyyy'}}</ng-container>
+  </div>
+
+  <div *dxTemplate="let data of 'statusTemplate'">
+    {{data.value | correctiveActionStatus}}
+  </div>
+
+  <div *dxTemplate="let data of 'statusTemplate'">
+    <dx-select-box [items]="statuses"
+                   [(value)]="data.value.status" displayExpr="title"
+                   valueExpr="id"
+                   (onValueChanged)="onStatusChanged(data.value)" ></dx-select-box>
+  </div>
+
+  <div *dxTemplate="let data of 'performerTemplate'">
+    <dx-select-box [items]="users"
+                   [(value)]="data.value.performerId"
+                   displayExpr="displayName"
+                   [searchEnabled]="true"
+                   valueExpr="id"
+                   (onValueChanged)="onPerformerChanged(data.value)"></dx-select-box>
+  </div>
+
+  <div *dxTemplate="let data of 'titleTemplate'">
+    <h3>Корректирующие мероприятия</h3>
+  </div>
+
+</dx-data-grid>

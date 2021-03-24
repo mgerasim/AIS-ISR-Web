@@ -5,6 +5,7 @@ import { Division } from './division';
 export interface User {
   account?: Account;
   accountId?: number;
+  allowEmail?: boolean;
   createdAt?: string;
   createdBy?: Account;
   createdById?: number;

@@ -7,9 +7,10 @@ import { FileSizePipe } from './pipes/file-size.pipe';
 import { ExaminationStatusPipe } from './pipes/examination-status.pipe';
 import { RoleTitlePipe } from './pipes/role-title.pipe';
 import { ExploitationPeriodUnitPipe } from './pipes/exploitation-period-unit.pipe';
+import {CorrectiveActionStatusPipe} from './pipes/corrective-action-status.pipe';
 
 @NgModule({
-  declarations: [ImportStatePipe, FileExtensionIconPipe, FileSizePipe, ExaminationStatusPipe, RoleTitlePipe, ExploitationPeriodUnitPipe],
+  declarations: [ImportStatePipe, FileExtensionIconPipe, FileSizePipe, ExaminationStatusPipe, RoleTitlePipe, ExploitationPeriodUnitPipe, CorrectiveActionStatusPipe],
   imports: [
     CommonModule,
     RouterModule
@@ -20,7 +21,8 @@ import { ExploitationPeriodUnitPipe } from './pipes/exploitation-period-unit.pip
     FileSizePipe,
     ExaminationStatusPipe,
     RoleTitlePipe,
-    ExploitationPeriodUnitPipe
+    ExploitationPeriodUnitPipe,
+    CorrectiveActionStatusPipe,
   ]
 })
 export class CoreModule { }

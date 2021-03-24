@@ -46,7 +46,7 @@ export class IncidentsComponent implements OnInit, OnDestroy {
         ])
       .pipe(untilDestroyed(this))
       .subscribe(([incidents, equipments, divisions, responsibilityCenters]) => {
-        this.dataSource = incidents.map(incident => {
+        this.dataSource = incidents.filter(incident => !incident.isClosed).map(incident => {
           const equipment = equipments.find(x => x.id === incident.equipmentId);
           const division = divisions.find(x => x.id === equipment?.divisionId);
           const responsibilityCenter = responsibilityCenters.find(x => x.id === equipment?.responsibilityCenterId);
