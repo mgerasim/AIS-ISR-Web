@@ -11,6 +11,7 @@ import {showSuccess} from '../../shared/utils/message-utils';
 import {TitleService} from '../../core/services/title.service';
 import {AuthService} from '../../auth/auth.service';
 import {AccountsService} from '../../api/services/accounts.service';
+import {PermissionService} from '../../core/services/permission.service';
 
 type DataSourceItem = {
   user: User,
@@ -28,23 +29,7 @@ export class UsersComponent implements OnInit, OnDestroy {
 
   dataSource: DataSourceItem[];
   selectedRowKeys: DataSourceItem[];
-  roles = [
-    {
-      id: Role.User,
-      title: 'Пользователь',
-      disabled: false
-    },
-    {
-      id: Role.Admin,
-      title: 'Администратор',
-      disabled: false
-    },
-    {
-      id: Role.SuperAdmin,
-      title: 'Супер Администратор',
-      disabled: this.authService.currentUser.account.role !== Role.SuperAdmin
-    }
-  ];
+  roles = this.permissionService.roles;
   divisions: Division[];
   responsibilityCenters: ResponsibilityCenter[];
 
@@ -54,7 +39,7 @@ export class UsersComponent implements OnInit, OnDestroy {
     private usersService: UsersService,
     private accountsService: AccountsService,
     private titleService: TitleService,
-    private authService: AuthService
+    private permissionService: PermissionService,
   ) { }
 
   ngOnInit(): void {
@@ -70,6 +55,7 @@ export class UsersComponent implements OnInit, OnDestroy {
       this.divisions = divisions;
       this.responsibilityCenters = responsibilityCenters;
       this.dataSource = users.map(user => {
+        this.roles = this.permissionService.roles;
         const division = divisions.find(x => x.id === user.divisionId);
         const account = accounts.find(x => x.id === user.accountId);
         if (account === undefined) {

@@ -7,6 +7,7 @@ import {User} from '../../api/models/user';
 import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
 import {Role} from '../../api/models/role';
 import {CorrectiveActionStatus} from '../../api/models';
+import {PermissionService} from '../../core/services/permission.service';
 
 @UntilDestroy()
 @Component({
@@ -20,34 +21,13 @@ export class CorrectiveActionFormComponent implements OnInit {
   @Output() save = new EventEmitter();
 
   users: User[];
-
-  statuses = [
-    {
-      id: CorrectiveActionStatus.None,
-      title: 'Создано',
-      disabled: false
-    },
-    {
-      id: CorrectiveActionStatus.InWork,
-      title: 'В работе',
-      disabled: false
-    },
-    {
-      id: CorrectiveActionStatus.Completed,
-      title: 'Выполнено',
-      disabled: false
-    },
-    {
-      id: CorrectiveActionStatus.Confirmed,
-      title: 'Подтверждено',
-      disabled: false
-    }
-  ];
+  statuses = this.permissionService.statuses;
 
   constructor(
     private correctiveActionsService: CorrectiveActionsService,
     private entityDataContext: EntityDataContext,
     private errorHandler: ErrorHandler,
+    private permissionService: PermissionService,
   ) { }
 
   ngOnInit(): void {

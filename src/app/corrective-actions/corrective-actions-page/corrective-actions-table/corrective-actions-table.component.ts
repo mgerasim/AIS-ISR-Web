@@ -11,6 +11,7 @@ import {UsersService} from '../../../api/services/users.service';
 import {showSuccess} from '../../../shared/utils/message-utils';
 import {CorrectiveActionsService} from '../../../api/services/corrective-actions.service';
 import {CorrectiveActionStatus} from '../../../api/models/corrective-action-status';
+import {PermissionService} from '../../../core/services/permission.service';
 
 type DataSourceItem = {
   correctiveAction: CorrectiveAction,
@@ -32,33 +33,12 @@ export class CorrectiveActionsTableComponent implements OnInit, OnDestroy {
 
   users: User[] = [];
 
-
-  statuses = [
-    {
-      id: CorrectiveActionStatus.None,
-      title: 'Создано',
-      disabled: false
-    },
-    {
-      id: CorrectiveActionStatus.InWork,
-      title: 'В работе',
-      disabled: false
-    },
-    {
-      id: CorrectiveActionStatus.Completed,
-      title: 'Выполнено',
-      disabled: false
-    },
-    {
-      id: CorrectiveActionStatus.Confirmed,
-      title: 'Подтверждено',
-      disabled: false
-    }
-  ];
+  statuses = this.permissionService.statuses;
 
   constructor(
     private entityDataContext: EntityDataContext,
     private correctiveActionsService: CorrectiveActionsService,
+    private permissionService: PermissionService,
     private errorHandler: ErrorHandlerService,
   ) { }
 

@@ -40,6 +40,7 @@
   <dxo-paging [pageSize]="100"></dxo-paging>
 
   <dxi-column dataField="incident.id" [fixed]="false" caption="№"></dxi-column>
+  <dxi-column dataField="incident.startDate" caption="Дата возникновения" cellTemplate="startDateTemplate"></dxi-column>
   <dxi-column dataField="incident.title" caption="Сообщение"></dxi-column>
   <dxi-column dataField="division.title" [fixed]="false" caption="Подразделение"></dxi-column>
   <dxi-column dataField="responsibilityCenter.title" [fixed]="false" caption="Центр ответственности"></dxi-column>
@@ -51,6 +52,10 @@
   <dxi-column dataField="equipment.exploitationPeriod" [fixed]="false" caption="Срок эксплуатации"></dxi-column>
   <dxi-column dataField="equipment.exploitationPeriodUnit" [fixed]="false" caption="Ед.изм." cellTemplate="exploitationPeriodUnitTemplate"></dxi-column>
   <dxi-column dataField="equipment.wearPercentage" [fixed]="false" caption="Процент износа оборудования"></dxi-column>
+
+  <div *dxTemplate="let data of 'startDateTemplate'">
+    {{toDate(data.data.incident.startDate) | date: 'dd.MM.yyyy hh:mm:ss'}}
+  </div>
 
   <div *dxTemplate="let data of 'exploitationPeriodUnitTemplate'">
     {{ data.data.equipment.exploitationPeriodUnit | exploitationPeriodUnit }}

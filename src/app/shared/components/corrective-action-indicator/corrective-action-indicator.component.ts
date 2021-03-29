@@ -4,6 +4,7 @@ import {EntityDataContext} from '../../../core/entity/entity-data-context.servic
 import {CorrectiveAction} from '../../../api/models/corrective-action';
 import {ErrorHandlerService} from '../../../core/errors/error-handler.service';
 import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
+import {CorrectiveActionStatus} from '../../../api/models/corrective-action-status';
 
 @UntilDestroy()
 @Component({
@@ -23,7 +24,7 @@ export class CorrectiveActionIndicatorComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.entityDataContext.correctiveActions.getListLazy().pipe(untilDestroyed(this)).subscribe(correctiveActions => {
-      this.correctiveActions = correctiveActions.filter(x => x.equipmentId === this.equipment.id);
+      this.correctiveActions = correctiveActions.filter(x => x.equipmentId === this.equipment.id && x.status !== CorrectiveActionStatus.Confirmed);
     }, error => {
       this.errorHandler.handle(error);
     });
