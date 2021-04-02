@@ -1,4 +1,5 @@
 <kendo-multiselect [data]="responsibilityCenters"
                    textField="title"
                    valueField="id"
+                   [disabled]="disabled"
                    (valueChange)="responsibilityCentersChanged()" [(ngModel)]="userResponsibilityCenters"></kendo-multiselect>

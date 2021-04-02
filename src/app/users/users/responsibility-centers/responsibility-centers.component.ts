@@ -18,6 +18,7 @@ export class ResponsibilityCentersComponent implements OnInit, OnDestroy {
 
   @Input() user: User;
   @Input() responsibilityCenters: ResponsibilityCenter[];
+  @Input() disabled: boolean;
 
   userResponsibilityCenters = new Array<ResponsibilityCenter>();
 

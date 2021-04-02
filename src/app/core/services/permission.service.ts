@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {Role} from '../../api/models/role';
 import {AuthService} from '../../auth/auth.service';
-import {EntityDataContext} from '../entity/entity-data-context.service';
 import {CorrectiveActionStatus} from '../../api/models/corrective-action-status';
+import {Account} from '../../api/models/account';
 
 type RolesType = {
   id: Role,
@@ -48,6 +48,10 @@ export class PermissionService {
         }
       ];
       return statuses;
+    }
+
+    isSuperAdmin(account: Account): boolean {
+      return account.role === Role.SuperAdmin;
     }
 
     get roles(): RolesType[] {

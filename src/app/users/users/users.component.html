@@ -51,7 +51,7 @@
   <dxi-column dataField="user.centerResponsibilities" caption="Центр ответственности" cellTemplate="responsibilityCenterTemplate"></dxi-column>
 
   <div *dxTemplate="let data of 'allowEmailTemplate'">
-    <dx-check-box [(value)]="data.data.user.allowEmail" (valueChange)="onAllowEmailChanged(data.data.user)"></dx-check-box>
+    <dx-check-box [(value)]="data.data.user.allowEmail" [disabled]="!permissionService.isSuperAdmin(data.data.account)" (valueChange)="onAllowEmailChanged(data.data.user)"></dx-check-box>
   </div>
 
   <div *dxTemplate="let data of 'allowEmailHeaderTemplate'">
@@ -74,7 +74,9 @@
   </div>
 
   <div *dxTemplate="let data of 'responsibilityCenterTemplate'">
-    <app-responsibility-centers [user]="data.data.user" [responsibilityCenters]="responsibilityCenters">
+    <app-responsibility-centers [user]="data.data.user"
+                                [disabled]="!permissionService.isSuperAdmin(data.data.account)"
+                                [responsibilityCenters]="responsibilityCenters">
 
     </app-responsibility-centers>
   </div>
