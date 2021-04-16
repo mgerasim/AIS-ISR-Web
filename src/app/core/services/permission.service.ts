@@ -50,8 +50,8 @@ export class PermissionService {
       return statuses;
     }
 
-    isSuperAdmin(account: Account): boolean {
-      return account.role === Role.SuperAdmin;
+    get isSuperAdmin(): boolean {
+      return this.authService.currentUser.account.role === Role.SuperAdmin;
     }
 
     get roles(): RolesType[] {

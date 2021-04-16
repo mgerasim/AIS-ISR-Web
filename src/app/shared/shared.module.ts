@@ -13,7 +13,7 @@ import {
   DxDataGridModule,
   DxDropDownBoxModule,
   DxFormModule, DxLoadPanelModule, DxPopupModule,
-  DxScrollViewModule, DxSelectBoxModule, DxTreeListModule,
+  DxScrollViewModule, DxSelectBoxModule, DxTextAreaModule, DxTreeListModule,
   DxTreeViewModule
 } from 'devextreme-angular';
 import {DropDownsModule} from '@progress/kendo-angular-dropdowns';
@@ -56,6 +56,7 @@ import { EquipmentWearStatusIndicatorComponent } from './components/equipment-we
     DxButtonModule,
     DxTreeListModule,
     DxTreeViewModule,
+    DxTextAreaModule,
     DxPopupModule,
     CoreModule
   ],

@@ -1,5 +1,5 @@
 <kendo-multiselect [data]="responsibilityCenters"
                    textField="title"
                    valueField="id"
-                   [disabled]="disabled"
+                   [disabled]="!permissionService.isSuperAdmin"
                    (valueChange)="responsibilityCentersChanged()" [(ngModel)]="userResponsibilityCenters"></kendo-multiselect>

@@ -3,13 +3,13 @@ import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/com
 import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
 import {AuthService} from './auth/auth.service';
-import {token} from '@progress/kendo-angular-inputs/dist/es2015/maskedtextbox/parsing/parsers';
+import {ErrorHandlerService} from './core/errors/error-handler.service';
 
 @Injectable()
 export class ApiInterceptor implements HttpInterceptor {
 
-  public constructor(
-    private authService: AuthService
+  public constructor(private authService: AuthService,
+                     private errorHandle: ErrorHandlerService,
   ) {
   }
 
@@ -34,6 +34,7 @@ export class ApiInterceptor implements HttpInterceptor {
         // Handle this err
         console.error(`Error performing request, status code = ${err.status}`);
         console.error(err);
+        this.errorHandle.handle(err);
       })
     );
   }

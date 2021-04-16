@@ -7,6 +7,7 @@ import {combineLatest} from 'rxjs';
 import {showSuccess} from '../../../shared/utils/message-utils';
 import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
 import {UsersService} from '../../../api/services/users.service';
+import {PermissionService} from '../../../core/services/permission.service';
 
 @UntilDestroy()
 @Component({
@@ -18,14 +19,14 @@ export class ResponsibilityCentersComponent implements OnInit, OnDestroy {
 
   @Input() user: User;
   @Input() responsibilityCenters: ResponsibilityCenter[];
-  @Input() disabled: boolean;
 
   userResponsibilityCenters = new Array<ResponsibilityCenter>();
 
   constructor(
     private usersService: UsersService,
     private entityDataContext: EntityDataContext,
-    private errorHandlerService: ErrorHandlerService
+    private errorHandlerService: ErrorHandlerService,
+    public permissionService: PermissionService,
   ) { }
 
   ngOnInit(): void {

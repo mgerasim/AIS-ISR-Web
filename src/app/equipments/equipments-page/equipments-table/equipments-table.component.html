@@ -38,6 +38,9 @@
   </dxo-state-storing>
 
   <dxo-scrolling mode="virtual" rowRenderingMode="virtual" ></dxo-scrolling>
+
+  <dxo-export [enabled]="true"></dxo-export>
+
   <dxo-paging [pageSize]="100"></dxo-paging>
 
   <dxi-column dataField="equipment.code" [fixed]="false" caption="№ п/п"></dxi-column>
@@ -88,6 +91,9 @@
   <dxi-column dataField="certificate.date" caption="Дата сертификата" cellTemplate="dateCertificateTemplate"></dxi-column>
   <dxi-column dataField="certificateAgent.title" caption="Кем выдан сертификат"></dxi-column>
   <dxi-column dataField="responsibilityCenter.title" caption="Центр ответственности"></dxi-column>
+  <dxi-column dataField="pziAttachCount" caption="Количество файлов категории Паспорт завода изготовителя"></dxi-column>
+  <dxi-column dataField="exmAttachCount" caption="Количество файлов категории Экспертиза"></dxi-column>
+  <dxi-column dataField="otherAttachCount" caption="Количество файлов категории Прочее"></dxi-column>
 
   <div *dxTemplate="let equipment of 'correctiveActionsTemplate'">
     <app-corrective-action-cell [equipment]="equipment.value">
@@ -138,6 +144,31 @@
     <ng-container *ngIf="data.data.certificate">
       {{toDate(data.data.certificate.date) | date: 'dd.MM.yyyy'}}
     </ng-container>
+  </div>
+
+  <div *dxTemplate="let d of 'tag1HeaderCellTemplate'">
+    <div class="icon">
+      <img src="assets/img/tags/tag1.png"
+           width="32"
+           height="32" />
+    </div>
+    ПЗИ
+  </div>
+
+  <div *dxTemplate="let d of 'tag2HeaderCellTemplate'">
+    <div class="icon">
+      <img src="assets/img/tags/tag2.png"
+           width="32"
+           height="32" />
+    </div>
+  </div>
+
+  <div *dxTemplate="let d of 'tag3HeaderCellTemplate'">
+    <div class="icon">
+      <img src="assets/img/tags/tag3.png"
+           width="32"
+           height="32" />
+    </div>
   </div>
 
   <div *dxTemplate="let data of 'titleTemplate'">

@@ -18,6 +18,8 @@ import {CertificateAgent} from '../../../api/models/certificate-agent';
 import {switchMap, tap} from 'rxjs/operators';
 import {Settings} from '../../../api/models/settings';
 import {SettingsService} from '../../../api/services/settings.service';
+import {Attachment} from '../../../api/models/attachment';
+import {AttachmentCategory} from '../../../api/models/attachment-category';
 
 class DataSourceItem {
   equipment: Equipment;
@@ -28,6 +30,9 @@ class DataSourceItem {
   certificateType?: CertificateType;
   certificateAgent?: CertificateAgent;
   settings: Settings;
+  pziAttachCount: number;
+  exmAttachCount: number;
+  otherAttachCount: number;
 }
 
 @UntilDestroy()
@@ -49,6 +54,7 @@ export class EquipmentsTableComponent implements OnInit, OnDestroy {
   responsibilityCenters: ResponsibilityCenter[];
   certificateTypes: CertificateType[];
   certificateAgents: CertificateAgent[];
+  attachments: Attachment[];
   value: any;
 
   gridDataSource: any;
@@ -68,12 +74,14 @@ export class EquipmentsTableComponent implements OnInit, OnDestroy {
 
     combineLatest([
       this.entityDataContext.certificateTypes.getListLazy(),
-      this.entityDataContext.certificateAgents.getListLazy()
+      this.entityDataContext.certificateAgents.getListLazy(),
+      this.entityDataContext.attachments.getListLazy(),
     ]).pipe(
       untilDestroyed(this),
-      tap(([certificateTypes, certificateAgent]) => {
+      tap(([certificateTypes, certificateAgents, attachments]) => {
         this.certificateTypes = certificateTypes;
-        this.certificateAgents = certificateAgent;
+        this.certificateAgents = certificateAgents;
+        this.attachments = attachments;
       }),
       switchMap(() => combineLatest([
         this.entityDataContext.equipments.getListLazy(),
@@ -127,6 +135,9 @@ export class EquipmentsTableComponent implements OnInit, OnDestroy {
         item.certificateType = certificateType;
         item.certificateAgent = certificateAgent;
         item.settings = settings;
+        item.pziAttachCount = this.attachments.filter(x => x.equipmentId === equipment.id && x.attachmentCategory === AttachmentCategory.Passport).length;
+        item.exmAttachCount = this.attachments.filter(x => x.equipmentId === equipment.id && x.attachmentCategory === AttachmentCategory.Examination).length;
+        item.otherAttachCount = this.attachments.filter(x => x.equipmentId === equipment.id && x.attachmentCategory === AttachmentCategory.Other).length;
         return item;
       });
       console.log(this.dataSource);

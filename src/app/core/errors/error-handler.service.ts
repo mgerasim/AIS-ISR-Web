@@ -69,6 +69,7 @@ export class ErrorHandlerService {
     if (response instanceof HttpErrorResponse) {
       if (response.status === 400) {
         console.log(response.error);
+        showError(response.error);
         Object.keys(response.error.errors).forEach(key => {
           response.error.errors[key].forEach((message: string) => {
             this.notificationService.show({
