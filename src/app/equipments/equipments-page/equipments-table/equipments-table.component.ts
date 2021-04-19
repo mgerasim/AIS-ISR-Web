@@ -186,6 +186,11 @@ export class EquipmentsTableComponent implements OnInit, OnDestroy {
     return toDate(dateString);
   }
 
+  customizeCount(data): string {
+    console.log(data);
+    return 'Количество: ' + data.value.toString();
+  }
+
   onRowPrepared(e: any): void {
     if (!e.data) {
       return;

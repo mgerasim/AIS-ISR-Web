@@ -1,12 +1,12 @@
+
 <dx-data-grid *ngIf="settings" id="gridContainer"
               [dataSource]="dataSource"
-              [remoteOperations]="true"
               [wordWrapEnabled]="true"
               [columnAutoWidth]="true"
               [allowColumnReordering]="true"
               [allowColumnResizing]="true"
               [rowAlternationEnabled]="true"
-              [masterDetail]="{ enabled: true, template: 'detail' }"
+              [masterDetail]="{ enabled: false, template: 'detail' }"
               (onCellDblClick)="onCellDblClick($event)"
               (onSelectionChanged)="onSelectionChanged($event)"
               columnResizingMode="widget"
@@ -14,34 +14,46 @@
               (onRowPrepared)="onRowPrepared($event)"
               [hoverStateEnabled]="true"
               [showBorders]="true">
-  <dxo-column-chooser
-    [enabled]="true"
-    mode="select">
-  </dxo-column-chooser>
 
-  <dxo-filter-panel [visible]="true"></dxo-filter-panel>
-  <dxo-filter-row [visible]="true"></dxo-filter-row>
-  <dxo-header-filter [visible]="true"></dxo-header-filter>
-  <dxo-search-panel
-    [visible]="true"
-    title="Выбрать колонки"
-    [width]="240"
-    placeholder="Поиск..."></dxo-search-panel>
 
-  <dxo-selection mode="single"></dxo-selection>
+    <dxo-column-chooser
+      [enabled]="true"
+      mode="select">
+    </dxo-column-chooser>
+    <dxo-filter-panel [visible]="true"></dxo-filter-panel>
+    <dxo-filter-row [visible]="true"></dxo-filter-row>
 
-  <dxo-column-fixing [enabled]="true"></dxo-column-fixing>
+    <dxo-header-filter [visible]="true"></dxo-header-filter>
 
-  <dxo-state-storing [enabled]="true"
-                     type="localStorage"
-                     storageKey="equipmentsDataGrid">
-  </dxo-state-storing>
+    <dxo-search-panel
+      [visible]="true"
+      title="Выбрать колонки"
+      [width]="240"
+      placeholder="Поиск..."></dxo-search-panel>
 
+      <dxo-selection mode="single"></dxo-selection>
+
+        <dxo-column-fixing [enabled]="true"></dxo-column-fixing>
+
+          <dxo-state-storing [enabled]="true"
+                             type="localStorage"
+                             storageKey="equipmentsDataGrid">
+          </dxo-state-storing>
+
+
+  <!--
   <dxo-scrolling mode="virtual" rowRenderingMode="virtual" ></dxo-scrolling>
-
+-->
   <dxo-export [enabled]="true"></dxo-export>
 
-  <dxo-paging [pageSize]="100"></dxo-paging>
+
+  <dxo-paging [pageSize]="20"></dxo-paging>
+
+  <dxo-pager
+    [showPageSizeSelector]="true"
+    [allowedPageSizes]="[5, 10, 20]"
+    [showInfo]="true">
+  </dxo-pager>
 
   <dxi-column dataField="equipment.code" [fixed]="false" caption="№ п/п"></dxi-column>
 
@@ -181,7 +193,15 @@
     </app-equipments-card>
   </div>
 
+  <dxo-summary>
+    <dxi-total-item
+      column="equipment.code"
+      summaryType="count">
+    </dxi-total-item>
+  </dxo-summary>
+
 </dx-data-grid>
+
 
 <ng-template #empty>
   <span>Не проводился</span>
