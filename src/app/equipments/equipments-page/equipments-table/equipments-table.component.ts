@@ -110,7 +110,7 @@ export class EquipmentsTableComponent implements OnInit, OnDestroy {
         }
 
         const division = divisions.find(x => x.id === equipment.divisionId);
-        const examination = examinations.find(x => x.id === equipment.examinationId);
+        const examination = examinations.find(x => x.id === equipment.examination?.id || null);
         const certificate = certificates.find(x => x.id === equipment.certificateId);
 
         let certificateType: CertificateType;

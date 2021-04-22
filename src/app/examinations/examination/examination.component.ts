@@ -32,15 +32,15 @@ export class ExaminationComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.titleService.setTitle('Экспертизы');
+    this.titleService.setTitle('Экспертиза');
     this.entityId
       .pipe(
         untilDestroyed(this),
         switchMap((id: number) => this.entityDataContext.equipments.getByIdLazy(id)),
         tap(equipment => this.equipment = {...equipment}),
         switchMap(equipment => {
-          if (equipment.examinationId) {
-            return this.entityDataContext.examinations.getByIdLazy(equipment.examinationId);
+          if (equipment.examination) {
+            return this.entityDataContext.examinations.getByIdLazy(equipment.examination.id);
           } else {
             const examination = {
               equipmentId: equipment.id

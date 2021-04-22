@@ -40,8 +40,8 @@ export class EquipmentCardComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    if (this.equipment.examinationId) {
-      this.entityDataContext.examinations.getByIdLazy(this.equipment.examinationId)
+    if (this.equipment.examination) {
+      this.entityDataContext.examinations.getByIdLazy(this.equipment.examination.id)
         .pipe(untilDestroyed(this))
         .subscribe(examination => this.examination = examination, error => this.errorHandler.handle(error));
     }

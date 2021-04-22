@@ -57,4 +57,16 @@ export class NavigatorService {
   toDivision(divisionId: number): void {
     this.route.navigate(['divisions', divisionId]).then();
   }
+
+  toCertificateAgentAdd(): void {
+    this.route.navigate(['certificateAgents', 'add']).then();
+  }
+
+  toCertificateAgentEdit(certificateAgentId: number): void {
+    this.route.navigate(['certificateAgents', certificateAgentId, 'edit']).then();
+  }
+
+  toCertificateAgentShow(certificateAgentId: number): void {
+    this.route.navigate(['certificateAgents', certificateAgentId]).then();
+  }
 }

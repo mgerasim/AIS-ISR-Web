@@ -36,7 +36,7 @@ export class EquipmentsCardSidebarComponent implements OnInit {
       }, {
         id: 2,
         icon: '',
-        title: (this.equipment.examinationId ? 'Редактировать ' : 'Добавить ') + 'экспертизу',
+        title: (this.equipment.examination ? 'Редактировать ' : 'Добавить ') + 'экспертизу',
         click: () => {
           this.navigator.toEquipmentExamination(this.equipment.id);
         }

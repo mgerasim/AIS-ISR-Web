@@ -23,6 +23,11 @@ const routes: Routes = [
     loadChildren: () => import('./certificates/certificates.module').then(m => m.CertificatesModule)
   },
   {
+    path: 'certificateAgents',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./certificate-agents/certificate-agents.module').then(m => m.CertificateAgentsModule)
+  },
+  {
     path: 'equipments',
     canActivate: [AuthGuard],
     loadChildren: () => import('./equipments/equipments.module').then(m => m.EquipmentsModule)
