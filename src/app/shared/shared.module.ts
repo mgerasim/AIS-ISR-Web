@@ -30,6 +30,7 @@ import {EquipmentCardComponent} from './components/equipment-card/equipment-card
 import {CorrectiveActionCellComponent} from './components/corrective-action-cell/corrective-action-cell.component';
 import { CorrectiveActionIndicatorComponent } from './components/corrective-action-indicator/corrective-action-indicator.component';
 import { EquipmentWearStatusIndicatorComponent } from './components/equipment-wear-status-indicator/equipment-wear-status-indicator.component';
+import { MenusModule } from '@progress/kendo-angular-menu';
 
 @NgModule({
   declarations: [HeaderComponent, CertificateInfoComponent, AttachmentsComponent, AttachmentsTableComponent, AttachmentsListComponent, EquipmentCardComponent, CorrectiveActionCellComponent, CorrectiveActionIndicatorComponent, EquipmentWearStatusIndicatorComponent],
@@ -58,7 +59,8 @@ import { EquipmentWearStatusIndicatorComponent } from './components/equipment-we
     DxTreeViewModule,
     DxTextAreaModule,
     DxPopupModule,
-    CoreModule
+    CoreModule,
+    MenusModule,
   ],
   exports: [
     LayoutModule,
@@ -90,7 +92,8 @@ import { EquipmentWearStatusIndicatorComponent } from './components/equipment-we
     EquipmentCardComponent,
     CorrectiveActionCellComponent,
     CorrectiveActionIndicatorComponent,
-    EquipmentWearStatusIndicatorComponent
+    EquipmentWearStatusIndicatorComponent,
+    MenusModule,
   ]
 })
 export class SharedModule { }

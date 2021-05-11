@@ -1,0 +1,19 @@
+<ng-container *ngIf="certificateAgent">
+  <dx-scroll-view>
+    <div class="container edit">
+
+      <dx-form id="form" [formData]="certificateAgent">
+
+        <dxi-item dataField="title">
+          <dxo-label text="Наименование организации"></dxo-label>
+        </dxi-item>
+
+      </dx-form>
+
+      <div class="k-form-buttons">
+        <button class="k-button k-primary" (click)="save()">Сохранить</button>
+      </div>
+
+    </div>
+  </dx-scroll-view>
+</ng-container>

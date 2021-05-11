@@ -2,6 +2,7 @@
 /* eslint-disable */
 import { Account } from './account';
 import { Division } from './division';
+import { ResponsibilityCenter } from './responsibility-center';
 export interface User {
   account?: Account;
   accountId?: number;
@@ -20,6 +21,7 @@ export interface User {
   enabled?: boolean;
   id?: number;
   name?: null | string;
+  responsibilityCenters?: null | Array<ResponsibilityCenter>;
   samAccountName?: null | string;
   sid?: null | string;
   surname?: null | string;

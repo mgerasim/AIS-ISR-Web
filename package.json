@@ -45,6 +45,7 @@
     "@progress/kendo-angular-label": "^2.3.4",
     "@progress/kendo-angular-layout": "^5.1.0",
     "@progress/kendo-angular-listview": "^0.2.1",
+    "@progress/kendo-angular-menu": "^2.0.5",
     "@progress/kendo-angular-notification": "^2.1.3",
     "@progress/kendo-angular-pager": "^1.0.1",
     "@progress/kendo-angular-pdf-export": "^2.0.0",

@@ -28,6 +28,10 @@ export class CertificateAgentsService extends BaseService {
   static readonly ApiCertificateAgentsGetPath = '/api/CertificateAgents';
 
   /**
+   * Получает список агентов сертификации.
+   *
+   *
+   *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
    * To access only the response body, use `apiCertificateAgentsGet$Plain()` instead.
    *
@@ -52,6 +56,10 @@ export class CertificateAgentsService extends BaseService {
   }
 
   /**
+   * Получает список агентов сертификации.
+   *
+   *
+   *
    * This method provides access to only to the response body.
    * To access the full response (for headers, for example), `apiCertificateAgentsGet$Plain$Response()` instead.
    *
@@ -66,6 +74,10 @@ export class CertificateAgentsService extends BaseService {
   }
 
   /**
+   * Получает список агентов сертификации.
+   *
+   *
+   *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
    * To access only the response body, use `apiCertificateAgentsGet$Json()` instead.
    *
@@ -90,6 +102,10 @@ export class CertificateAgentsService extends BaseService {
   }
 
   /**
+   * Получает список агентов сертификации.
+   *
+   *
+   *
    * This method provides access to only to the response body.
    * To access the full response (for headers, for example), `apiCertificateAgentsGet$Json$Response()` instead.
    *
@@ -109,12 +125,20 @@ export class CertificateAgentsService extends BaseService {
   static readonly ApiCertificateAgentsPostPath = '/api/CertificateAgents';
 
   /**
+   * Создает агента сертификации.
+   *
+   *
+   *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
    * To access only the response body, use `apiCertificateAgentsPost$Plain()` instead.
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
   apiCertificateAgentsPost$Plain$Response(params?: {
+
+    /**
+     * Агент сертификации.
+     */
     body?: CertificateAgent
   }): Observable<StrictHttpResponse<CertificateAgent>> {
 
@@ -135,12 +159,20 @@ export class CertificateAgentsService extends BaseService {
   }
 
   /**
+   * Создает агента сертификации.
+   *
+   *
+   *
    * This method provides access to only to the response body.
    * To access the full response (for headers, for example), `apiCertificateAgentsPost$Plain$Response()` instead.
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
   apiCertificateAgentsPost$Plain(params?: {
+
+    /**
+     * Агент сертификации.
+     */
     body?: CertificateAgent
   }): Observable<CertificateAgent> {
 
@@ -150,12 +182,20 @@ export class CertificateAgentsService extends BaseService {
   }
 
   /**
+   * Создает агента сертификации.
+   *
+   *
+   *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
    * To access only the response body, use `apiCertificateAgentsPost$Json()` instead.
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
   apiCertificateAgentsPost$Json$Response(params?: {
+
+    /**
+     * Агент сертификации.
+     */
     body?: CertificateAgent
   }): Observable<StrictHttpResponse<CertificateAgent>> {
 
@@ -176,12 +216,20 @@ export class CertificateAgentsService extends BaseService {
   }
 
   /**
+   * Создает агента сертификации.
+   *
+   *
+   *
    * This method provides access to only to the response body.
    * To access the full response (for headers, for example), `apiCertificateAgentsPost$Json$Response()` instead.
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
   apiCertificateAgentsPost$Json(params?: {
+
+    /**
+     * Агент сертификации.
+     */
     body?: CertificateAgent
   }): Observable<CertificateAgent> {
 
@@ -196,12 +244,20 @@ export class CertificateAgentsService extends BaseService {
   static readonly ApiCertificateAgentsIdGetPath = '/api/CertificateAgents/{id}';
 
   /**
+   * Получает агента сертификации по идентификатору.
+   *
+   *
+   *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
    * To access only the response body, use `apiCertificateAgentsIdGet$Plain()` instead.
    *
    * This method doesn't expect any request body.
    */
   apiCertificateAgentsIdGet$Plain$Response(params: {
+
+    /**
+     * Идентификатор агента сертификации.
+     */
     id: number;
   }): Observable<StrictHttpResponse<CertificateAgent>> {
 
@@ -222,12 +278,20 @@ export class CertificateAgentsService extends BaseService {
   }
 
   /**
+   * Получает агента сертификации по идентификатору.
+   *
+   *
+   *
    * This method provides access to only to the response body.
    * To access the full response (for headers, for example), `apiCertificateAgentsIdGet$Plain$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
   apiCertificateAgentsIdGet$Plain(params: {
+
+    /**
+     * Идентификатор агента сертификации.
+     */
     id: number;
   }): Observable<CertificateAgent> {
 
@@ -237,12 +301,20 @@ export class CertificateAgentsService extends BaseService {
   }
 
   /**
+   * Получает агента сертификации по идентификатору.
+   *
+   *
+   *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
    * To access only the response body, use `apiCertificateAgentsIdGet$Json()` instead.
    *
    * This method doesn't expect any request body.
    */
   apiCertificateAgentsIdGet$Json$Response(params: {
+
+    /**
+     * Идентификатор агента сертификации.
+     */
     id: number;
   }): Observable<StrictHttpResponse<CertificateAgent>> {
 
@@ -263,12 +335,20 @@ export class CertificateAgentsService extends BaseService {
   }
 
   /**
+   * Получает агента сертификации по идентификатору.
+   *
+   *
+   *
    * This method provides access to only to the response body.
    * To access the full response (for headers, for example), `apiCertificateAgentsIdGet$Json$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
   apiCertificateAgentsIdGet$Json(params: {
+
+    /**
+     * Идентификатор агента сертификации.
+     */
     id: number;
   }): Observable<CertificateAgent> {
 
@@ -283,13 +363,25 @@ export class CertificateAgentsService extends BaseService {
   static readonly ApiCertificateAgentsIdPutPath = '/api/CertificateAgents/{id}';
 
   /**
+   * Обновляет агента сертификации.
+   *
+   *
+   *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
    * To access only the response body, use `apiCertificateAgentsIdPut()` instead.
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
   apiCertificateAgentsIdPut$Response(params: {
+
+    /**
+     * Идентификатор агента сертификации.
+     */
     id: number;
+
+    /**
+     * Агент сертификации.
+     */
     body?: CertificateAgent
   }): Observable<StrictHttpResponse<void>> {
 
@@ -311,13 +403,25 @@ export class CertificateAgentsService extends BaseService {
   }
 
   /**
+   * Обновляет агента сертификации.
+   *
+   *
+   *
    * This method provides access to only to the response body.
    * To access the full response (for headers, for example), `apiCertificateAgentsIdPut$Response()` instead.
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
   apiCertificateAgentsIdPut(params: {
+
+    /**
+     * Идентификатор агента сертификации.
+     */
     id: number;
+
+    /**
+     * Агент сертификации.
+     */
     body?: CertificateAgent
   }): Observable<void> {
 
@@ -332,12 +436,20 @@ export class CertificateAgentsService extends BaseService {
   static readonly ApiCertificateAgentsIdDeletePath = '/api/CertificateAgents/{id}';
 
   /**
+   * Удаляет агента сертификации.
+   *
+   *
+   *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
    * To access only the response body, use `apiCertificateAgentsIdDelete$Plain()` instead.
    *
    * This method doesn't expect any request body.
    */
   apiCertificateAgentsIdDelete$Plain$Response(params: {
+
+    /**
+     * Идентифкатор агента сертификации.
+     */
     id: number;
   }): Observable<StrictHttpResponse<CertificateAgent>> {
 
@@ -358,12 +470,20 @@ export class CertificateAgentsService extends BaseService {
   }
 
   /**
+   * Удаляет агента сертификации.
+   *
+   *
+   *
    * This method provides access to only to the response body.
    * To access the full response (for headers, for example), `apiCertificateAgentsIdDelete$Plain$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
   apiCertificateAgentsIdDelete$Plain(params: {
+
+    /**
+     * Идентифкатор агента сертификации.
+     */
     id: number;
   }): Observable<CertificateAgent> {
 
@@ -373,12 +493,20 @@ export class CertificateAgentsService extends BaseService {
   }
 
   /**
+   * Удаляет агента сертификации.
+   *
+   *
+   *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
    * To access only the response body, use `apiCertificateAgentsIdDelete$Json()` instead.
    *
    * This method doesn't expect any request body.
    */
   apiCertificateAgentsIdDelete$Json$Response(params: {
+
+    /**
+     * Идентифкатор агента сертификации.
+     */
     id: number;
   }): Observable<StrictHttpResponse<CertificateAgent>> {
 
@@ -399,12 +527,20 @@ export class CertificateAgentsService extends BaseService {
   }
 
   /**
+   * Удаляет агента сертификации.
+   *
+   *
+   *
    * This method provides access to only to the response body.
    * To access the full response (for headers, for example), `apiCertificateAgentsIdDelete$Json$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
   apiCertificateAgentsIdDelete$Json(params: {
+
+    /**
+     * Идентифкатор агента сертификации.
+     */
     id: number;
   }): Observable<CertificateAgent> {
 

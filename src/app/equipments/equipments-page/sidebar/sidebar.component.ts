@@ -97,6 +97,18 @@ export class SidebarComponent implements OnInit, OnDestroy {
       }
     },
     {
+      id: 7,
+      icon: '/assets/document-history.png',
+      title: 'История изменений',
+      click: () => {
+        if (this.sidebarService.equipment$.value === undefined) {
+          showWarning('Необходимо выделить оборудование в таблице');
+          return;
+        }
+        this.navigator.toEquipmentHistory(this.sidebarService.equipment$.value.id);
+      }
+    },
+    {
       id: 4,
       icon: '/assets/import.ico',
       title: 'Импорт',

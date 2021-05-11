@@ -1,6 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import { Account } from './account';
+import { User } from './user';
 export interface ResponsibilityCenter {
   createdAt?: string;
   createdBy?: Account;
@@ -13,4 +14,5 @@ export interface ResponsibilityCenter {
   updatedAt?: string;
   updatedBy?: Account;
   updatedById?: number;
+  users?: null | Array<User>;
 }

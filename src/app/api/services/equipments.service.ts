@@ -223,6 +223,125 @@ export class EquipmentsService extends BaseService {
   }
 
   /**
+   * Path part for operation apiEquipmentsIdHistoryGet
+   */
+  static readonly ApiEquipmentsIdHistoryGetPath = '/api/Equipments/{id}/history';
+
+  /**
+   * Возвращает историю оборудования.
+   *
+   *
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `apiEquipmentsIdHistoryGet$Plain()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiEquipmentsIdHistoryGet$Plain$Response(params: {
+
+    /**
+     * Идентификатор оборудования.
+     */
+    id: number;
+  }): Observable<StrictHttpResponse<Array<Equipment>>> {
+
+    const rb = new RequestBuilder(this.rootUrl, EquipmentsService.ApiEquipmentsIdHistoryGetPath, 'get');
+    if (params) {
+      rb.path('id', params.id, {});
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'text',
+      accept: 'text/plain'
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<Array<Equipment>>;
+      })
+    );
+  }
+
+  /**
+   * Возвращает историю оборудования.
+   *
+   *
+   *
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `apiEquipmentsIdHistoryGet$Plain$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiEquipmentsIdHistoryGet$Plain(params: {
+
+    /**
+     * Идентификатор оборудования.
+     */
+    id: number;
+  }): Observable<Array<Equipment>> {
+
+    return this.apiEquipmentsIdHistoryGet$Plain$Response(params).pipe(
+      map((r: StrictHttpResponse<Array<Equipment>>) => r.body as Array<Equipment>)
+    );
+  }
+
+  /**
+   * Возвращает историю оборудования.
+   *
+   *
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `apiEquipmentsIdHistoryGet$Json()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiEquipmentsIdHistoryGet$Json$Response(params: {
+
+    /**
+     * Идентификатор оборудования.
+     */
+    id: number;
+  }): Observable<StrictHttpResponse<Array<Equipment>>> {
+
+    const rb = new RequestBuilder(this.rootUrl, EquipmentsService.ApiEquipmentsIdHistoryGetPath, 'get');
+    if (params) {
+      rb.path('id', params.id, {});
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'text/json'
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<Array<Equipment>>;
+      })
+    );
+  }
+
+  /**
+   * Возвращает историю оборудования.
+   *
+   *
+   *
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `apiEquipmentsIdHistoryGet$Json$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiEquipmentsIdHistoryGet$Json(params: {
+
+    /**
+     * Идентификатор оборудования.
+     */
+    id: number;
+  }): Observable<Array<Equipment>> {
+
+    return this.apiEquipmentsIdHistoryGet$Json$Response(params).pipe(
+      map((r: StrictHttpResponse<Array<Equipment>>) => r.body as Array<Equipment>)
+    );
+  }
+
+  /**
    * Path part for operation apiEquipmentsIdGet
    */
   static readonly ApiEquipmentsIdGetPath = '/api/Equipments/{id}';

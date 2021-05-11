@@ -26,6 +26,10 @@ export class NavigatorService {
     this.route.navigate(['equipments', equipmentId, 'edit']).then();
   }
 
+  toEquipmentHistory(equipmentId: number): void {
+    this.route.navigate(['equipments', equipmentId, 'history']).then();
+  }
+
   toEquipmentAdd(): void {
     this.route.navigate(['equipments', 'add']).then();
   }

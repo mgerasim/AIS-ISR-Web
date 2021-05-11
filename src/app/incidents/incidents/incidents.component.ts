@@ -37,7 +37,7 @@ export class IncidentsComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.titleService.setTitle('Нешатные ситуации');
+    this.titleService.setTitle('Нештатные ситуации');
     combineLatest([
       this.entityDataContext.incidents.getListLazy(),
       this.entityDataContext.equipments.getListLazy(),

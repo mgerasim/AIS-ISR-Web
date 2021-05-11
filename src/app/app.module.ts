@@ -24,6 +24,8 @@ import { DialogsModule } from '@progress/kendo-angular-dialog';
 import { IndicatorsModule } from '@progress/kendo-angular-indicators';
 import {ApiModule} from './api/api.module';
 import {environment} from '../environments/environment';
+import { MenuModule } from '@progress/kendo-angular-menu';
+
 
 
 
@@ -60,7 +62,8 @@ export function loadingProviderFactory(provider: CoreService): () => Promise<boo
     DropDownsModule,
     DialogsModule,
     IndicatorsModule,
-    ApiModule.forRoot({rootUrl: environment.rootUrl})
+    ApiModule.forRoot({rootUrl: environment.rootUrl}),
+    MenuModule
   ],
   providers: [
     ApiInterceptor,

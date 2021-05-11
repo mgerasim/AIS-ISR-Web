@@ -47,10 +47,27 @@
       </li>
     </ul>
 
+
+    <ul class="navbar-nav mt-2 mt-lg-0">
+      <li class="nav-item">
+        <kendo-avatar *ngIf="currentUser.thumbnailPhoto" class="otstup" [shape]="'circle'" size="medium" [imageSrc]="'data:image/png;base64,' + currentUser.thumbnailPhoto"></kendo-avatar>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{currentUser.displayName}}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="nav-link" href="file://cdn01-pifs---01.dmn.tn.corp/Resources_01$/2418/АИС Реестр ЭПБ">Журнал замечаний и предложений</a>
+        </div>
+      </li>
+
+    </ul>
+
+    <!--
     <form class="form-inline my-2 my-lg-0">
       <kendo-avatar *ngIf="currentUser.thumbnailPhoto" class="otstup" [shape]="'circle'" size="medium" [imageSrc]="'data:image/png;base64,' + currentUser.thumbnailPhoto"></kendo-avatar>
       {{currentUser.displayName}}
     </form>
-
+    -->
   </div>
 </nav>

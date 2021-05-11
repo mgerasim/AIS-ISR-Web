@@ -54,6 +54,14 @@ export class EquipmentsCardSidebarComponent implements OnInit {
           this.popupVisible = true;
         }
       },
+      {
+        id: 4,
+        icon: '/assets/document-history.png',
+        title: 'История изменений',
+        click: () => {
+          this.navigator.toEquipmentHistory(this.equipment.id);
+        }
+      },
     ];
   }
 

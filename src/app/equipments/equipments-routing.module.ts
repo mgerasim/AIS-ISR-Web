@@ -23,6 +23,10 @@ const routes: Routes = [
     loadChildren: () => import('../examinations/examinations.module').then(m => m.ExaminationsModule)
   },
   {
+    path: ':id/history',
+    loadChildren: () => import('./history/history.module').then(m => m.HistoryModule)
+  },
+  {
     path: ':id',
     component: EquipmentsCardPageComponent
   }
