@@ -1,4 +1,4 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
 import {Equipment} from '../../../api/models/equipment';
 import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
 import {ErrorHandlerService} from '../../../core/errors/error-handler.service';
@@ -14,7 +14,7 @@ import {AttachmentCategory} from '../../../api/models';
   templateUrl: './equipment-card.component.html',
   styleUrls: ['./equipment-card.component.scss']
 })
-export class EquipmentCardComponent implements OnInit, OnDestroy {
+export class EquipmentCardComponent implements OnInit, OnDestroy, OnChanges {
 
   @Input() equipment: Equipment;
 
@@ -40,6 +40,9 @@ export class EquipmentCardComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+  }
+
+  private refresh(): void {
     if (this.equipment.examination) {
       this.entityDataContext.examinations.getByIdLazy(this.equipment.examination.id)
         .pipe(untilDestroyed(this))
@@ -61,7 +64,13 @@ export class EquipmentCardComponent implements OnInit, OnDestroy {
       });
   }
 
-  ngOnDestroy(): void {
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.equipment && changes.equipment.currentValue) {
+      this.equipment = changes.equipment.currentValue;
+      this.refresh();
+    }
   }
 
+  ngOnDestroy(): void {
+  }
 }

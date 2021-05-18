@@ -176,7 +176,9 @@ export class EquipmentsTableComponent implements OnInit, OnDestroy {
   }
 
   onSelectionChanged(e: {selectedRowsData: DataSourceItem[]}): void {
-    this.sidebarService.equipment$.next(e.selectedRowsData[0].equipment);
+    if (e.selectedRowsData[0]) {
+      this.sidebarService.equipment$.next(e.selectedRowsData[0].equipment);
+    }
   }
 
   ngOnDestroy(): void {

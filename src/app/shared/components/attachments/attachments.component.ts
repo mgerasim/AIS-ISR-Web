@@ -1,4 +1,4 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
 import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
 import {Equipment} from '../../../api/models/equipment';
 import {Attachment} from '../../../api/models/attachment';
@@ -17,7 +17,7 @@ import {AttachmentCategory} from '../../../api/models/attachment-category';
   templateUrl: './attachments.component.html',
   styleUrls: ['./attachments.component.scss']
 })
-export class AttachmentsComponent implements OnInit, OnDestroy {
+export class AttachmentsComponent implements OnInit, OnChanges, OnDestroy {
 
   @Input() equipment?: Equipment;
   @Input() certificate?: Certificate;
@@ -35,6 +35,9 @@ export class AttachmentsComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+  }
+
+  private refresh(): void {
     this.entityDataContext.attachments.getListLazy()
       .pipe(untilDestroyed(this))
       .subscribe((attachments) => {
@@ -49,6 +52,13 @@ export class AttachmentsComponent implements OnInit, OnDestroy {
           this.attachments = this.attachments.filter(x => x.attachmentCategory === this.category);
         }
       });
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.equipment && changes.equipment.currentValue) {
+      this.equipment = changes.equipment.currentValue;
+      this.refresh();
+    }
   }
 
   ngOnDestroy(): void {
