@@ -1,3 +1,10 @@
-<app-equipments-form *ngIf="equipment" [equipment]="equipment">
+<div *ngIf="isLoaded">
+  <app-equipments-form *ngIf="equipment;else empty" [equipment]="equipment">
 
-</app-equipments-form>
+  </app-equipments-form>
+
+  <ng-template #empty>
+    <h1>{{ titleAccessDenied }}</h1>
+  </ng-template>
+
+</div>

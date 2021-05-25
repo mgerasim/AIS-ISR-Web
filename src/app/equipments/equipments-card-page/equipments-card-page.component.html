@@ -1,16 +1,21 @@
-<kendo-splitter *ngIf="equipment" orientation="horizontal">
+<div *ngIf="isLoaded">
+  <kendo-splitter *ngIf="equipment;else empty" orientation="horizontal">
 
+    <kendo-splitter-pane size="250px">
+      <app-equipments-card-sidebar [equipment]="equipment">
 
-  <kendo-splitter-pane size="250px">
-    <app-equipments-card-sidebar [equipment]="equipment">
+      </app-equipments-card-sidebar>
+    </kendo-splitter-pane>
 
-    </app-equipments-card-sidebar>
-  </kendo-splitter-pane>
+    <kendo-splitter-pane>
+      <app-equipments-card [equipment]="equipment">
 
-  <kendo-splitter-pane>
-    <app-equipments-card [equipment]="equipment">
+      </app-equipments-card>
+    </kendo-splitter-pane>
 
-    </app-equipments-card>
-  </kendo-splitter-pane>
+  </kendo-splitter>
 
-</kendo-splitter>
+  <ng-template #empty>
+    <h1>{{ titleAccessDenied }}</h1>
+  </ng-template>
+</div>

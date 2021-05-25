@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {shareEntityId} from '../../shared/utils/routing-utils';
 import {ActivatedRoute} from '@angular/router';
 import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
@@ -6,6 +6,9 @@ import {ErrorHandlerService} from '../../core/errors/error-handler.service';
 import {Equipment} from '../../api/models/equipment';
 import {EntityDataContext} from '../../core/entity/entity-data-context.service';
 import {TitleService} from '../../core/services/title.service';
+import {filter, map, switchMap, tap} from 'rxjs/operators';
+import {showError, showInfo, showWarning} from '../../shared/utils/message-utils';
+import {AuthService} from '../../auth/auth.service';
 
 @UntilDestroy()
 @Component({
@@ -15,15 +18,19 @@ import {TitleService} from '../../core/services/title.service';
 })
 export class EquipmentsCardPageComponent implements OnInit, OnDestroy{
 
-  equipment: Equipment;
+  equipment: Equipment | undefined | null = null;
 
   entityId = this.route.params.pipe(shareEntityId());
+
+  isLoaded = false;
+
+  titleAccessDenied = 'Оборудование не найдено или пользователь не имеет доступ к оборудованию';
 
   constructor(
     private route: ActivatedRoute,
     private entityDataContext: EntityDataContext,
     private errorHandler: ErrorHandlerService,
-    private titleService: TitleService
+    private titleService: TitleService,
   ) { }
 
   ngOnInit(): void {
@@ -31,17 +38,20 @@ export class EquipmentsCardPageComponent implements OnInit, OnDestroy{
 
     this.entityId
       .pipe(
-        untilDestroyed(this)
-      )
-      .subscribe(
-        id => {
-          this.entityDataContext.equipments.getByIdLazy(id).subscribe(equipment => {
-            console.log(equipment);
-            this.equipment = equipment;
-          }, error => this.errorHandler.handle(error));
-        },
-        error => this.errorHandler.handle(error)
-      );
+        untilDestroyed(this),
+        switchMap((id: number) => this.entityDataContext.equipments.getListLazy().pipe(
+          untilDestroyed(this),
+          map(equipments => equipments.find(x => x.id === id)),
+        ))
+      ).subscribe((equipment) => {
+        this.isLoaded = true;
+        this.equipment = equipment;
+        if (equipment === undefined) {
+          showWarning('Оборудование не найдено или пользователь не имеет доступ к оборудованию');
+        }
+      },
+      error => this.errorHandler.handle(error)
+    );
   }
 
   ngOnDestroy(): void {

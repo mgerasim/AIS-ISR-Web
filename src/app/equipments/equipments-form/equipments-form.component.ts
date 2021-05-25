@@ -11,6 +11,9 @@ import {showSuccess} from '../../shared/utils/message-utils';
 import {NavigatorService} from '../../core/routing/navigator.service';
 import {Certificate} from '../../api/models/certificate';
 import {ExploitationPeriodUnit} from '../../api/models/exploitation-period-unit';
+import {NotificationService} from '@progress/kendo-angular-notification';
+import {AuthService} from '../../auth/auth.service';
+import {Role} from '../../api/models/role';
 
 @UntilDestroy()
 @Component({
@@ -39,28 +42,84 @@ export class EquipmentsFormComponent implements OnInit, OnDestroy {
     }
   ];
 
+  get isUserRole(): boolean {
+    return this.authService.currentUser.account.role === Role.User;
+  }
+
   constructor(
     private entityDataContext: EntityDataContext,
     private errorHandle: ErrorHandlerService,
     private equipmentsService: EquipmentsService,
-    private navigator: NavigatorService
+    private navigator: NavigatorService,
+    private notificationService: NotificationService,
+    private authService: AuthService,
   ) { }
 
   ngOnInit(): void {
     combineLatest([
       this.entityDataContext.responsibilityCenters.getListLazy(),
       this.entityDataContext.divisions.getListLazy(),
-      this.entityDataContext.certificates.getListLazy()
+      this.entityDataContext.certificates.getListLazy(),
       ])
       .pipe(untilDestroyed(this))
       .subscribe(([responsibilityCenters, divisions, certificates]) => {
       this.divisions = divisions;
+      // TODO: Перенести в permissionService
       this.responsibilityCenters = responsibilityCenters;
       this.certificates = certificates;
     }, error => this.errorHandle.handle(error));
   }
 
   async save(): Promise<void> {
+
+    if (this.equipment.title === undefined || this.equipment.title === null || this.equipment.title === '') {
+      this.notificationService.show({
+        content: 'Наименование должно быть указано!',
+        cssClass: 'button-notification',
+        animation: { type: 'slide', duration: 400 },
+        position: { horizontal: 'right', vertical: 'bottom' },
+        type: { style: 'error', icon: true },
+        closable: true
+      });
+      return ;
+    }
+
+    if (this.equipment.serialNumber === undefined || this.equipment.serialNumber === null || this.equipment.serialNumber === '') {
+      this.notificationService.show({
+        content: 'Заводской номер должен быть указан!',
+        cssClass: 'button-notification',
+        animation: { type: 'slide', duration: 400 },
+        position: { horizontal: 'right', vertical: 'bottom' },
+        type: { style: 'error', icon: true },
+        closable: true
+      });
+      return ;
+    }
+
+    if (this.equipment.exploitationPeriodUnit === undefined) {
+      this.notificationService.show({
+        content: 'Единица измерения срока эксплуатации должна быть указана!',
+        cssClass: 'button-notification',
+        animation: { type: 'slide', duration: 400 },
+        position: { horizontal: 'right', vertical: 'bottom' },
+        type: { style: 'error', icon: true },
+        closable: true
+      });
+      return ;
+    }
+
+    if (this.equipment.responsibilityCenterId === undefined) {
+      this.notificationService.show({
+        content: 'Центр ответственности должен быть указан!',
+        cssClass: 'button-notification',
+        animation: { type: 'slide', duration: 400 },
+        position: { horizontal: 'right', vertical: 'bottom' },
+        type: { style: 'error', icon: true },
+        closable: true
+      });
+      return ;
+    }
+
     try {
       if (this.equipment.id) {
         console.log(this.equipment);

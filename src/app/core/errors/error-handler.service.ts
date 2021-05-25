@@ -19,7 +19,11 @@ export class ErrorHandlerService {
       throw new Error('Не удалось обработать ошибку. Ошибка не передана.');
     }
 
-    if (error instanceof DataServiceError) {
+
+
+    if (error.ClassName !== undefined) {
+      showError(error.Message);
+    } else  if (error instanceof DataServiceError) {
       this.handleNgrxDataServiceError(error);
     } else if (error instanceof HttpErrorResponse) {
       this.handleResponseError(error, message);
@@ -29,11 +33,14 @@ export class ErrorHandlerService {
   }
 
   private handleNgrxDataServiceError(error: DataServiceError): void {
+    /*
     if (error.error instanceof DataServiceError) {
       this.handleResponseError(error.error);
     } else {
       this.handleUnhandledError(error);
     }
+
+     */
   }
 
 
@@ -68,8 +75,8 @@ export class ErrorHandlerService {
 
     if (response instanceof HttpErrorResponse) {
       if (response.status === 400) {
-        console.log(response.error);
-        showError(response.error);
+        console.log(response);
+        showError(response.error.Message);
         Object.keys(response.error.errors).forEach(key => {
           response.error.errors[key].forEach((message: string) => {
             this.notificationService.show({

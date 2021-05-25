@@ -108,6 +108,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
         this.navigator.toEquipmentHistory(this.sidebarService.equipment$.value.id);
       }
     },
+    /**
     {
       id: 4,
       icon: '/assets/import.ico',
@@ -116,6 +117,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
         this.navigator.toImport();
       }
     }
+     */
   ];
   correctiveAction: CorrectiveAction;
   popupVisible = false;
