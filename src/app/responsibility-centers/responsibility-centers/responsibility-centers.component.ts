@@ -1,23 +1,27 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {CertificateAgent} from '../../api/models/certificate-agent';
-import {EntityDataContext} from '../../core/entity/entity-data-context.service';
 import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
+import {EntityDataContext} from '../../core/entity/entity-data-context.service';
 import {ErrorHandlerService} from '../../core/errors/error-handler.service';
 import {NavigatorService} from '../../core/routing/navigator.service';
-import {Role} from '../../api/models/role';
-import {showWarning} from '../../shared/utils/message-utils';
 import {AuthService} from '../../auth/auth.service';
 import {TitleService} from '../../core/services/title.service';
+import {Role} from '../../api/models/role';
+import {showWarning} from '../../shared/utils/message-utils';
+import {ResponsibilityCenter} from '../../api/models/responsibility-center';
+
+interface DataSourceItem {
+  responsibilityCenter: ResponsibilityCenter;
+};
 
 @UntilDestroy()
 @Component({
-  selector: 'app-certificate-agents',
-  templateUrl: './certificate-agents.component.html',
-  styleUrls: ['./certificate-agents.component.scss']
+  selector: 'app-responsibility-centers',
+  templateUrl: './responsibility-centers.component.html',
+  styleUrls: ['./responsibility-centers.component.scss']
 })
-export class CertificateAgentsComponent implements OnInit, OnDestroy {
-  certificateAgents: CertificateAgent[];
-  selectedRowKeys: CertificateAgent[];
+export class ResponsibilityCentersComponent implements OnInit, OnDestroy {
+  dataSource: DataSourceItem[];
+  selectedRowKeys: DataSourceItem[];
 
   constructor(
     private entityDataContext: EntityDataContext,
@@ -28,11 +32,16 @@ export class CertificateAgentsComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.titleService.setTitle('Орагнизации');
-    this.entityDataContext.certificateAgents.getListLazy()
+    this.titleService.setTitle('Центры ответсвенности');
+    this.entityDataContext.responsibilityCenters.getListLazy()
       .pipe(untilDestroyed(this))
-      .subscribe(certificateAgents => {
-        this.certificateAgents = certificateAgents;
+      .subscribe(responsibilityCenters => {
+        this.dataSource = responsibilityCenters.map(responsibilityCenter => {
+          const item = {
+            responsibilityCenter
+          } as DataSourceItem;
+          return item;
+        });
       }, error => {
         this.errorHandler.handle(error);
       });
@@ -45,7 +54,7 @@ export class CertificateAgentsComponent implements OnInit, OnDestroy {
 
   }
 
-  onToolbarPreparing(e: any) {
+  onToolbarPreparing(e: any): void {
     for (const item of e.toolbarOptions.items) {
       item.location = 'after';
       item.showText = '';
@@ -73,7 +82,7 @@ export class CertificateAgentsComponent implements OnInit, OnDestroy {
       showWarning('Данная операция доступна для Администратора.');
       return;
     }
-    this.navigatorService.toCertificateAgentAdd();
+    this.navigatorService.toResponsibilityCenterAdd();
   }
 
   edit(): void {
@@ -84,17 +93,17 @@ export class CertificateAgentsComponent implements OnInit, OnDestroy {
     if (this.selectedRowKeys === undefined || this.selectedRowKeys.length === 0) {
       throw new Error('Отсутствует выделенние организации');
     }
-    const certificate = this.selectedRowKeys[0];
+    const dataSourceItem = this.selectedRowKeys[0];
 
-    this.navigatorService.toCertificateAgentEdit(certificate.id);
+    this.navigatorService.toResponsibilityCenterEdit(dataSourceItem.responsibilityCenter.id);
   }
 
   show(): void {
     if (this.selectedRowKeys === undefined || this.selectedRowKeys.length === 0) {
       throw new Error('Отсутствует выделенние организации');
     }
-    const certificate = this.selectedRowKeys[0];
+    const dataSourceItem = this.selectedRowKeys[0];
 
-    this.navigatorService.toCertificateAgentShow(certificate.id);
+    this.navigatorService.toResponsibilityCenterShow(dataSourceItem.responsibilityCenter.id);
   }
 }

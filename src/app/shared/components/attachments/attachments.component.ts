@@ -10,6 +10,8 @@ import {showError, showSuccess} from '../../utils/message-utils';
 import {Certificate} from '../../../api/models/certificate';
 import {SuccessEvent, UploadEvent} from '@progress/kendo-angular-upload';
 import {AttachmentCategory} from '../../../api/models/attachment-category';
+import {AuthService} from '../../../auth/auth.service';
+import {Role} from '../../../api/models';
 
 @UntilDestroy()
 @Component({
@@ -28,10 +30,15 @@ export class AttachmentsComponent implements OnInit, OnChanges, OnDestroy {
   files: any[];
   uploadSaveUrl = '/api/files/upload';
 
+  get isUserRole(): boolean {
+    return this.authService.currentUser.account.role === Role.User;
+  }
+
   constructor(
     public attachmentsService: AttachmentsService,
     public errorHandlerService: ErrorHandlerService,
-    public entityDataContext: EntityDataContext
+    public entityDataContext: EntityDataContext,
+    public authService: AuthService,
   ) { }
 
   ngOnInit(): void {

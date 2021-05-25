@@ -11,6 +11,7 @@ import {DialogService} from '@progress/kendo-angular-dialog';
 import {ErrorHandlerService} from '../../../core/errors/error-handler.service';
 import {EquipmentsService} from '../../../api/services/equipments.service';
 import {EntityDataContext} from '../../../core/entity/entity-data-context.service';
+import {Role} from '../../../api/models';
 
 @UntilDestroy()
 @Component({
@@ -38,6 +39,10 @@ export class SidebarComponent implements OnInit, OnDestroy {
       icon: '/assets/document-add.png',
       title: 'Добавить оборудование',
       click: () => {
+        if (this.authService.currentUser.account.role === Role.User) {
+          showWarning('Данная операция доступна для Администратора.');
+          return;
+        }
         this.navigator.toEquipmentAdd();
       }
     },
@@ -46,6 +51,10 @@ export class SidebarComponent implements OnInit, OnDestroy {
       icon: '/assets/document-edit-flat.png',
       title: 'Редактировать оборудование',
       click: () => {
+        if (this.authService.currentUser.account.role === Role.User) {
+          showWarning('Данная операция доступна для Администратора.');
+          return;
+        }
         if (this.sidebarService.equipment$.value === undefined) {
           showWarning('Необходимо выделить оборудование в таблице');
           return;
@@ -58,6 +67,10 @@ export class SidebarComponent implements OnInit, OnDestroy {
       icon: '/assets/document-remove-icon.png',
       title: 'Удалить оборудование',
       click: () => {
+        if (this.authService.currentUser.account.role === Role.User) {
+          showWarning('Данная операция доступна для Администратора.');
+          return;
+        }
         if (this.sidebarService.equipment$.value === undefined) {
           showWarning('Необходимо выделить оборудование в таблице');
           return;

@@ -58,6 +58,8 @@
     "@progress/kendo-licensing": "^1.1.1",
     "@progress/kendo-svg-icons": "^0.1.2",
     "@progress/kendo-theme-default": "latest",
+    "@sentry/angular": "^6.4.1",
+    "@sentry/tracing": "^6.4.1",
     "angular-split": "^4.0.0",
     "bootstrap": "^4.5.3",
     "classlist.js": "^1.1.20150312",

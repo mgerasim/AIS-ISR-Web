@@ -12,6 +12,8 @@ import {showConfirmation} from '../../../utils/dialog-utils';
 import {DialogService} from '@progress/kendo-angular-dialog';
 import {ErrorHandlerService} from '../../../../core/errors/error-handler.service';
 import {EntityDataContext} from '../../../../core/entity/entity-data-context.service';
+import {Role} from '../../../../api/models/role';
+import {AuthService} from '../../../../auth/auth.service';
 
 @Component({
   selector: 'app-attachments-list',
@@ -22,12 +24,17 @@ export class AttachmentsListComponent implements OnInit {
 
   @Input() attachments: Attachment[];
 
+  get isUserRole(): boolean {
+    return this.authService.currentUser.account.role === Role.User;
+  }
+
   constructor(
     private dialogService: DialogService,
     private errorHandlerService: ErrorHandlerService,
     private attachmentsService: AttachmentsService,
     private entityDataContext: EntityDataContext,
-    protected http: HttpClient
+    protected http: HttpClient,
+    private authService: AuthService,
   ) { }
 
   ngOnInit(): void {

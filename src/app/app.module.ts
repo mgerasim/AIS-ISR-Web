@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import {APP_INITIALIZER, forwardRef, NgModule, Provider} from '@angular/core';
+import {APP_INITIALIZER, ErrorHandler, forwardRef, Injectable, NgModule, Provider} from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
@@ -25,15 +25,31 @@ import { IndicatorsModule } from '@progress/kendo-angular-indicators';
 import {ApiModule} from './api/api.module';
 import {environment} from '../environments/environment';
 import { MenuModule } from '@progress/kendo-angular-menu';
-
-
-
+import * as Sentry from "@sentry/angular";
+import {Router} from '@angular/router';
 
 export const API_INTERCEPTOR_PROVIDER: Provider = {
   provide: HTTP_INTERCEPTORS,
   useExisting: forwardRef(() => ApiInterceptor),
   multi: true
 };
+
+Sentry.init({
+  dsn: "https://7c57b8f81ff04126bf526a0fef046a53@o351918.ingest.sentry.io/5781512",
+
+  // Set tracesSampleRate to 1.0 to capture 100%
+  // of transactions for performance monitoring.
+  // We recommend adjusting this value in production
+  tracesSampleRate: 1.0,
+});
+
+@Injectable()
+export class SentryErrorHandler implements ErrorHandler {
+  constructor() {}
+  handleError(error): void {
+    const eventId = Sentry.captureException(error.originalError || error);
+  }
+}
 
 export function loadingProviderFactory(provider: CoreService): () => Promise<boolean> {
   return () => provider.load();
@@ -68,7 +84,23 @@ export function loadingProviderFactory(provider: CoreService): () => Promise<boo
   providers: [
     ApiInterceptor,
     API_INTERCEPTOR_PROVIDER,
-    { provide: APP_INITIALIZER, useFactory: loadingProviderFactory, deps: [CoreService], multi: true }
+    { provide: APP_INITIALIZER, useFactory: loadingProviderFactory, deps: [CoreService], multi: true },
+    {
+      provide: ErrorHandler,
+      useValue: Sentry.createErrorHandler({
+        showDialog: false,
+      }),
+    },
+    {
+      provide: Sentry.TraceService,
+      deps: [Router],
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: () => () => {},
+      deps: [Sentry.TraceService],
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent]
 })

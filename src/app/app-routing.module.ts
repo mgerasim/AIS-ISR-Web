@@ -23,6 +23,11 @@ const routes: Routes = [
     loadChildren: () => import('./certificates/certificates.module').then(m => m.CertificatesModule)
   },
   {
+    path: 'responsibilityCenters',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./responsibility-centers/responsibility-centers.module').then(m => m.ResponsibilityCentersModule)
+  },
+  {
     path: 'certificateAgents',
     canActivate: [AuthGuard],
     loadChildren: () => import('./certificate-agents/certificate-agents.module').then(m => m.CertificateAgentsModule)

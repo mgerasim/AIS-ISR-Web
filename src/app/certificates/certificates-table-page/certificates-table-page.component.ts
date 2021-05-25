@@ -7,6 +7,9 @@ import {NavigatorService} from '../../core/routing/navigator.service';
 import {combineLatest} from 'rxjs';
 import {ErrorHandlerService} from '../../core/errors/error-handler.service';
 import {TitleService} from '../../core/services/title.service';
+import {Role} from '../../api/models/role';
+import {showWarning} from '../../shared/utils/message-utils';
+import {AuthService} from '../../auth/auth.service';
 
 @UntilDestroy()
 @Component({
@@ -23,7 +26,8 @@ export class CertificatesTablePageComponent implements OnInit, OnDestroy {
     private entityDataContext: EntityDataContext,
     private navigatorService: NavigatorService,
     private errorHandler: ErrorHandlerService,
-    private titleService: TitleService
+    private titleService: TitleService,
+    private authService: AuthService,
   ) { }
 
   ngOnInit(): void {
@@ -96,10 +100,18 @@ export class CertificatesTablePageComponent implements OnInit, OnDestroy {
   }
 
   add(): void {
+    if (this.authService.currentUser.account.role === Role.User) {
+      showWarning('Данная операция доступна для Администратора.');
+      return;
+    }
     this.navigatorService.toCertificateAdd();
   }
 
   edit(): void {
+    if (this.authService.currentUser.account.role === Role.User) {
+      showWarning('Данная операция доступна для Администратора.');
+      return;
+    }
     if (this.selectedRowKeys === undefined || this.selectedRowKeys.length === 0) {
       throw new Error('Отсутствует выделенного сертификата');
     }

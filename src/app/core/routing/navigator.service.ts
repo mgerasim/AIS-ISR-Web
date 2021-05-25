@@ -62,6 +62,10 @@ export class NavigatorService {
     this.route.navigate(['divisions', divisionId]).then();
   }
 
+  toCertificateAgents(): void {
+    this.route.navigate(['certificateAgents']).then();
+  }
+
   toCertificateAgentAdd(): void {
     this.route.navigate(['certificateAgents', 'add']).then();
   }
@@ -72,5 +76,21 @@ export class NavigatorService {
 
   toCertificateAgentShow(certificateAgentId: number): void {
     this.route.navigate(['certificateAgents', certificateAgentId]).then();
+  }
+
+  toResponsibilityCenters(): void {
+    this.route.navigate(['responsibilityCenters']).then();
+  }
+
+  toResponsibilityCenterAdd(): void {
+    this.route.navigate(['responsibilityCenters', 'add']).then();
+  }
+
+  toResponsibilityCenterEdit(responsibilityCenterId: number): void {
+    this.route.navigate(['responsibilityCenters', responsibilityCenterId, 'edit']).then();
+  }
+
+  toResponsibilityCenterShow(responsibilityCenterId: number): void {
+    this.route.navigate(['responsibilityCenters', responsibilityCenterId]).then();
   }
 }

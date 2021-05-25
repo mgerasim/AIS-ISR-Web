@@ -4,7 +4,7 @@
 
 </app-attachments-list>
 
-<p>
+<p *ngIf="!isUserRole">
   <kendo-upload
     [(ngModel)]="files"
     title="Добавить файл"

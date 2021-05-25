@@ -13,6 +13,8 @@ import {DivisionsBatchService} from '../../../api/services/divisions-batch.servi
 import {EquipmentsBatchService} from '../../../api/services/equipments-batch.service';
 import {ifTrue} from 'codelyzer/util/function';
 import {LoadingService} from '../../../core/services/loading.service';
+import {Role} from '../../../api/models/role';
+import {AuthService} from '../../../auth/auth.service';
 
 @UntilDestroy()
 @Component({
@@ -31,6 +33,10 @@ export class DivisionsSidebarComponent implements OnInit, OnDestroy {
       id: 2,
       title: 'Создать подразделение',
       click: () => {
+        if (this.authService.currentUser.account.role === Role.User) {
+          showWarning('Данная операция доступна для Администратора.');
+          return;
+        }
         this.selectedDivision = {} as Division;
         this.popupDivisionForm = true;
       }
@@ -39,6 +45,10 @@ export class DivisionsSidebarComponent implements OnInit, OnDestroy {
       id: 3,
       title: 'Редактировать подразделение',
       click: () => {
+        if (this.authService.currentUser.account.role === Role.User) {
+          showWarning('Данная операция доступна для Администратора.');
+          return;
+        }
         if (this.sidebarService.dataSourceItem$.value === undefined) {
           showWarning('Необходимо выделить подразделение в таблице');
           return;
@@ -51,6 +61,10 @@ export class DivisionsSidebarComponent implements OnInit, OnDestroy {
       id: 4,
       title: 'Удалить подразделение',
       click: () => {
+        if (this.authService.currentUser.account.role === Role.User) {
+          showWarning('Данная операция доступна для Администратора.');
+          return;
+        }
         if (this.sidebarService.dataSourceItem$.value === undefined || this.sidebarService.dataSourceItem$.value.length === 0) {
           showWarning('Необходимо выделить подразделение в таблице');
           return;
@@ -76,6 +90,10 @@ export class DivisionsSidebarComponent implements OnInit, OnDestroy {
       id: 5,
       title: 'Переместить оборудование',
       click: () => {
+        if (this.authService.currentUser.account.role === Role.User) {
+          showWarning('Данная операция доступна для Администратора.');
+          return;
+        }
         if (this.sidebarService.dataSourceItem$.value === undefined || this.sidebarService.dataSourceItem$.value.length === 0) {
           showWarning('Необходимо выделить подразделение в таблице');
           return;
@@ -88,6 +106,10 @@ export class DivisionsSidebarComponent implements OnInit, OnDestroy {
       id: 6,
       title: 'Переместить подразделение',
       click: () => {
+        if (this.authService.currentUser.account.role === Role.User) {
+          showWarning('Данная операция доступна для Администратора.');
+          return;
+        }
         if (this.sidebarService.dataSourceItem$.value === undefined || this.sidebarService.dataSourceItem$.value.length === 0) {
           showWarning('Необходимо выделить подразделение в таблице');
           return;
@@ -111,7 +133,8 @@ export class DivisionsSidebarComponent implements OnInit, OnDestroy {
     private divisionsBatchService: DivisionsBatchService,
     private equipmentsBatchService: EquipmentsBatchService,
     private errorHandler: ErrorHandlerService,
-    private loadingService: LoadingService
+    private loadingService: LoadingService,
+    private authService: AuthService,
   ) { }
 
   ngOnInit(): void {

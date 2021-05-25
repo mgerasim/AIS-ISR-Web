@@ -5,6 +5,7 @@ import {showWarning} from '../../../shared/utils/message-utils';
 import {CorrectiveAction} from '../../../api/models/corrective-action';
 import {CorrectiveActionStatus} from '../../../api/models/corrective-action-status';
 import {AuthService} from '../../../auth/auth.service';
+import {Role} from '../../../api/models/role';
 
 @Component({
   selector: 'app-equipments-card-sidebar',
@@ -31,6 +32,10 @@ export class EquipmentsCardSidebarComponent implements OnInit {
         icon: '',
         title: 'Редактировать оборудование',
         click: () => {
+          if (this.authService.currentUser.account.role === Role.User) {
+            showWarning('Данная операция доступна для Администратора.');
+            return;
+          }
           this.navigator.toEquipmentEdit(this.equipment.id);
         }
       }, {
@@ -38,6 +43,10 @@ export class EquipmentsCardSidebarComponent implements OnInit {
         icon: '',
         title: (this.equipment.examination ? 'Редактировать ' : 'Добавить ') + 'экспертизу',
         click: () => {
+          if (this.authService.currentUser.account.role === Role.User) {
+            showWarning('Данная операция доступна для Администратора.');
+            return;
+          }
           this.navigator.toEquipmentExamination(this.equipment.id);
         }
       },
