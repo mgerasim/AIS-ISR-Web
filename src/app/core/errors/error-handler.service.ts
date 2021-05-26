@@ -4,6 +4,7 @@ import {HttpErrorResponse} from '@angular/common/http';
 import {ResponseError} from './response-error';
 import {showError} from '../../shared/utils/message-utils';
 import {NotificationService} from '@progress/kendo-angular-notification';
+import * as Sentry from '@sentry/browser';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,9 @@ export class ErrorHandlerService {
   ) { }
 
   public handle(error: any, message?: string): void {
+
+    Sentry.captureException(error);
+
     if (!error) {
       throw new Error('Не удалось обработать ошибку. Ошибка не передана.');
     }
@@ -76,7 +80,7 @@ export class ErrorHandlerService {
     if (response instanceof HttpErrorResponse) {
       if (response.status === 400) {
         console.log(response);
-        showError(response.error.Message);
+        showError(response.error);
         Object.keys(response.error.errors).forEach(key => {
           response.error.errors[key].forEach((message: string) => {
             this.notificationService.show({

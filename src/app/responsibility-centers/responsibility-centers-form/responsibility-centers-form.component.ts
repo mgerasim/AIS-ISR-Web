@@ -37,7 +37,7 @@ export class ResponsibilityCentersFormComponent implements OnInit {
       } else {
         this.responsibilityCenter = await this.responsibilityCentersService.apiResponsibilityCentersPost$Json({body: this.responsibilityCenter}).toPromise();
         showSuccess(`Центр ответсвенности ${this.responsibilityCenter.title} успешно создан`);
-        this.navigator.toCertificateAgentShow(this.responsibilityCenter.id);
+        this.navigator.toResponsibilityCenters();
       }
     }
     catch (e) {

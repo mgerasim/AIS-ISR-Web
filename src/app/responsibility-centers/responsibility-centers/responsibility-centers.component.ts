@@ -8,9 +8,12 @@ import {TitleService} from '../../core/services/title.service';
 import {Role} from '../../api/models/role';
 import {showWarning} from '../../shared/utils/message-utils';
 import {ResponsibilityCenter} from '../../api/models/responsibility-center';
+import {combineLatest} from 'rxjs';
 
 interface DataSourceItem {
   responsibilityCenter: ResponsibilityCenter;
+  equipmentCount: number;
+  userCount: number;
 };
 
 @UntilDestroy()
@@ -33,12 +36,18 @@ export class ResponsibilityCentersComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.titleService.setTitle('Центры ответсвенности');
-    this.entityDataContext.responsibilityCenters.getListLazy()
+    combineLatest([
+      this.entityDataContext.responsibilityCenters.getListLazy(),
+      this.entityDataContext.equipments.getListLazy(),
+      this.entityDataContext.userResponsibilityCenters.getListLazy()
+      ])
       .pipe(untilDestroyed(this))
-      .subscribe(responsibilityCenters => {
+      .subscribe(([responsibilityCenters, equipments, userResponsibilityCenters]) => {
         this.dataSource = responsibilityCenters.map(responsibilityCenter => {
           const item = {
-            responsibilityCenter
+            responsibilityCenter,
+            equipmentCount: equipments.filter(x => x.responsibilityCenterId === responsibilityCenter.id).length,
+            userCount: userResponsibilityCenters.filter(x => x.responsibilityCenterId === responsibilityCenter.id).length,
           } as DataSourceItem;
           return item;
         });

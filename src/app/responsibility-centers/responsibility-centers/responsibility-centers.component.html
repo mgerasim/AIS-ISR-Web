@@ -1,6 +1,6 @@
-<dx-data-grid id="gridContainer"
+<dx-data-grid *ngIf="dataSource"
+              id="gridContainer"
               [dataSource]="dataSource"
-              [remoteOperations]="true"
               [wordWrapEnabled]="true"
               [columnAutoWidth]="true"
               [allowColumnReordering]="true"
@@ -35,12 +35,18 @@
                      storageKey="responsibilityCentersDataGrid">
   </dxo-state-storing>
 
-  <dxo-scrolling mode="virtual" rowRenderingMode="virtual" ></dxo-scrolling>
-  <dxo-paging [pageSize]="100"></dxo-paging>
+  <dxo-paging [pageSize]="5"></dxo-paging>
 
-  <dxi-column dataField="id" [fixed]="false" caption="№ п/п"></dxi-column>
+  <dxo-pager
+    [showPageSizeSelector]="true"
+    [allowedPageSizes]="[5, 10, 20]"
+    [showInfo]="true">
+  </dxo-pager>
 
-  <dxi-column dataField="title" caption="Наименование"></dxi-column>
+  <dxi-column dataField="responsibilityCenter.id" [fixed]="false" caption="№ п/п"></dxi-column>
+  <dxi-column dataField="responsibilityCenter.title" caption="Наименование"></dxi-column>
+  <dxi-column dataField="equipmentCount" caption="Количество оборудования"></dxi-column>
+  <dxi-column dataField="userCount" caption="Количество сотрудников"></dxi-column>
 
   <div *dxTemplate="let data of 'titleTemplate'">
     <h3>Центры ответственности</h3>
@@ -66,11 +72,22 @@
                icon="file"></dx-button>
   </div>
 
-</dx-data-grid>
+  <dxo-summary>
+    <dxi-total-item
+      column="responsibilityCenter.title"
+      summaryType="count">
+    </dxi-total-item>
+    <dxi-total-item
+      column="equipmentCount"
+      summaryType="sum">
+    </dxi-total-item>
+    <dxi-total-item
+      column="userCount"
+      summaryType="sum">
+    </dxi-total-item>
+  </dxo-summary>
 
-<ng-template #empty>
-  <span>Не проводился</span>
-</ng-template>
+</dx-data-grid>
 
 <router-outlet class="router-card"
 ></router-outlet>

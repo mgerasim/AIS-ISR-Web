@@ -104,4 +104,6 @@ export function loadingProviderFactory(provider: CoreService): () => Promise<boo
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(trace: Sentry.TraceService) {}
+}

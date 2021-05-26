@@ -28,7 +28,7 @@ export class AppComponent implements OnInit {
   isLoading = false;
 
   constructor(
-    private loadingService: LoadingService
+    private loadingService: LoadingService,
   ) {
     Globalize.load(
       supplemental, ruCldrData
