@@ -76,10 +76,12 @@ export class ResponsibilityCentersComponent implements OnInit, OnDestroy {
       location: 'before',
       template: 'actionEditTemplate',
     });
+    /*
     e.toolbarOptions.items.push({
       location: 'before',
       template: 'actionShowTemplate',
     });
+     */
     e.toolbarOptions.items.push({
       location: 'center',
       template: 'titleTemplate',

@@ -1,4 +1,4 @@
-<dx-scroll-view>
+
   <div class="container fix-footer" *ngIf="equipment">
     <h1 class="text-sm-center">{{equipment.title}}</h1>
     <h2 class="text-sm-center">Сведения об оборудовании</h2>
@@ -119,5 +119,6 @@
     <app-attachments [equipment]="equipment" title="Паспорт завода изготовителя" [category]="attachmentCategoryPassport"></app-attachments>
     <app-attachments [equipment]="equipment" title="Экспертиза" [category]="attachmentCategoryExamination"></app-attachments>
     <app-attachments [equipment]="equipment" title="Прочее" [category]="attachmentCategoryOther"></app-attachments>
+
   </div>
-</dx-scroll-view>
+

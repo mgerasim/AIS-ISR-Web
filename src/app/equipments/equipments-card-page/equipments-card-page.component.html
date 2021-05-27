@@ -1,21 +1,26 @@
-<div *ngIf="isLoaded">
-  <kendo-splitter *ngIf="equipment;else empty" orientation="horizontal">
+<ng-container *ngIf="isLoaded">
+  <as-split *ngIf="equipment;else empty" direction="horizontal" unit="pixel">
+    <as-split-area class="panel-container" [size]="260">
+      <dx-scroll-view>
+        <div class="panel-container-context">
+          <app-equipments-card-sidebar [equipment]="equipment">
 
-    <kendo-splitter-pane size="250px">
-      <app-equipments-card-sidebar [equipment]="equipment">
+          </app-equipments-card-sidebar>
+        </div>
+      </dx-scroll-view>
+    </as-split-area>
+    <as-split-area>
 
-      </app-equipments-card-sidebar>
-    </kendo-splitter-pane>
+      <dx-scroll-view>
+        <app-equipments-card [equipment]="equipment">
 
-    <kendo-splitter-pane>
-      <app-equipments-card [equipment]="equipment">
+        </app-equipments-card>
+      </dx-scroll-view>
 
-      </app-equipments-card>
-    </kendo-splitter-pane>
-
-  </kendo-splitter>
+    </as-split-area>
+  </as-split>
 
   <ng-template #empty>
     <h1>{{ titleAccessDenied }}</h1>
   </ng-template>
-</div>
+</ng-container>

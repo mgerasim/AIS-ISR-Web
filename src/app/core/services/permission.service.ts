@@ -54,6 +54,10 @@ export class PermissionService {
       return this.authService.currentUser.account.role === Role.SuperAdmin;
     }
 
+    get isUser(): boolean {
+      return this.authService.currentUser.account.role === Role.User;
+    }
+
     get roles(): RolesType[] {
       const roles = new Array<RolesType>();
       roles.push(

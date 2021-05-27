@@ -1,0 +1,5 @@
+<dx-select-box [items]="roles"
+               [(value)]="account.role" displayExpr="title"
+               [disabled]="disabled"
+               valueExpr="id"
+               (onValueChanged)="onRoleChanged(account)" ></dx-select-box>

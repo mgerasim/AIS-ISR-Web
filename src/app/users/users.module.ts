@@ -7,10 +7,11 @@ import {SharedModule} from '../shared/shared.module';
 import {CoreModule} from '../core/core.module';
 import {FormsModule} from '@angular/forms';
 import { ResponsibilityCentersComponent } from './users/responsibility-centers/responsibility-centers.component';
+import { RolesComponent } from './users/roles/roles.component';
 
 
 @NgModule({
-  declarations: [UsersComponent, ResponsibilityCentersComponent],
+  declarations: [UsersComponent, ResponsibilityCentersComponent, RolesComponent],
     imports: [
         CommonModule,
         UsersRoutingModule,

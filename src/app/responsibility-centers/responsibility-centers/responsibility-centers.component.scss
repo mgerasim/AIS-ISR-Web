@@ -1,3 +1,9 @@
+:host {
+  height: 100%;
+  display: block;
+  padding-bottom: 57px;
+}
+
 
 .router-card ::ng-deep + * {
   top: 0;

@@ -19,7 +19,7 @@ const routes: Routes = [
         component: ResponsibilityCentersEditComponent
       },
       {
-        path: ':id/show',
+        path: ':id',
         component: ResponsibilityCentersShowComponent
       }
     ]

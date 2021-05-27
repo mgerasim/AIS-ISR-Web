@@ -29,7 +29,6 @@ export class UsersComponent implements OnInit, OnDestroy {
 
   dataSource: DataSourceItem[];
   selectedRowKeys: DataSourceItem[];
-  roles = this.permissionService.roles;
   divisions: Division[];
   responsibilityCenters: ResponsibilityCenter[];
 
@@ -55,7 +54,6 @@ export class UsersComponent implements OnInit, OnDestroy {
       this.divisions = divisions;
       this.responsibilityCenters = responsibilityCenters;
       this.dataSource = users.map(user => {
-        this.roles = this.permissionService.roles;
         const division = divisions.find(x => x.id === user.divisionId);
         const account = accounts.find(x => x.id === user.accountId);
         if (account === undefined) {
@@ -90,13 +88,6 @@ export class UsersComponent implements OnInit, OnDestroy {
       location: 'center',
       template: 'titleTemplate',
     });
-  }
-
-  onRoleChanged(account: Account): void {
-    console.log(account);
-    this.accountsService.apiAccountsIdPut({id: account.id, body: account}).subscribe(() => {
-      showSuccess(`Роль пользователя успешна изменена`);
-    }, error => this.errorHandlerService.handle(error));
   }
 
   onDivisionChanged(user: User): void {

@@ -35,7 +35,7 @@
                      storageKey="responsibilityCentersDataGrid">
   </dxo-state-storing>
 
-  <dxo-paging [pageSize]="5"></dxo-paging>
+  <dxo-paging [pageSize]="20"></dxo-paging>
 
   <dxo-pager
     [showPageSizeSelector]="true"
@@ -47,6 +47,7 @@
   <dxi-column dataField="responsibilityCenter.title" caption="Наименование"></dxi-column>
   <dxi-column dataField="equipmentCount" caption="Количество оборудования"></dxi-column>
   <dxi-column dataField="userCount" caption="Количество сотрудников"></dxi-column>
+
 
   <div *dxTemplate="let data of 'titleTemplate'">
     <h3>Центры ответственности</h3>

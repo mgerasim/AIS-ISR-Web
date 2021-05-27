@@ -13,6 +13,7 @@ import {CoreModule} from '../core/core.module';
 import { EquipmentsAddComponent } from './equipments-add/equipments-add.component';
 import { EquipmentsFormComponent } from './equipments-form/equipments-form.component';
 import {CorrectiveActionsModule} from '../corrective-actions/corrective-actions.module';
+import {AngularSplitModule} from 'angular-split';
 
 @NgModule({
     declarations: [SidebarComponent, EquipmentsPageComponent, EquipmentsTableComponent, EquipmentsCardSidebarComponent, EquipmentsCardPageComponent, EquipmentsEditComponent, EquipmentsAddComponent, EquipmentsFormComponent],
@@ -24,7 +25,8 @@ import {CorrectiveActionsModule} from '../corrective-actions/corrective-actions.
     SharedModule,
     FormsModule,
     CoreModule,
-    CorrectiveActionsModule
+    CorrectiveActionsModule,
+    AngularSplitModule
   ]
 })
 export class EquipmentsModule { }

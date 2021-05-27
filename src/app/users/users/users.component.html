@@ -69,11 +69,9 @@
   </div>
 
   <div *dxTemplate="let data of 'roleTemplate'">
-    <dx-select-box [items]="roles"
-                   [(value)]="data.data.account.role" displayExpr="title"
-                   [disabled]="!permissionService.isSuperAdmin"
-                   valueExpr="id"
-                   (onValueChanged)="onRoleChanged(data.data.account)" ></dx-select-box>
+    <app-roles [account]="data.data.account">
+
+    </app-roles>
   </div>
 
   <div *dxTemplate="let data of 'responsibilityCenterTemplate'">
