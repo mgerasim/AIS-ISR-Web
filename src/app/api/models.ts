@@ -2,6 +2,7 @@ export { Account } from './models/account';
 export { Attachment } from './models/attachment';
 export { AttachmentCategory } from './models/attachment-category';
 export { AuthResponse } from './models/auth-response';
+export { BatchEquipmentOperationEditRequest } from './models/batch-equipment-operation-edit-request';
 export { Certificate } from './models/certificate';
 export { CertificateAgent } from './models/certificate-agent';
 export { CertificateType } from './models/certificate-type';

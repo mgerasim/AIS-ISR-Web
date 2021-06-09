@@ -5,7 +5,7 @@ import {ErrorHandlerService} from '../../core/errors/error-handler.service';
 import {User} from '../../api/models/user';
 import {Division} from '../../api/models/division';
 import {combineLatest} from 'rxjs';
-import {Account, ResponsibilityCenter, Role} from '../../api/models';
+import {Account, ResponsibilityCenter, Role, UserResponsibilityCenter} from '../../api/models';
 import {UsersService} from '../../api/services/users.service';
 import {showSuccess} from '../../shared/utils/message-utils';
 import {TitleService} from '../../core/services/title.service';
@@ -31,6 +31,8 @@ export class UsersComponent implements OnInit, OnDestroy {
   selectedRowKeys: DataSourceItem[];
   divisions: Division[];
   responsibilityCenters: ResponsibilityCenter[];
+  responsibilityCenterHeaderFilter?: Array<any> = undefined;
+  userResponsibilityCenters?: UserResponsibilityCenter[] = undefined;
 
   constructor(
     private entityDataContext: EntityDataContext,
@@ -48,11 +50,14 @@ export class UsersComponent implements OnInit, OnDestroy {
       this.entityDataContext.divisions.getListLazy(),
       this.entityDataContext.accounts.getListLazy(),
       this.entityDataContext.responsibilityCenters.getListLazy(),
+      this.entityDataContext.userResponsibilityCenters.getListLazy(),
     ]).pipe(
       untilDestroyed(this)
-    ).subscribe(([users, divisions, accounts, responsibilityCenters]) => {
+    ).subscribe(([users, divisions, accounts, responsibilityCenters, userResponsibilityCenters]) => {
+      this.userResponsibilityCenters = userResponsibilityCenters;
       this.divisions = divisions;
       this.responsibilityCenters = responsibilityCenters;
+      this.createResponsibilityCenterHeaderFilter();
       this.dataSource = users.map(user => {
         const division = divisions.find(x => x.id === user.divisionId);
         const account = accounts.find(x => x.id === user.accountId);
@@ -66,6 +71,31 @@ export class UsersComponent implements OnInit, OnDestroy {
         } as DataSourceItem;
       });
     }, error => this.errorHandlerService.handle(error));
+  }
+
+  calculateCenterResponsibilities = (dataSourceItem: DataSourceItem): string => {
+    const userResponsibilityCentersIds = this.userResponsibilityCenters.filter(x => dataSourceItem.user.id === x.userId).map(x => x.responsibilityCenterId);
+    const responsibilityCenters = this.responsibilityCenters.filter(x => userResponsibilityCentersIds.includes(x.id));
+    return responsibilityCenters.map(x => x.title).join('; ');
+  }
+
+  calculateFilterExpression = (value, selectedFilterOperations, target) => {
+    const column = this as any;
+    return [this.calculateCenterResponsibilities, 'contains', value];
+  }
+
+
+  createResponsibilityCenterHeaderFilter(): void {
+    this.responsibilityCenterHeaderFilter = [];
+
+    this.responsibilityCenters.forEach(responsibilityCenter => {
+      this.responsibilityCenterHeaderFilter.push({
+        text: responsibilityCenter.title,
+        value: [
+          'user.centerResponsibilities', 'contains', responsibilityCenter.title
+        ]
+      });
+    });
   }
 
   ngOnDestroy(): void {

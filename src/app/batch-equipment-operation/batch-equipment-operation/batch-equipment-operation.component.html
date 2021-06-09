@@ -1,0 +1,179 @@
+<dx-scroll-view>
+  <p>
+    Количество оборудования: {{ equipments?.length }}
+  </p>
+  <dx-form *ngIf="request && divisions && responsibilityCenters && certificates" [(formData)]="request" colCount="3">
+
+    <dxi-item itemType='group' caption='Регистрационный номер ОПО'>
+
+      <dxi-item dataField="canRegisterNumberEdit" editorType="dxCheckBox">
+        <dxo-label text="Изменить" ></dxo-label>
+      </dxi-item>
+
+      <dxi-item dataField="registerNumber" [editorOptions]="{disabled: !request.canRegisterNumberEdit}">
+        <dxo-label text="Новое значение"></dxo-label>
+      </dxi-item>
+
+    </dxi-item>
+
+    <dxi-item itemType='group' caption='Расположение'>
+
+      <dxi-item dataField="canLocationEdit" editorType="dxCheckBox">
+        <dxo-label text="Изменить" ></dxo-label>
+      </dxi-item>
+
+      <dxi-item dataField="location" [editorOptions]="{disabled: !request.canLocationEdit}">
+        <dxo-label text="Новое значение"></dxo-label>
+      </dxi-item>
+
+    </dxi-item>
+
+    <dxi-item itemType='group' caption='Краткие карактеристики'>
+
+      <dxi-item dataField="canShortCharacteristicsEdit" editorType="dxCheckBox">
+        <dxo-label text="Изменить" ></dxo-label>
+      </dxi-item>
+
+      <dxi-item dataField="shortCharacteristics" editorType="dxTextArea" [editorOptions]="{disabled: !request.canShortCharacteristicsEdit}">
+        <dxo-label text="Новое значение"></dxo-label>
+      </dxi-item>
+
+    </dxi-item>
+
+    <dxi-item itemType='group' caption='Технический номер'>
+
+      <dxi-item dataField="canTechNumberEdit" editorType="dxCheckBox">
+        <dxo-label text="Изменить" ></dxo-label>
+      </dxi-item>
+
+      <dxi-item dataField="techNumber" editorType="dxTextArea" [editorOptions]="{disabled: !request.canTechNumberEdit}">
+        <dxo-label text="Новое значение"></dxo-label>
+      </dxi-item>
+
+    </dxi-item>
+
+    <dxi-item itemType='group' caption='Заводской номер'>
+
+      <dxi-item dataField="canSerialNumberEdit" editorType="dxCheckBox">
+        <dxo-label text="Изменить" ></dxo-label>
+      </dxi-item>
+
+      <dxi-item dataField="serialNumber" editorType="dxTextArea" [editorOptions]="{disabled: !request.canSerialNumberEdit}">
+        <dxo-label text="Новое значение"></dxo-label>
+      </dxi-item>
+
+    </dxi-item>
+
+    <dxi-item itemType='group' caption='Год выпуска'>
+
+      <dxi-item dataField="canReleaseYearEdit" editorType="dxCheckBox">
+        <dxo-label text="Изменить" ></dxo-label>
+      </dxi-item>
+
+      <dxi-item dataField="releaseYear" editorType="dxNumberBox" [editorOptions]="{disabled: !request.canReleaseYearEdit}">
+        <dxo-label text="Новое значение"></dxo-label>
+      </dxi-item>
+
+    </dxi-item>
+
+    <dxi-item itemType='group' caption='Средний ремонт'>
+
+      <dxi-item dataField="canRepairDateEdit" editorType="dxCheckBox" >
+        <dxo-label text="Изменить"></dxo-label>
+      </dxi-item>
+
+      <dxi-item dataField="repairDate" editorType="dxDateBox" [editorOptions]="{disabled: !request.canRepairDateEdit}">
+        <dxo-label text="Новое значение"></dxo-label>
+      </dxi-item>
+
+    </dxi-item>
+
+    <dxi-item itemType='group' caption='Капитальный ремонт'>
+
+      <dxi-item dataField="canOverhaulDateEdit" editorType="dxCheckBox">
+        <dxo-label text="Изменить"></dxo-label>
+      </dxi-item>
+
+      <dxi-item dataField="overhaulDate" editorType="dxDateBox" [editorOptions]="{disabled: !request.canOverhaulDateEdit}">
+        <dxo-label text="Новое значение"></dxo-label>
+      </dxi-item>
+
+    </dxi-item>
+
+    <dxi-item itemType='group' caption='Срок эксплуатации'>
+
+      <dxi-item dataField="canExploitationPeriodEdit" editorType="dxCheckBox">
+        <dxo-label text="Изменить"></dxo-label>
+      </dxi-item>
+
+      <dxi-item dataField="exploitationPeriod" editorType="dxNumberBox" [editorOptions]="{disabled: !request.canExploitationPeriodEdit}">
+        <dxo-label text="Новое значение"></dxo-label>
+      </dxi-item>
+
+    </dxi-item>
+
+    <dxi-item itemType='group' caption='Единица измерения срока эксплуатации'>
+
+      <dxi-item dataField="canExploitationPeriodUnitEdit" editorType="dxCheckBox">
+        <dxo-label text="Изменить"></dxo-label>
+      </dxi-item>
+
+      <dxi-item dataField="exploitationPeriodUnit" editorType="dxSelectBox" [editorOptions]="{disabled: !request.canExploitationPeriodUnitEdit, items: exploitationPeriodUnits, searchEnabled: true, valueExpr: 'id', displayExpr: 'title'}">
+        <dxo-label text="Новое значение"></dxo-label>
+      </dxi-item>
+
+    </dxi-item>
+
+    <dxi-item itemType='group' caption='Год ввода в эксплуатацию'>
+
+      <dxi-item dataField="canCommissioningYearEdit" editorType="dxCheckBox">
+        <dxo-label text="Изменить"></dxo-label>
+      </dxi-item>
+
+      <dxi-item dataField="commissioningYear" editorType="dxNumberBox" [editorOptions]="{disabled: !request.canCommissioningYearEdit}">
+        <dxo-label text="Новое значение"></dxo-label>
+      </dxi-item>
+
+    </dxi-item>
+
+    <dxi-item itemType='group' caption='Подразделение'>
+
+      <dxi-item dataField="canDivisionEdit" editorType="dxCheckBox">
+        <dxo-label text="Изменить"></dxo-label>
+      </dxi-item>
+
+      <dxi-item dataField="divisionId" editorType="dxSelectBox" [editorOptions]="{disabled: !request.canDivisionEdit, items: divisions, searchEnabled: true, valueExpr: 'id', displayExpr: 'title'}">
+        <dxo-label text="Новое значение"></dxo-label>
+      </dxi-item>
+
+    </dxi-item>
+
+    <dxi-item itemType='group' caption='Центр ответсвенности'>
+
+      <dxi-item dataField="canResponsibilityCenterEdit" editorType="dxCheckBox">
+        <dxo-label text="Изменить"></dxo-label>
+      </dxi-item>
+
+      <dxi-item dataField="responsibilityCenterId" editorType="dxSelectBox" [editorOptions]="{disabled: !request.canResponsibilityCenterEdit, items: responsibilityCenters, searchEnabled: true, valueExpr: 'id', displayExpr: 'title'}">
+        <dxo-label text="Новое значение"></dxo-label>
+      </dxi-item>
+
+    </dxi-item>
+
+    <dxi-item itemType='group' caption='Сертификат'>
+
+      <dxi-item dataField="canCertificateEdit" editorType="dxCheckBox">
+        <dxo-label text="Изменить"></dxo-label>
+      </dxi-item>
+
+      <dxi-item dataField="certificateId" editorType="dxSelectBox" [editorOptions]="{disabled: !request.canCertificateEdit, items: certificates, searchEnabled: true, valueExpr: 'id', displayExpr: 'title'}">
+        <dxo-label text="Новое значение"></dxo-label>
+      </dxi-item>
+
+    </dxi-item>
+
+  </dx-form>
+  <p>
+    <dx-button text="Применить" (click)="apply()"></dx-button>
+  </p>
+</dx-scroll-view>

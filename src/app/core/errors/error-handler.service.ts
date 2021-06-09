@@ -17,6 +17,8 @@ export class ErrorHandlerService {
 
   public handle(error: any, message?: string): void {
 
+    console.error(error);
+
     Sentry.captureException(error);
 
     if (!error) {

@@ -28,6 +28,10 @@ export class ResponsibilityCentersService extends BaseService {
   static readonly ApiResponsibilityCentersGetPath = '/api/ResponsibilityCenters';
 
   /**
+   * Получает список центров ответсвенности.
+   *
+   *
+   *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
    * To access only the response body, use `apiResponsibilityCentersGet$Plain()` instead.
    *
@@ -52,6 +56,10 @@ export class ResponsibilityCentersService extends BaseService {
   }
 
   /**
+   * Получает список центров ответсвенности.
+   *
+   *
+   *
    * This method provides access to only to the response body.
    * To access the full response (for headers, for example), `apiResponsibilityCentersGet$Plain$Response()` instead.
    *
@@ -66,6 +74,10 @@ export class ResponsibilityCentersService extends BaseService {
   }
 
   /**
+   * Получает список центров ответсвенности.
+   *
+   *
+   *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
    * To access only the response body, use `apiResponsibilityCentersGet$Json()` instead.
    *
@@ -90,6 +102,10 @@ export class ResponsibilityCentersService extends BaseService {
   }
 
   /**
+   * Получает список центров ответсвенности.
+   *
+   *
+   *
    * This method provides access to only to the response body.
    * To access the full response (for headers, for example), `apiResponsibilityCentersGet$Json$Response()` instead.
    *
@@ -109,12 +125,20 @@ export class ResponsibilityCentersService extends BaseService {
   static readonly ApiResponsibilityCentersPostPath = '/api/ResponsibilityCenters';
 
   /**
+   * Создает центр ответсвенности.
+   *
+   *
+   *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
    * To access only the response body, use `apiResponsibilityCentersPost$Plain()` instead.
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
   apiResponsibilityCentersPost$Plain$Response(params?: {
+
+    /**
+     * Центр ответсвенности.
+     */
     body?: ResponsibilityCenter
   }): Observable<StrictHttpResponse<ResponsibilityCenter>> {
 
@@ -135,12 +159,20 @@ export class ResponsibilityCentersService extends BaseService {
   }
 
   /**
+   * Создает центр ответсвенности.
+   *
+   *
+   *
    * This method provides access to only to the response body.
    * To access the full response (for headers, for example), `apiResponsibilityCentersPost$Plain$Response()` instead.
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
   apiResponsibilityCentersPost$Plain(params?: {
+
+    /**
+     * Центр ответсвенности.
+     */
     body?: ResponsibilityCenter
   }): Observable<ResponsibilityCenter> {
 
@@ -150,12 +182,20 @@ export class ResponsibilityCentersService extends BaseService {
   }
 
   /**
+   * Создает центр ответсвенности.
+   *
+   *
+   *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
    * To access only the response body, use `apiResponsibilityCentersPost$Json()` instead.
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
   apiResponsibilityCentersPost$Json$Response(params?: {
+
+    /**
+     * Центр ответсвенности.
+     */
     body?: ResponsibilityCenter
   }): Observable<StrictHttpResponse<ResponsibilityCenter>> {
 
@@ -176,12 +216,20 @@ export class ResponsibilityCentersService extends BaseService {
   }
 
   /**
+   * Создает центр ответсвенности.
+   *
+   *
+   *
    * This method provides access to only to the response body.
    * To access the full response (for headers, for example), `apiResponsibilityCentersPost$Json$Response()` instead.
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
   apiResponsibilityCentersPost$Json(params?: {
+
+    /**
+     * Центр ответсвенности.
+     */
     body?: ResponsibilityCenter
   }): Observable<ResponsibilityCenter> {
 
@@ -196,12 +244,20 @@ export class ResponsibilityCentersService extends BaseService {
   static readonly ApiResponsibilityCentersIdGetPath = '/api/ResponsibilityCenters/{id}';
 
   /**
+   * Получает центр ответсвенности по идентификатору.
+   *
+   *
+   *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
    * To access only the response body, use `apiResponsibilityCentersIdGet$Plain()` instead.
    *
    * This method doesn't expect any request body.
    */
   apiResponsibilityCentersIdGet$Plain$Response(params: {
+
+    /**
+     * Идентификатор центр ответсвенности.
+     */
     id: number;
   }): Observable<StrictHttpResponse<ResponsibilityCenter>> {
 
@@ -222,12 +278,20 @@ export class ResponsibilityCentersService extends BaseService {
   }
 
   /**
+   * Получает центр ответсвенности по идентификатору.
+   *
+   *
+   *
    * This method provides access to only to the response body.
    * To access the full response (for headers, for example), `apiResponsibilityCentersIdGet$Plain$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
   apiResponsibilityCentersIdGet$Plain(params: {
+
+    /**
+     * Идентификатор центр ответсвенности.
+     */
     id: number;
   }): Observable<ResponsibilityCenter> {
 
@@ -237,12 +301,20 @@ export class ResponsibilityCentersService extends BaseService {
   }
 
   /**
+   * Получает центр ответсвенности по идентификатору.
+   *
+   *
+   *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
    * To access only the response body, use `apiResponsibilityCentersIdGet$Json()` instead.
    *
    * This method doesn't expect any request body.
    */
   apiResponsibilityCentersIdGet$Json$Response(params: {
+
+    /**
+     * Идентификатор центр ответсвенности.
+     */
     id: number;
   }): Observable<StrictHttpResponse<ResponsibilityCenter>> {
 
@@ -263,12 +335,20 @@ export class ResponsibilityCentersService extends BaseService {
   }
 
   /**
+   * Получает центр ответсвенности по идентификатору.
+   *
+   *
+   *
    * This method provides access to only to the response body.
    * To access the full response (for headers, for example), `apiResponsibilityCentersIdGet$Json$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
   apiResponsibilityCentersIdGet$Json(params: {
+
+    /**
+     * Идентификатор центр ответсвенности.
+     */
     id: number;
   }): Observable<ResponsibilityCenter> {
 
@@ -283,13 +363,25 @@ export class ResponsibilityCentersService extends BaseService {
   static readonly ApiResponsibilityCentersIdPutPath = '/api/ResponsibilityCenters/{id}';
 
   /**
+   * Обновляет центр ответсвенности.
+   *
+   *
+   *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
    * To access only the response body, use `apiResponsibilityCentersIdPut()` instead.
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
   apiResponsibilityCentersIdPut$Response(params: {
+
+    /**
+     * Идентификатор центр ответсвенности.
+     */
     id: number;
+
+    /**
+     * Центр ответсвенности.
+     */
     body?: ResponsibilityCenter
   }): Observable<StrictHttpResponse<void>> {
 
@@ -311,13 +403,25 @@ export class ResponsibilityCentersService extends BaseService {
   }
 
   /**
+   * Обновляет центр ответсвенности.
+   *
+   *
+   *
    * This method provides access to only to the response body.
    * To access the full response (for headers, for example), `apiResponsibilityCentersIdPut$Response()` instead.
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
   apiResponsibilityCentersIdPut(params: {
+
+    /**
+     * Идентификатор центр ответсвенности.
+     */
     id: number;
+
+    /**
+     * Центр ответсвенности.
+     */
     body?: ResponsibilityCenter
   }): Observable<void> {
 
@@ -332,12 +436,20 @@ export class ResponsibilityCentersService extends BaseService {
   static readonly ApiResponsibilityCentersIdDeletePath = '/api/ResponsibilityCenters/{id}';
 
   /**
+   * Удаляет центр ответсвенности.
+   *
+   *
+   *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
    * To access only the response body, use `apiResponsibilityCentersIdDelete$Plain()` instead.
    *
    * This method doesn't expect any request body.
    */
   apiResponsibilityCentersIdDelete$Plain$Response(params: {
+
+    /**
+     * Идентифкатор центр ответсвенности.
+     */
     id: number;
   }): Observable<StrictHttpResponse<ResponsibilityCenter>> {
 
@@ -358,12 +470,20 @@ export class ResponsibilityCentersService extends BaseService {
   }
 
   /**
+   * Удаляет центр ответсвенности.
+   *
+   *
+   *
    * This method provides access to only to the response body.
    * To access the full response (for headers, for example), `apiResponsibilityCentersIdDelete$Plain$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
   apiResponsibilityCentersIdDelete$Plain(params: {
+
+    /**
+     * Идентифкатор центр ответсвенности.
+     */
     id: number;
   }): Observable<ResponsibilityCenter> {
 
@@ -373,12 +493,20 @@ export class ResponsibilityCentersService extends BaseService {
   }
 
   /**
+   * Удаляет центр ответсвенности.
+   *
+   *
+   *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
    * To access only the response body, use `apiResponsibilityCentersIdDelete$Json()` instead.
    *
    * This method doesn't expect any request body.
    */
   apiResponsibilityCentersIdDelete$Json$Response(params: {
+
+    /**
+     * Идентифкатор центр ответсвенности.
+     */
     id: number;
   }): Observable<StrictHttpResponse<ResponsibilityCenter>> {
 
@@ -399,12 +527,20 @@ export class ResponsibilityCentersService extends BaseService {
   }
 
   /**
+   * Удаляет центр ответсвенности.
+   *
+   *
+   *
    * This method provides access to only to the response body.
    * To access the full response (for headers, for example), `apiResponsibilityCentersIdDelete$Json$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
   apiResponsibilityCentersIdDelete$Json(params: {
+
+    /**
+     * Идентифкатор центр ответсвенности.
+     */
     id: number;
   }): Observable<ResponsibilityCenter> {
 

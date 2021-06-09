@@ -14,6 +14,7 @@ import { EquipmentsAddComponent } from './equipments-add/equipments-add.componen
 import { EquipmentsFormComponent } from './equipments-form/equipments-form.component';
 import {CorrectiveActionsModule} from '../corrective-actions/corrective-actions.module';
 import {AngularSplitModule} from 'angular-split';
+import {BatchEquipmentOperationModule} from '../batch-equipment-operation/batch-equipment-operation.module';
 
 @NgModule({
     declarations: [SidebarComponent, EquipmentsPageComponent, EquipmentsTableComponent, EquipmentsCardSidebarComponent, EquipmentsCardPageComponent, EquipmentsEditComponent, EquipmentsAddComponent, EquipmentsFormComponent],
@@ -26,7 +27,8 @@ import {AngularSplitModule} from 'angular-split';
     FormsModule,
     CoreModule,
     CorrectiveActionsModule,
-    AngularSplitModule
+    AngularSplitModule,
+    BatchEquipmentOperationModule
   ]
 })
 export class EquipmentsModule { }

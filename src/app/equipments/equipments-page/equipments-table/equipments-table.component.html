@@ -5,8 +5,10 @@
               [allowColumnReordering]="true"
               [allowColumnResizing]="true"
               [rowAlternationEnabled]="true"
+              [(selectedRowKeys)]="selectedRowKeys"
               [masterDetail]="{ enabled: false, template: 'detail' }"
               (onCellDblClick)="onCellDblClick($event)"
+              (onRowClick)="onRowClick($event)"
               (onSelectionChanged)="onSelectionChanged($event)"
               columnResizingMode="widget"
               (onToolbarPreparing)="onToolbarPreparing($event)"
@@ -30,7 +32,11 @@
       [width]="240"
       placeholder="Поиск..."></dxo-search-panel>
 
-      <dxo-selection mode="single"></dxo-selection>
+  <!--<dxo-selection mode="single"></dxo-selection>-->
+        <dxo-selection
+          selectAllMode="allPages"
+          showCheckBoxesMode="onClick"
+          mode="multiple"></dxo-selection>
 
         <dxo-column-fixing [enabled]="true"></dxo-column-fixing>
 
@@ -95,7 +101,9 @@
   <dxi-column dataField="examination.registerNumber" [fixed]="false" caption="Регистрационный номер ЭПБ"></dxi-column>
   <dxi-column dataField="examination.status" [fixed]="false" caption="Статус ЭПБ" cellTemplate="examinationStatusTemplate"></dxi-column>
   <dxi-column dataField="examination.comment" [fixed]="false" caption="Выводы из заключения ЭПБ"></dxi-column>
+  <!--
   <dxi-column dataField="equipment" [fixed]="false" caption="Корректирующие мероприятия" cellTemplate="correctiveActionsTemplate"></dxi-column>
+  -->
   <dxi-column dataField="examination.examinationNextYear" [fixed]="false" caption="Дата след. ЭПБ, продление срока эксплуатации"></dxi-column>
   <dxi-column dataField="certificateType.title" caption="Тип сертификата"></dxi-column>
   <dxi-column dataField="certificate.title" caption="Номер сертификата"></dxi-column>
@@ -194,7 +202,7 @@
 
   <dxo-summary>
     <dxi-total-item
-      column="equipment.code"
+      column="equipment.title"
       summaryType="count">
     </dxi-total-item>
     <dxi-total-item

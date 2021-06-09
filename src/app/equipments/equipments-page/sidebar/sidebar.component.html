@@ -18,10 +18,20 @@
 
 </kendo-listview>
 
-<dx-popup *ngIf="correctiveAction" [(visible)]="popupVisible"
+<dx-popup *ngIf="correctiveAction" [(visible)]="popupCorrectiveActionFormVisible"
           title="Добавить корректирующее мероприятие">
   <div *dxTemplate="let data of 'content'">
     <app-corrective-action-form [correctiveAction]="correctiveAction" (save)="saveCorrectiveAction()"></app-corrective-action-form>
+  </div>
+</dx-popup>
+
+<dx-popup [(visible)]="popupBatchEquipmentOperationVisible"
+          title="Массовое изменение параметров оборудования">
+  <div *dxTemplate="let data of 'content'">
+    <app-batch-equipment-operation [equipments]="sidebarService.equipments$.value"
+    (end)="batchEquipmentOperationCompleted()">
+
+    </app-batch-equipment-operation>
   </div>
 </dx-popup>
 

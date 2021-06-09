@@ -1,4 +1,5 @@
-<dx-data-grid id="gridContainer"
+<dx-data-grid *ngIf="userResponsibilityCenters && responsibilityCenters"
+              id="gridContainer"
               [dataSource]="dataSource"
               [remoteOperations]="true"
               [wordWrapEnabled]="true"
@@ -39,6 +40,10 @@
   <dxo-scrolling mode="virtual" rowRenderingMode="virtual" ></dxo-scrolling>
   <dxo-paging [pageSize]="100"></dxo-paging>
 
+  <dxo-filter-builder
+    [allowHierarchicalFields]="true">
+  </dxo-filter-builder>
+
   <dxi-column dataField="user.id" [fixed]="false" caption="№"></dxi-column>
   <dxi-column dataField="user.createdAt" caption="Дата создания" cellTemplate="createAtTemplate"></dxi-column>
   <dxi-column width="50" cellTemplate="avatarTemplate"></dxi-column>
@@ -48,7 +53,12 @@
   <dxi-column dataField="user.allowEmail" width="50" [allowFiltering]="false" [allowReordering]="false" headerCellTemplate="allowEmailHeaderTemplate" cellTemplate="allowEmailTemplate"></dxi-column>
   <dxi-column dataField="division.title" caption="Подразделение" cellTemplate="divisionTemplate"></dxi-column>
   <dxi-column dataField="user.role" caption="Роль" cellTemplate="roleTemplate"></dxi-column>
-  <dxi-column dataField="user.centerResponsibilities" caption="Центр ответственности" cellTemplate="responsibilityCenterTemplate"></dxi-column>
+  <dxi-column name="user.centerResponsibilities" [calculateCellValue]="calculateCenterResponsibilities" allowFiltering="true"
+              caption="Центр ответственности"
+              [calculateFilterExpression]="calculateFilterExpression"
+              cellTemplate="responsibilityCenterTemplate">
+    <dxo-header-filter [dataSource]="responsibilityCenterHeaderFilter"></dxo-header-filter>
+  </dxi-column>
 
   <div *dxTemplate="let data of 'allowEmailTemplate'">
     <dx-check-box [(value)]="data.data.user.allowEmail"

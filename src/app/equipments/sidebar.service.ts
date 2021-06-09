@@ -7,7 +7,7 @@ import {Equipment} from '../api/models/equipment';
 })
 export class SidebarService {
 
-  public equipment$ = new BehaviorSubject<Equipment>(undefined);
+  public equipments$ = new BehaviorSubject<Equipment[]>([]);
 
   constructor() { }
 }

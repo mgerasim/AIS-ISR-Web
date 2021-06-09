@@ -27,11 +27,11 @@ export class SidebarComponent implements OnInit, OnDestroy {
       icon: '/assets/document.png',
       title: 'Карточка',
       click: () => {
-        if (this.sidebarService.equipment$.value === undefined) {
+        if (this.sidebarService.equipments$.value.length === 0) {
           showWarning('Необходимо выделить оборудование в таблице');
           return;
         }
-        this.navigator.toEquipment(this.sidebarService.equipment$.value.id);
+        this.navigator.toEquipment(this.sidebarService.equipments$.value[0].id);
       }
     },
     {
@@ -55,11 +55,11 @@ export class SidebarComponent implements OnInit, OnDestroy {
           showWarning('Данная операция доступна для Администратора.');
           return;
         }
-        if (this.sidebarService.equipment$.value === undefined) {
+        if (this.sidebarService.equipments$.value.length === 0) {
           showWarning('Необходимо выделить оборудование в таблице');
           return;
         }
-        this.navigator.toEquipmentEdit(this.sidebarService.equipment$.value.id);
+        this.navigator.toEquipmentEdit(this.sidebarService.equipments$.value[0].id);
       }
     },
     {
@@ -71,11 +71,11 @@ export class SidebarComponent implements OnInit, OnDestroy {
           showWarning('Данная операция доступна для Администратора.');
           return;
         }
-        if (this.sidebarService.equipment$.value === undefined) {
+        if (this.sidebarService.equipments$.value.length === 0) {
           showWarning('Необходимо выделить оборудование в таблице');
           return;
         }
-        const equipment = this.sidebarService.equipment$.value;
+        const equipment = this.sidebarService.equipments$.value[0];
         const content = `Удалить оборудование ${equipment.title} с кодом ${equipment.code} ?`;
         showConfirmation(this.dialogService, content).subscribe(result => {
           if (result === false) {
@@ -97,16 +97,16 @@ export class SidebarComponent implements OnInit, OnDestroy {
       icon: '/assets/action.png',
       title: 'Добавить корректирующее мероприятие',
       click: () => {
-        if (this.sidebarService.equipment$.value === undefined) {
+        if (this.sidebarService.equipments$.value.length === 0) {
           showWarning('Необходимо выделить оборудование в таблице');
           return;
         }
         this.correctiveAction = {
-          equipmentId: this.sidebarService.equipment$.value.id,
+          equipmentId: this.sidebarService.equipments$.value[0].id,
           performerId: this.authService.currentUser.id,
           status: CorrectiveActionStatus.InWork
         } as CorrectiveAction;
-        this.popupVisible = true;
+        this.popupCorrectiveActionFormVisible = true;
       }
     },
     {
@@ -114,11 +114,27 @@ export class SidebarComponent implements OnInit, OnDestroy {
       icon: '/assets/document-history.png',
       title: 'История изменений',
       click: () => {
-        if (this.sidebarService.equipment$.value === undefined) {
+        if (this.sidebarService.equipments$.value.length === 0) {
           showWarning('Необходимо выделить оборудование в таблице');
           return;
         }
-        this.navigator.toEquipmentHistory(this.sidebarService.equipment$.value.id);
+        this.navigator.toEquipmentHistory(this.sidebarService.equipments$.value[0].id);
+      }
+    },
+    {
+      id: 8,
+      icon: '/assets/document-edit-flat.png',
+      title: 'Массовое изменение параметров',
+      click: () => {
+        if (this.authService.currentUser.account.role === Role.User) {
+          showWarning('Данная операция доступна для Администратора.');
+          return;
+        }
+        if (this.sidebarService.equipments$.value.length === 0) {
+          showWarning('Необходимо выделить оборудование в таблице');
+          return;
+        }
+        this.popupBatchEquipmentOperationVisible = true;
       }
     },
     /**
@@ -133,7 +149,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
      */
   ];
   correctiveAction: CorrectiveAction;
-  popupVisible = false;
+  popupCorrectiveActionFormVisible = false;
+  popupBatchEquipmentOperationVisible = false;
 
   constructor(
     private navigator: NavigatorService,
@@ -152,6 +169,10 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
   saveCorrectiveAction(): void {
-    this.popupVisible = false;
+    this.popupCorrectiveActionFormVisible = false;
+  }
+
+  batchEquipmentOperationCompleted(): void {
+    this.popupBatchEquipmentOperationVisible = false;
   }
 }

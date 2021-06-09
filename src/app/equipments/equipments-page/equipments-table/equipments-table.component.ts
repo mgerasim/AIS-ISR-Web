@@ -60,6 +60,7 @@ export class EquipmentsTableComponent implements OnInit, OnDestroy {
   gridDataSource: any;
   popupVisible = false;
   equipment: Equipment;
+  selectedRowKeys = new Array<any>();
 
   constructor(
     public equipmentsService: EquipmentsService,
@@ -177,7 +178,7 @@ export class EquipmentsTableComponent implements OnInit, OnDestroy {
 
   onSelectionChanged(e: {selectedRowsData: DataSourceItem[]}): void {
     if (e.selectedRowsData[0]) {
-      this.sidebarService.equipment$.next(e.selectedRowsData[0].equipment);
+      this.sidebarService.equipments$.next(e.selectedRowsData.map(x => x.equipment));
     }
   }
 
@@ -196,6 +197,12 @@ export class EquipmentsTableComponent implements OnInit, OnDestroy {
   onRowPrepared(e: any): void {
     if (!e.data) {
       return;
+    }
+  }
+
+  onRowClick(data: {key: number; rowType: string}): void {
+    if (data.rowType === 'data') {
+      this.selectedRowKeys = [data.key];
     }
   }
 }
