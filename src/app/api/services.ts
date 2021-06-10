@@ -12,6 +12,7 @@ export { DivisionsBatchService } from './services/divisions-batch.service';
 export { EquipmentsService } from './services/equipments.service';
 export { EquipmentsBatchService } from './services/equipments-batch.service';
 export { ExaminationsService } from './services/examinations.service';
+export { FaqsService } from './services/faqs.service';
 export { FilesService } from './services/files.service';
 export { ImportService } from './services/import.service';
 export { IncidentLogsService } from './services/incident-logs.service';

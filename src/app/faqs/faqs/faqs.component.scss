@@ -1,0 +1,30 @@
+
+.router-card ::ng-deep + * {
+  top: 0;
+  padding-top: 57px;
+  position: absolute;
+  background-color: white;
+  width: 100%;
+  min-height: 100%;
+  z-index: 201;
+}
+
+dx-data-grid {
+  ::ng-deep {
+    .clicked-column {
+      cursor: pointer;
+    }
+  }
+}
+
+#gridContainer {
+  height: 100%;
+}
+
+::ng-deep {
+  .dx-datagrid-header-panel {
+    padding-top: 9px;
+    padding-left: 9px;
+    padding-right: 9px;
+  }
+}

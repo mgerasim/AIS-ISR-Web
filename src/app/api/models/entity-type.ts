@@ -21,5 +21,6 @@ export enum EntityType {
   Settings = 'Settings',
   User = 'User',
   UserNotification = 'UserNotification',
-  UserResponsibilityCenter = 'UserResponsibilityCenter'
+  UserResponsibilityCenter = 'UserResponsibilityCenter',
+  Faq = 'Faq'
 }

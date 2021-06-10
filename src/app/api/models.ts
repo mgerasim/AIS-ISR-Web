@@ -18,6 +18,7 @@ export { Equipment } from './models/equipment';
 export { Examination } from './models/examination';
 export { ExaminationStatus } from './models/examination-status';
 export { ExploitationPeriodUnit } from './models/exploitation-period-unit';
+export { Faq } from './models/faq';
 export { File } from './models/file';
 export { Importance } from './models/importance';
 export { ImportProcessorError } from './models/import-processor-error';

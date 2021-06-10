@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {AuthGuard} from './auth.guard';
+import {AuthSuperAdminGuard} from './auth-super-admin.guard';
 
 const routes: Routes = [
   {
@@ -36,6 +37,11 @@ const routes: Routes = [
     path: 'equipments',
     canActivate: [AuthGuard],
     loadChildren: () => import('./equipments/equipments.module').then(m => m.EquipmentsModule)
+  },
+  {
+    path: 'faqs',
+    canActivate: [AuthSuperAdminGuard],
+    loadChildren: () => import('./faqs/faqs.module').then(m => m.FaqsModule)
   },
   {
     path: 'settings',

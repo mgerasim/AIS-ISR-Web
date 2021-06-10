@@ -18,6 +18,7 @@ import { DivisionsBatchService } from './services/divisions-batch.service';
 import { EquipmentsService } from './services/equipments.service';
 import { EquipmentsBatchService } from './services/equipments-batch.service';
 import { ExaminationsService } from './services/examinations.service';
+import { FaqsService } from './services/faqs.service';
 import { FilesService } from './services/files.service';
 import { ImportService } from './services/import.service';
 import { IncidentLogsService } from './services/incident-logs.service';
@@ -52,6 +53,7 @@ import { WeatherForecastService } from './services/weather-forecast.service';
     EquipmentsService,
     EquipmentsBatchService,
     ExaminationsService,
+    FaqsService,
     FilesService,
     ImportService,
     IncidentLogsService,

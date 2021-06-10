@@ -6,6 +6,7 @@ import {ErrorHandlerService} from '../../../core/errors/error-handler.service';
 import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
 import {ServerNotificationsService} from '../../../core/server-notifications/server-notifications.service';
 import {SubscribeOperation} from '../../../api/models/subscribe-operation';
+import {Role} from '../../../api/models/role';
 
 @UntilDestroy()
 @Component({
@@ -21,6 +22,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   public get currentUser(): User {
     return this.authService.currentUser;
+  }
+
+  public get isSuperAdmin(): boolean {
+    return  this.currentUser.account.role === Role.SuperAdmin;
   }
 
   constructor(

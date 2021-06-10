@@ -15,7 +15,8 @@ const entityMetadata: EntityMetadataMap = {
   User: {},
   Account: {},
   UserResponsibilityCenter: {},
-  CorrectiveAction: {}
+  CorrectiveAction: {},
+  Faq: {},
 };
 
 const pluralNames = {  Equipment: 'Equipments'};

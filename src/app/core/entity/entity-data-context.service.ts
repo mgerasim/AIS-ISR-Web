@@ -17,7 +17,7 @@ import {
   Division,
   Equipment,
   Examination, Incident, Notification, Account,
-  ResponsibilityCenter, User, UserNotification, UserResponsibilityCenter, CorrectiveAction
+  ResponsibilityCenter, User, UserNotification, UserResponsibilityCenter, CorrectiveAction, Faq
 } from '../../api/models';
 import {EquipmentsService} from '../../api/services/equipments.service';
 import {CertificatesService} from '../../api/services/certificates.service';
@@ -34,6 +34,7 @@ import {UsersService} from '../../api/services/users.service';
 import {AccountsService} from '../../api/services/accounts.service';
 import {UserResponsibilityCentersService} from '../../api/services/user-responsibility-centers.service';
 import {CorrectiveActionsService} from '../../api/services/corrective-actions.service';
+import {FaqsService} from '../../api/services/faqs.service';
 
 /*
 Контекст для получения справочников сущностей с сервера и кэширования их в памяти приложения
@@ -57,6 +58,7 @@ export class EntityDataContext extends EntityServicesBase {
   public readonly accounts = this.createAndRegisterCollectionService<Account>('Account');
   public readonly userResponsibilityCenters = this.createAndRegisterCollectionService<UserResponsibilityCenter>('UserResponsibilityCenter');
   public readonly correctiveActions = this.createAndRegisterCollectionService<CorrectiveAction>('CorrectiveAction');
+  public readonly faqs = this.createAndRegisterCollectionService<Faq>('Faq');
 
   constructor(
     entityServicesElements: EntityServicesElements,
@@ -78,6 +80,7 @@ export class EntityDataContext extends EntityServicesBase {
     private accountApi: AccountsService,
     private userResponsibilityCenterApi: UserResponsibilityCentersService,
     private correctiveActionApi: CorrectiveActionsService,
+    private faqApi: FaqsService,
   ) {
     super(entityServicesElements);
 
@@ -88,6 +91,13 @@ export class EntityDataContext extends EntityServicesBase {
       getById: (id: number) =>
         equipmentApi
           .apiEquipmentsIdGet$Json({ id })
+    });
+
+    this.createAndRegisterDataService('Faq', {
+      getAll: () =>
+        faqApi.apiFaqsGet$Json(),
+      getById: (id: number) =>
+        faqApi.apiFaqsIdGet$Json({id})
     });
 
     this.createAndRegisterDataService('Certificate', {
