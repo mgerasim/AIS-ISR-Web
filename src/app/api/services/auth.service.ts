@@ -216,4 +216,101 @@ export class AuthService extends BaseService {
     );
   }
 
+  /**
+   * Path part for operation apiAuthSignInGet
+   */
+  static readonly ApiAuthSignInGetPath = '/api/Auth/SignIn';
+
+  /**
+   * Авторизация.
+   *
+   *
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `apiAuthSignInGet$Plain()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiAuthSignInGet$Plain$Response(params?: {
+  }): Observable<StrictHttpResponse<AuthResponse>> {
+
+    const rb = new RequestBuilder(this.rootUrl, AuthService.ApiAuthSignInGetPath, 'get');
+    if (params) {
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'text',
+      accept: 'text/plain'
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<AuthResponse>;
+      })
+    );
+  }
+
+  /**
+   * Авторизация.
+   *
+   *
+   *
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `apiAuthSignInGet$Plain$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiAuthSignInGet$Plain(params?: {
+  }): Observable<AuthResponse> {
+
+    return this.apiAuthSignInGet$Plain$Response(params).pipe(
+      map((r: StrictHttpResponse<AuthResponse>) => r.body as AuthResponse)
+    );
+  }
+
+  /**
+   * Авторизация.
+   *
+   *
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `apiAuthSignInGet$Json()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiAuthSignInGet$Json$Response(params?: {
+  }): Observable<StrictHttpResponse<AuthResponse>> {
+
+    const rb = new RequestBuilder(this.rootUrl, AuthService.ApiAuthSignInGetPath, 'get');
+    if (params) {
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'text/json'
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<AuthResponse>;
+      })
+    );
+  }
+
+  /**
+   * Авторизация.
+   *
+   *
+   *
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `apiAuthSignInGet$Json$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiAuthSignInGet$Json(params?: {
+  }): Observable<AuthResponse> {
+
+    return this.apiAuthSignInGet$Json$Response(params).pipe(
+      map((r: StrictHttpResponse<AuthResponse>) => r.body as AuthResponse)
+    );
+  }
+
 }

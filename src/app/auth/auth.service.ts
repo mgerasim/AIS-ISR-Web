@@ -30,7 +30,8 @@ export class AuthService {
   }
 
   public auth(): Observable<any> {
-    return this.authServiceApi.apiAuthLoginGet$Json().pipe(
+    //return this.authServiceApi.apiAuthLoginGet$Json().pipe(
+    return this.authServiceApi.apiAuthSignInGet$Json().pipe(
       tap(response => {
         if (response.user === undefined) {
           throw Error(`В ответе от сервера не указан пользователь: ${response}`);
