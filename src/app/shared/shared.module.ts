@@ -9,6 +9,7 @@ import {ButtonsModule} from '@progress/kendo-angular-buttons';
 import {UploadsModule} from '@progress/kendo-angular-upload';
 import {GridModule} from '@progress/kendo-angular-grid';
 import {
+  DxAccordionModule,
   DxButtonModule, DxCheckBoxModule,
   DxDataGridModule,
   DxDropDownBoxModule,
@@ -87,6 +88,7 @@ import { MenusModule } from '@progress/kendo-angular-menu';
     DxLoadPanelModule,
     DxCheckBoxModule,
     DxTextBoxModule,
+    DxAccordionModule,
     CertificateInfoComponent,
     AttachmentsComponent,
     HeaderComponent,
