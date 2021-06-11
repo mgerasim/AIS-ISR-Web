@@ -1,23 +1,24 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {shareEntityId} from '../../shared/utils/routing-utils';
-import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
-import {switchMap} from 'rxjs/operators';
+import {Certificate} from '../../api/models/certificate';
 import {ActivatedRoute} from '@angular/router';
 import {EntityDataContext} from '../../core/entity/entity-data-context.service';
 import {ErrorHandlerService} from '../../core/errors/error-handler.service';
-import {Certificate} from '../../api/models/certificate';
+import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
+import {switchMap} from 'rxjs/operators';
+import {Faq} from '../../api/models/faq';
 
 @UntilDestroy()
 @Component({
-  selector: 'app-certificates-card-edit',
-  templateUrl: './certificates-card-edit.component.html',
-  styleUrls: ['./certificates-card-edit.component.scss']
+  selector: 'app-faq-edit',
+  templateUrl: './faq-edit.component.html',
+  styleUrls: ['./faq-edit.component.scss']
 })
-export class CertificatesCardEditComponent implements OnInit, OnDestroy {
+export class FaqEditComponent implements OnInit, OnDestroy {
 
   entityId = this.route.params.pipe(shareEntityId());
 
-  certificate: Certificate;
+  faq: Faq;
 
   constructor(
     private route: ActivatedRoute,
@@ -29,12 +30,11 @@ export class CertificatesCardEditComponent implements OnInit, OnDestroy {
     this.entityId
       .pipe(
         untilDestroyed(this),
-        switchMap((id: number) => this.entityDataContext.certificates.getByIdLazy(id))
+        switchMap((id: number) => this.entityDataContext.faqs.getByIdLazy(id))
       )
       .subscribe(
-        (certificate) => {
-          this.certificate = {...certificate};
-          console.log(this.certificate);
+        (faq) => {
+          this.faq = {...faq};
         },
         error => this.errorHandler.handle(error)
       );
@@ -44,3 +44,4 @@ export class CertificatesCardEditComponent implements OnInit, OnDestroy {
   }
 
 }
+

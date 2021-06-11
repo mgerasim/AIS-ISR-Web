@@ -1,0 +1,6 @@
+<ng-container *ngIf="faq">
+  <div class="container">
+    <h2>{{faq.title}}</h2>
+    <quill-view [content]="faq.answer" format="html" theme="snow"></quill-view>
+  </div>
+</ng-container>

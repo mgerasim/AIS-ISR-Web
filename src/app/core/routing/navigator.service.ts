@@ -93,4 +93,20 @@ export class NavigatorService {
   toResponsibilityCenterShow(responsibilityCenterId: number): void {
     this.route.navigate(['responsibilityCenters', responsibilityCenterId]).then();
   }
+
+  toFaqs(): void {
+    this.route.navigate(['faqs']).then();
+  }
+
+  toFaqAdd(): void {
+    this.route.navigate(['faqs', 'add']).then();
+  }
+
+  toFaqEdit(faqId: number): void {
+    this.route.navigate(['faqs', faqId, 'edit']).then();
+  }
+
+  toFaqShow(faqId: number): void {
+    this.route.navigate(['faqs', faqId]).then();
+  }
 }

@@ -39,7 +39,9 @@
   <dxo-scrolling mode="virtual" rowRenderingMode="virtual" ></dxo-scrolling>
   <dxo-paging [pageSize]="100"></dxo-paging>
 
-  <dxi-column dataField="id" [fixed]="false" caption="№ п/п"></dxi-column>
+  <dxi-column [width]="50" caption="" cellTemplate="buttonEditTemplate"></dxi-column>
+
+  <dxi-column dataField="id" [width]="50" [fixed]="false" caption="№ п/п"></dxi-column>
 
   <dxi-column dataField="title" caption="Вопрос"></dxi-column>
 
@@ -51,6 +53,10 @@
     <h3>Часто задаваемые вопросы</h3>
   </div>
 
+  <div *dxTemplate="let data of 'buttonEditTemplate'">
+    <dx-button class="otstup" [hint]="'Редактировать'" icon="edit" (click)="edit(data.data)"></dx-button>
+  </div>
+
   <div *dxTemplate="let data of 'actionAddTemplate'">
     <dx-button text="Добавить"
                (onClick)="add()"
@@ -58,9 +64,12 @@
   </div>
 
   <div *dxTemplate="let data of 'detail'">
-
+    <app-faq-show [faq]="data.data"></app-faq-show>
   </div>
 
 </dx-data-grid>
+
+<router-outlet class="router-card"
+></router-outlet>
 
 

@@ -1,0 +1,8 @@
+<div class="container">
+  <label for="title">Вопрос:</label>
+  <dx-text-box id="title" [(ngModel)]="faq.title" ></dx-text-box>
+  <label for="answer">Ответ:</label>
+  <quill-editor id="answer" [(ngModel)]="faq.answer" (onContentChanged)="onContentChanged()" ></quill-editor>
+  <br/>
+  <dx-button icon="save" text="Сохранить" (click)="save()"></dx-button>
+</div>

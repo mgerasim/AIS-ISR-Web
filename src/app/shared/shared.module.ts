@@ -13,7 +13,7 @@ import {
   DxDataGridModule,
   DxDropDownBoxModule,
   DxFormModule, DxLoadPanelModule, DxPopupModule,
-  DxScrollViewModule, DxSelectBoxModule, DxTextAreaModule, DxTreeListModule,
+  DxScrollViewModule, DxSelectBoxModule, DxTextAreaModule, DxTextBoxModule, DxTreeListModule,
   DxTreeViewModule
 } from 'devextreme-angular';
 import {DropDownsModule} from '@progress/kendo-angular-dropdowns';
@@ -86,6 +86,7 @@ import { MenusModule } from '@progress/kendo-angular-menu';
     DxSelectBoxModule,
     DxLoadPanelModule,
     DxCheckBoxModule,
+    DxTextBoxModule,
     CertificateInfoComponent,
     AttachmentsComponent,
     HeaderComponent,

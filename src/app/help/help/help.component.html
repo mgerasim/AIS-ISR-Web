@@ -1,0 +1,21 @@
+<ng-container *ngIf="faqs">
+  <dx-accordion
+    #accordion
+    [dataSource]="faqs"
+    [collapsible]="false"
+    [multiple]="false"
+    [animationDuration]="300"
+    [selectedItems]="[faqs[0]]">
+    <div *dxTemplate="let faq of 'title'">
+      <h1>{{faq.title}}</h1>
+    </div>
+    <div *dxTemplate="let faq of 'item'">
+      <div>
+        <p>
+          <b>{{faq.title}}</b>
+        </p>
+
+      </div>
+    </div>
+  </dx-accordion>
+</ng-container>

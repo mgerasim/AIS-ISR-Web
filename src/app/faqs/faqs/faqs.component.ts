@@ -5,6 +5,8 @@ import {EntityDataContext} from '../../core/entity/entity-data-context.service';
 import {ErrorHandlerService} from '../../core/errors/error-handler.service';
 import {Role} from '../../api/models/role';
 import {showWarning} from '../../shared/utils/message-utils';
+import {NavigatorService} from '../../core/routing/navigator.service';
+import {TitleService} from '../../core/services/title.service';
 
 @UntilDestroy()
 @Component({
@@ -17,9 +19,12 @@ export class FaqsComponent implements OnInit, OnDestroy {
   faqs?: Faq[] = undefined;
 
   constructor(private entityDataContext: EntityDataContext,
-              private errorHandler: ErrorHandlerService) { }
+              private errorHandler: ErrorHandlerService,
+              private navigatorService: NavigatorService,
+              private titleService: TitleService) { }
 
   ngOnInit(): void {
+    this.titleService.setTitle('FAQ');
     this.entityDataContext.faqs.getListLazy()
       .pipe(untilDestroyed(this))
       .subscribe(faqs => {
@@ -30,6 +35,7 @@ export class FaqsComponent implements OnInit, OnDestroy {
   }
 
   add(): void {
+    this.navigatorService.toFaqAdd();
   }
 
   onSelectionChanged($event: any): void {
@@ -57,4 +63,8 @@ export class FaqsComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
   }
 
+  edit(faq: Faq): void {
+    console.log(faq);
+    this.navigatorService.toFaqEdit(faq.id);
+  }
 }
