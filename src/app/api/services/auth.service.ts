@@ -9,6 +9,7 @@ import { RequestBuilder } from '../request-builder';
 import { Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
+import { AuthRequest } from '../models/auth-request';
 import { AuthResponse } from '../models/auth-response';
 
 @Injectable({
@@ -217,9 +218,9 @@ export class AuthService extends BaseService {
   }
 
   /**
-   * Path part for operation apiAuthSignInGet
+   * Path part for operation apiAuthSignInPost
    */
-  static readonly ApiAuthSignInGetPath = '/api/Auth/SignIn';
+  static readonly ApiAuthSignInPostPath = '/api/Auth/SignIn';
 
   /**
    * Авторизация.
@@ -227,15 +228,17 @@ export class AuthService extends BaseService {
    *
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `apiAuthSignInGet$Plain()` instead.
+   * To access only the response body, use `apiAuthSignInPost$Plain()` instead.
    *
-   * This method doesn't expect any request body.
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  apiAuthSignInGet$Plain$Response(params?: {
+  apiAuthSignInPost$Plain$Response(params?: {
+    body?: AuthRequest
   }): Observable<StrictHttpResponse<AuthResponse>> {
 
-    const rb = new RequestBuilder(this.rootUrl, AuthService.ApiAuthSignInGetPath, 'get');
+    const rb = new RequestBuilder(this.rootUrl, AuthService.ApiAuthSignInPostPath, 'post');
     if (params) {
+      rb.body(params.body, 'application/*+json');
     }
 
     return this.http.request(rb.build({
@@ -255,14 +258,15 @@ export class AuthService extends BaseService {
    *
    *
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `apiAuthSignInGet$Plain$Response()` instead.
+   * To access the full response (for headers, for example), `apiAuthSignInPost$Plain$Response()` instead.
    *
-   * This method doesn't expect any request body.
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  apiAuthSignInGet$Plain(params?: {
+  apiAuthSignInPost$Plain(params?: {
+    body?: AuthRequest
   }): Observable<AuthResponse> {
 
-    return this.apiAuthSignInGet$Plain$Response(params).pipe(
+    return this.apiAuthSignInPost$Plain$Response(params).pipe(
       map((r: StrictHttpResponse<AuthResponse>) => r.body as AuthResponse)
     );
   }
@@ -273,15 +277,17 @@ export class AuthService extends BaseService {
    *
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `apiAuthSignInGet$Json()` instead.
+   * To access only the response body, use `apiAuthSignInPost$Json()` instead.
    *
-   * This method doesn't expect any request body.
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  apiAuthSignInGet$Json$Response(params?: {
+  apiAuthSignInPost$Json$Response(params?: {
+    body?: AuthRequest
   }): Observable<StrictHttpResponse<AuthResponse>> {
 
-    const rb = new RequestBuilder(this.rootUrl, AuthService.ApiAuthSignInGetPath, 'get');
+    const rb = new RequestBuilder(this.rootUrl, AuthService.ApiAuthSignInPostPath, 'post');
     if (params) {
+      rb.body(params.body, 'application/*+json');
     }
 
     return this.http.request(rb.build({
@@ -301,14 +307,15 @@ export class AuthService extends BaseService {
    *
    *
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `apiAuthSignInGet$Json$Response()` instead.
+   * To access the full response (for headers, for example), `apiAuthSignInPost$Json$Response()` instead.
    *
-   * This method doesn't expect any request body.
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  apiAuthSignInGet$Json(params?: {
+  apiAuthSignInPost$Json(params?: {
+    body?: AuthRequest
   }): Observable<AuthResponse> {
 
-    return this.apiAuthSignInGet$Json$Response(params).pipe(
+    return this.apiAuthSignInPost$Json$Response(params).pipe(
       map((r: StrictHttpResponse<AuthResponse>) => r.body as AuthResponse)
     );
   }

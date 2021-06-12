@@ -9,6 +9,7 @@ export interface Account {
   deletedBy?: Account;
   deletedById?: null | number;
   id?: number;
+  passwordHash?: null | string;
   role?: Role;
   title: string;
   updatedAt?: string;

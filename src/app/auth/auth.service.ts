@@ -3,9 +3,11 @@ import { AuthService as AuthServiceApi } from '../api/services/auth.service';
 import {BehaviorSubject, combineLatest, Observable, of} from 'rxjs';
 import {AuthResponse} from '../api/models/auth-response';
 import {User} from '../api/models/user';
-import {switchMap, tap} from 'rxjs/operators';
+import {filter, switchMap, tap} from 'rxjs/operators';
 import {token} from '@progress/kendo-angular-inputs/dist/es2015/maskedtextbox/parsing/parsers';
 import {AccountsService} from '../api/services/accounts.service';
+import {AuthRequest} from "../api/models/auth-request";
+import {ErrorHandlerService} from "../core/errors/error-handler.service";
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +20,7 @@ export class AuthService {
 
   constructor(
     private authServiceApi: AuthServiceApi,
-    private accountsService: AccountsService
+    private accountsService: AccountsService,
   ) { }
 
   public get currentUser(): User {
@@ -26,23 +28,41 @@ export class AuthService {
   }
 
   public get isLogged(): boolean {
-    return this.currentUser !== null;
+    return !!this.currentUser;
+  }
+
+  public signIn(authRequest: AuthRequest): Observable<any> {
+    return this.authServiceApi.apiAuthSignInPost$Json({body: authRequest})
+      .pipe(
+        tap((response) => {
+          this.token = response.token;
+          this.currentUser$.next(response.user);
+        })
+      );
   }
 
   public auth(): Observable<any> {
     return this.authServiceApi.apiAuthLoginGet$Json().pipe(
     //return this.authServiceApi.apiAuthSignInGet$Json().pipe(
       tap(response => {
+        if (response === null) {
+          return
+        }
         if (response.user === undefined) {
           throw Error(`В ответе от сервера не указан пользователь: ${response}`);
         }
         this.token = response.token;
       }),
       switchMap(response => combineLatest([
-        of(response.user),
-        this.accountsService.apiAccountsIdGet$Json({id: response.user.accountId})
+        of(response?.user),
+        response ? this.accountsService.apiAccountsIdGet$Json({id: response.user.accountId})
+          : of(undefined)
       ])),
       tap(([user, account]) => {
+        if (user === undefined && account === undefined) {
+          this.currentUser$.next(undefined);
+          return;
+        }
         user.account = account;
         this.currentUser$.next(user);
       })

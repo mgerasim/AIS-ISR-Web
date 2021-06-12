@@ -36,6 +36,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+    if (this.currentUser === undefined) {
+      return;
+    }
     console.log('subscribe Incident Count');
     this.serverNotificationsService.subscribe<number>(SubscribeOperation.IncidentCount)
       .pipe(untilDestroyed(this))

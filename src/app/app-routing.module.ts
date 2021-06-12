@@ -9,6 +9,10 @@ const routes: Routes = [
     loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
   },
   {
+    path: 'signIn',
+    loadChildren: () => import('./sign-in/sign-in.module').then(m => m.SignInModule)
+  },
+  {
     path: 'notifications',
     canActivate: [AuthGuard],
     loadChildren: () => import('./notifications/notifications.module').then(m => m.NotificationsModule)
@@ -74,6 +78,7 @@ const routes: Routes = [
   },
   {
     path: '',
+    canActivate: [AuthGuard],
     loadChildren: () => import('./equipments/equipments.module').then(m => m.EquipmentsModule)
   }
 ];

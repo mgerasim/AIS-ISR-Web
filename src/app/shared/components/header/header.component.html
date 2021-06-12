@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav *ngIf="currentUser" class="navbar navbar-expand-lg navbar-light bg-light">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -71,12 +71,22 @@
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           {{currentUser.displayName}}
         </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
           <a class="nav-link" href="file://cdn01-pifs---01.dmn.tn.corp/Resources_01$/2418/АИС Реестр ЭПБ">Журнал замечаний и предложений</a>
           <a class="nav-link" href="file://cdn01-pifs---01.dmn.tn.corp\Resources_01$\2402\Инструкции АИС Реестр ЭПБ">Инструкции АИС Реестр ЭПБ</a>
         </div>
       </li>
     </ul>
+
+
+    <ul class="navbar-nav mt-2 mt-lg-0">
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/help']">
+          <i class="fas fa-question-circle"></i>
+        </a>
+      </li>
+    </ul>
+
 
     <!--
     <form class="form-inline my-2 my-lg-0">

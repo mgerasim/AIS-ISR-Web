@@ -1,6 +1,7 @@
 export { Account } from './models/account';
 export { Attachment } from './models/attachment';
 export { AttachmentCategory } from './models/attachment-category';
+export { AuthRequest } from './models/auth-request';
 export { AuthResponse } from './models/auth-response';
 export { BatchEquipmentOperationEditRequest } from './models/batch-equipment-operation-edit-request';
 export { Certificate } from './models/certificate';

@@ -42,6 +42,14 @@ export class NavigatorService {
     this.route.navigate(['auth']).then();
   }
 
+  toRoot(): void {
+    this.route.navigate(['/']).then();
+  }
+
+  toSignIn(): void {
+    this.route.navigate(['signIn']).then();
+  }
+
   toCertificateCard(certificateId: number): void {
     this.route.navigate(['certificates', certificateId]).then();
   }
