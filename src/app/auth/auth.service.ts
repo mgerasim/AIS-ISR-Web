@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AuthService as AuthServiceApi } from '../api/services/auth.service';
-import {BehaviorSubject, combineLatest, Observable, of} from 'rxjs';
+import {BehaviorSubject, combineLatest, from, Observable, of} from 'rxjs';
 import {AuthResponse} from '../api/models/auth-response';
 import {User} from '../api/models/user';
 import {filter, switchMap, tap} from 'rxjs/operators';
@@ -8,6 +8,7 @@ import {token} from '@progress/kendo-angular-inputs/dist/es2015/maskedtextbox/pa
 import {AccountsService} from '../api/services/accounts.service';
 import {AuthRequest} from "../api/models/auth-request";
 import {ErrorHandlerService} from "../core/errors/error-handler.service";
+import {EntityChangedSubscriberService} from "../core/entity/entity-changed-subscriber.service";
 
 @Injectable({
   providedIn: 'root'
@@ -31,14 +32,21 @@ export class AuthService {
     return !!this.currentUser;
   }
 
+  public signOut(): void {
+    this.currentUser$.next(null);
+    this.token = undefined;
+  }
+
   public signIn(authRequest: AuthRequest): Observable<any> {
     return this.authServiceApi.apiAuthSignInPost$Json({body: authRequest})
       .pipe(
-        tap((response) => {
-          this.token = response.token;
-          this.currentUser$.next(response.user);
-        })
+        tap((response) =>
+          this.token = response.token)
       );
+  }
+
+  public signInCompleted(response: AuthResponse) {
+    this.currentUser$.next(response.user);
   }
 
   public auth(): Observable<any> {

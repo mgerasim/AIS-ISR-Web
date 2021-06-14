@@ -13,6 +13,10 @@ const routes: Routes = [
     loadChildren: () => import('./sign-in/sign-in.module').then(m => m.SignInModule)
   },
   {
+    path: 'signOut',
+    loadChildren: () => import('./sign-out/sign-out.module').then(m => m.SignOutModule)
+  },
+  {
     path: 'notifications',
     canActivate: [AuthGuard],
     loadChildren: () => import('./notifications/notifications.module').then(m => m.NotificationsModule)

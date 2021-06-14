@@ -85,6 +85,7 @@ export function loadingProviderFactory(provider: CoreService): () => Promise<boo
     ApiInterceptor,
     API_INTERCEPTOR_PROVIDER,
     { provide: APP_INITIALIZER, useFactory: loadingProviderFactory, deps: [CoreService], multi: true },
+
     {
       provide: ErrorHandler,
       useValue: Sentry.createErrorHandler({

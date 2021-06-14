@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { HelpRoutingModule } from './help-routing.module';
 import { HelpComponent } from './help/help.component';
 import {SharedModule} from '../shared/shared.module';
+import {QuillModule} from "ngx-quill";
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import {SharedModule} from '../shared/shared.module';
     imports: [
         CommonModule,
         HelpRoutingModule,
-        SharedModule
+        SharedModule,
+        QuillModule
     ]
 })
 export class HelpModule { }

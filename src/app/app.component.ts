@@ -17,6 +17,8 @@ import Globalize from 'globalize';
 import {TitleService} from './core/services/title.service';
 import {LoadingService} from './core/services/loading.service';
 import {load} from '@progress/kendo-angular-intl';
+import {User} from "./api/models/user";
+import {AuthService} from "./auth/auth.service";
 
 @Component({
   selector: 'app-root',
@@ -27,8 +29,13 @@ export class AppComponent implements OnInit {
 
   isLoading = false;
 
+  public get currentUser(): User {
+    return this.authService.currentUser;
+  }
+
   constructor(
     private loadingService: LoadingService,
+    private authService: AuthService,
   ) {
     Globalize.load(
       supplemental, ruCldrData
