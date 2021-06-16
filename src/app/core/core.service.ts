@@ -30,7 +30,6 @@ export class CoreService {
           console.log('response');
         resolve(true);
         console.log('Загрузка завершена');
-        this.navigatorService.toRoot();
       }, error => this.errorHandlerService.handle(error));
     });
   }

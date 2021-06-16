@@ -34,7 +34,7 @@ export class AppComponent implements OnInit {
   }
 
   constructor(
-    private loadingService: LoadingService,
+    public loadingService: LoadingService,
     private authService: AuthService,
   ) {
     Globalize.load(

@@ -1,17 +1,18 @@
-<div *ngIf="faqs" class="container">
-  <dx-scroll-view>
-  <dx-accordion
-    #accordion
-    [dataSource]="faqs"
-    [collapsible]="false"
-    [multiple]="false"
-    [animationDuration]="300">
-    <div *dxTemplate="let faq of 'title'">
-      <h1>{{faq.title}}</h1>
-    </div>
-    <div *dxTemplate="let faq of 'item'">
-      <div [innerHTML]="faq.answer"></div>
-    </div>
-  </dx-accordion>
-  </dx-scroll-view>
-</div>
+<dx-scroll-view>
+  <div *ngIf="faqs" class="area container">
+    <dx-accordion
+      #accordion
+      [dataSource]="faqs"
+      [collapsible]="false"
+      [multiple]="false"
+      [animationDuration]="300">
+      <div *dxTemplate="let faq of 'title'">
+        <h1>{{faq.title}}</h1>
+      </div>
+      <div *dxTemplate="let faq of 'item'">
+        <div [innerHTML]="faq.answer"></div>
+      </div>
+    </dx-accordion>
+  </div>
+
+</dx-scroll-view>
