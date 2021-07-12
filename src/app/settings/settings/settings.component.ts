@@ -5,6 +5,7 @@ import {SettingsService} from '../../api/services/settings.service';
 import {showSuccess} from '../../shared/utils/message-utils';
 import {ErrorHandlerService} from '../../core/errors/error-handler.service';
 import {NavigatorService} from '../../core/routing/navigator.service';
+import {AttachmentCategory} from '../../api/models/attachment-category';
 
 @Component({
   selector: 'app-settings',
@@ -13,6 +14,10 @@ import {NavigatorService} from '../../core/routing/navigator.service';
 })
 export class SettingsComponent implements OnInit {
 
+
+  get attachmentCategoryOther(): AttachmentCategory {
+    return AttachmentCategory.Other;
+  }
 
   public settings: Settings;
 

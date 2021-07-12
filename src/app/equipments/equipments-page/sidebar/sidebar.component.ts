@@ -137,7 +137,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
         this.popupBatchEquipmentOperationVisible = true;
       }
     },
-    /**
     {
       id: 4,
       icon: '/assets/import.ico',
@@ -146,7 +145,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
         this.navigator.toImport();
       }
     }
-     */
   ];
   correctiveAction: CorrectiveAction;
   popupCorrectiveActionFormVisible = false;

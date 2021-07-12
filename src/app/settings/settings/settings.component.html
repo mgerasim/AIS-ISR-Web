@@ -1,4 +1,4 @@
-<div class="container">
+<div *ngIf="settings" class="container">
   <dx-form id="form" [formData]="settings">
 
     <h5>Настройки</h5>
@@ -23,4 +23,7 @@
   <div class="k-form-buttons">
     <button class="k-button k-primary" (click)="submitForm()">Сохранить</button>
   </div>
+
+  <app-attachments [settings]="settings" title="Файлы" [category]="attachmentCategoryOther"></app-attachments>
+
 </div>

@@ -4,5 +4,6 @@ export enum AttachmentCategory {
   Passport = 'Passport',
   Examination = 'Examination',
   Certificate = 'Certificate',
-  Other = 'Other'
+  Other = 'Other',
+  Settings = 'Settings'
 }

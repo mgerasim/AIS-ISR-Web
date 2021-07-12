@@ -11,7 +11,7 @@ import {Certificate} from '../../../api/models/certificate';
 import {SuccessEvent, UploadEvent} from '@progress/kendo-angular-upload';
 import {AttachmentCategory} from '../../../api/models/attachment-category';
 import {AuthService} from '../../../auth/auth.service';
-import {Role} from '../../../api/models';
+import {Role, Settings} from '../../../api/models';
 
 @UntilDestroy()
 @Component({
@@ -21,9 +21,10 @@ import {Role} from '../../../api/models';
 })
 export class AttachmentsComponent implements OnInit, OnChanges, OnDestroy {
 
-  @Input() equipment?: Equipment;
-  @Input() certificate?: Certificate;
+  @Input() equipment?: Equipment = undefined;
+  @Input() certificate?: Certificate = undefined;
   @Input() category?: AttachmentCategory = undefined;
+  @Input() settings?: Settings = undefined;
   @Input() title = 'Вложенные файлы';
 
   attachments: Attachment[];
@@ -52,6 +53,8 @@ export class AttachmentsComponent implements OnInit, OnChanges, OnDestroy {
           this.attachments = attachments.filter(x => x.equipmentId === this.equipment.id);
         } else if (this.certificate) {
           this.attachments = attachments.filter(x => x.certificateId === this.certificate.id);
+        } else if (this.settings) {
+          this.attachments = attachments.filter(x => x.settingsId === this.settings.id);
         } else {
           throw new Error('Должен быть указано оборудование или сертификат');
         }
@@ -64,6 +67,14 @@ export class AttachmentsComponent implements OnInit, OnChanges, OnDestroy {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.equipment && changes.equipment.currentValue) {
       this.equipment = changes.equipment.currentValue;
+      this.refresh();
+    }
+    if (changes.certificate && changes.certificate.currentValue) {
+      this.certificate = changes.certificate.currentValue;
+      this.refresh();
+    }
+    if (changes.settings && changes.settings.currentValue) {
+      this.settings = changes.settings.currentValue;
       this.refresh();
     }
   }
@@ -80,6 +91,7 @@ export class AttachmentsComponent implements OnInit, OnChanges, OnDestroy {
       contentType: file.type,
       equipmentId: this.equipment?.id,
       certificateId: this.certificate?.id,
+      settingsId: this.settings?.id,
       attachmentCategory: this.category,
       fileId,
       lastModified: file.lastModified,

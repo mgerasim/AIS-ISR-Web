@@ -5,6 +5,7 @@ import { AttachmentCategory } from './attachment-category';
 import { Certificate } from './certificate';
 import { Equipment } from './equipment';
 import { File } from './file';
+import { Settings } from './settings';
 export interface Attachment {
   attachmentCategory?: AttachmentCategory;
   certificate?: Certificate;
@@ -21,6 +22,8 @@ export interface Attachment {
   fileId?: number;
   id?: number;
   lastModified?: number;
+  settings?: Settings;
+  settingsId?: null | number;
   size?: number;
   title: string;
   updatedAt?: string;
